@@ -10,8 +10,15 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.19",
+    "normalizr": "^3.6.0",
     "react": "16.13.1",
     "react-native": "0.63.2",
+    "react-redux": "^7.2.1",
+    "redux": "^4.0.5",
+    "redux-saga": "^1.1.3",
+    "uuid": "^8.2.0",
     "watchman": "^1.0.0"
   },
   "devDependencies": {
