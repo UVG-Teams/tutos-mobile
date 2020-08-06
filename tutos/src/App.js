@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { routes } from './routes'
 import * as selectors from './tools/reducers'
 import Login from './app/login'
+import SideBar from './layout/sidebar'
 
 
 const Drawer = createDrawerNavigator()
@@ -14,7 +15,7 @@ const App = ({ isAuthenticated }) => (
     <NavigationContainer>
         <Drawer.Navigator 
             initialRouteName="Login"
-            // drawerContent={ props => <SideBar { ...props } /> }
+            drawerContent={ props => <SideBar { ...props } /> }
         >
             {
                 isAuthenticated ? (
