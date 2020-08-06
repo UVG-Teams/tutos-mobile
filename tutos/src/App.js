@@ -4,7 +4,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import { connect } from 'react-redux'
 
 import { routes } from './routes'
-// import * as selectors from './tools/reducers'
+import * as selectors from './tools/reducers'
 import Login from './app/login'
 
 
@@ -31,15 +31,6 @@ const App = ({ isAuthenticated }) => (
                     </>
                 ) : (
                     <>
-                        {
-                            routes.map(route => (
-                                <Drawer.Screen
-                                    key={ route.name }
-                                    name={ route.name }
-                                    component={ route.component }
-                                />
-                            ))
-                        }
                         <Drawer.Screen name="Login" component={ Login } />
                     </>
                 )
@@ -49,10 +40,8 @@ const App = ({ isAuthenticated }) => (
 )
 
 
-// · 
 export default connect(
     state => ({
-        isAuthenticated: false,
-        // isAuthenticated: selectors.isAuthenticated(state),
+        isAuthenticated: selectors.isAuthenticated(state),
     })
 )(App)

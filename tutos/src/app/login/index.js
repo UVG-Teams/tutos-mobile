@@ -16,8 +16,8 @@ import {
 
 import { RenderInput } from '../../components/form/field'
 
-// import * as actions from '../tools/actions/auth'
-// import * as selectors from "../tools/reducers"
+import * as actions from '../../tools/actions/auth'
+import * as selectors from "../../tools/reducers"
 
 
 const Login = ({
@@ -35,20 +35,18 @@ const Login = ({
         <ImageBackground style={ styles.image }>
             <View style={ styles.view }>
                 <Text style={ styles.title }>
-                    Bienvenido 
+                    Tuto's 
                 </Text>
                 <Field
                     name='email'
                     placeholder='email'
                     component={ RenderInput }
-                    // normalize={ value => value && (value.charAt().toLowerCase() + value.slice(1)) }
                 />
                 <Field
                     type={'password'}
                     name='password'
                     placeholder='password'
                     component={ RenderInput }
-                    // normalize={ value => value && (value.charAt().toLowerCase() + value.slice(1)) }
                 />
                 {
                     error && (
@@ -64,7 +62,7 @@ const Login = ({
                         <>
                             <TouchableHighlight style={ styles.buttonLogin }>
                                 <Button
-                                    onPress={ () => navigation.navigate('Home') }
+                                    onPress={ handleSubmit }
                                     color="black"
                                     title="Login"
                                     accessibilityLabel="Learn more about this button"
@@ -88,12 +86,9 @@ const Login = ({
 
 export default connect(
     state => ({
-        // isLoading: selectors.getIsAuthenticating(state),
-        // error: selectors.getAuthenticatingError(state),
-        // isAuthenticated: selectors.isAuthenticated(state),
-        isLoading: false,
-        error: false,
-        isAuthenticated: false,
+        isLoading: selectors.getIsAuthenticating(state),
+        error: selectors.getAuthenticatingError(state),
+        isAuthenticated: selectors.isAuthenticated(state),
     }),
     dispatch => ({
         rememberPassword() {
@@ -109,7 +104,7 @@ export default connect(
         // validate(values) {
         //     const errors = {}
         //     if (values.email && !values.email.includes('@')) {
-        //         errors.email = "Ingrese un correo con @"
+        //         errors.email = "Ingrese un correo valido"
         //     }
         //     return errors
         // },
@@ -117,7 +112,6 @@ export default connect(
 )
 
 
-// · 
 const styles = StyleSheet.create({
     view: {
         flex: 1, 
