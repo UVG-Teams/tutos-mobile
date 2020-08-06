@@ -8,7 +8,7 @@ export const theme = StyleSheet.create({
         backgroundColor: '#edf6ff',
     },
     content: {
-        padding: 10,
+        padding: 15,
     },
     errorText: {
         color: 'red',
