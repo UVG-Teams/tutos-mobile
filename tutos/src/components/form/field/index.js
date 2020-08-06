@@ -16,30 +16,22 @@ export const RenderInput = ({ input, meta, type, placeholder }) => (
             )
         }
         <TextInput 
-            { ...input } 
-            type={type}  
+            { ...input }
+            type={ type }
             style={ styles.input }
-            placeholder={placeholder}
-            secureTextEntry={type == 'password'}
+            placeholder={ placeholder }
+            secureTextEntry={ type == 'password' }
         />
     </View>
 )
 
 const styles = StyleSheet.create({
     input: {
-        height: 40, 
-        width: '100%',
-        borderWidth: 1,
+        height: 40,
         borderRadius: 4,
-        borderColor: 'rgb(255,255,255)',
         backgroundColor: 'rgb(255,255,255)',
-        // padding: 20,
         paddingStart: 15,
         marginBottom: 10,
-        shadowColor: 'rgb(200,200,200)',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 1,
-        shadowRadius: 4,
         elevation: 5,
     },
     textError: {
