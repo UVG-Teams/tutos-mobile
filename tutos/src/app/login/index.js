@@ -14,6 +14,7 @@ import {
     ActivityIndicator
 } from 'react-native'
 
+import { theme } from '../../layout/themes'
 import { RenderInput } from '../../components/form/field'
 
 import * as actions from '../../tools/actions/auth'
@@ -32,8 +33,8 @@ const Login = ({
         navigation.navigate('Home')
     }
     return (
-        <ImageBackground style={ styles.image }>
-            <View style={ styles.view }>
+        <ImageBackground style={ styles.background }>
+            <View style={ styles.content }>
                 <Text style={ styles.title }>
                     Tuto's 
                 </Text>
@@ -50,7 +51,7 @@ const Login = ({
                 />
                 {
                     error && (
-                        <Text style={ styles.title }>
+                        <Text style={ theme.errorText }>
                             { error }
                         </Text>
                     )
@@ -65,15 +66,12 @@ const Login = ({
                                     onPress={ handleSubmit }
                                     color="black"
                                     title="Login"
-                                    accessibilityLabel="Learn more about this button"
                                 />
                             </TouchableHighlight>
                             <TouchableHighlight style={ styles.buttonPassword }>
                                 <Button
                                     onPress={ rememberPassword }
-                                    color="#3689e6"
                                     title="Forgot your password?"
-                                    accessibilityLabel="Learn more about this button"
                                 />
                             </TouchableHighlight>
                         </>
@@ -98,71 +96,41 @@ export default connect(
 )(
     reduxForm({
         form: 'login',
-        onSubmit({email, password}, dispatch) {
+        onSubmit({ email, password }, dispatch) {
             dispatch(actions.startLogin(email, password))
         },
-        // validate(values) {
-        //     const errors = {}
-        //     if (values.email && !values.email.includes('@')) {
-        //         errors.email = "Ingrese un correo valido"
-        //     }
-        //     return errors
-        // },
+        validate(values) {
+            const errors = {}
+            // if (values.email && !values.email.includes('@')) {
+            //     errors.email = "Ingrese un correo valido"
+            // }
+            // return errors
+        },
     })(Login),
 )
 
 
 const styles = StyleSheet.create({
-    view: {
-        flex: 1, 
-        width: 320,
+    background: {
+        ...theme.background,
+        justifyContent: 'center',
+    },
+    content: {
+        ...theme.content,
+        width: 350,
         alignItems: 'center', 
         marginLeft: 'auto',
         marginRight: 'auto',
-        justifyContent: 'center',
     },
     title: {
-        fontSize: 34,
-        width: '100%',
-        marginBottom: 20,
-    },
-    input: {
-        height: 40, 
-        width: '100%',
-        borderWidth: 1,
-        borderRadius: 4,
-        borderColor: 'rgb(255,255,255)',
-        backgroundColor: 'rgb(255,255,255)',
-        // padding: 20,
-        paddingStart: 15,
-        marginBottom: 10,
-        shadowColor: 'rgb(200,200,200)',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 1,
-        shadowRadius: 4,
-        elevation: 5,
-    },
-    image: {
-        flex: 1,
-        resizeMode: "cover",
-        justifyContent: "center",
-        backgroundColor: '#edf6ff',
-        width: Dimensions.get('window').width,
+        fontSize: 40,
+        marginBottom: 30,
     },
     buttonLogin: {
-        height: 40,
         width: '100%',
-        borderRadius: 4,
-        backgroundColor: "#3689e6",
-        marginTop: 5,
+        marginTop: 15,
     },
     buttonPassword: {
-        width: '100%',
-        borderTopWidth: 1,
-        borderBottomWidth: 1,
-        borderTopColor: "#3689e6",
-        borderBottomColor: "#3689e6",
         marginTop: 100,
-        padding: 2,
     },
 })
