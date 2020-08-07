@@ -61,3 +61,6 @@ buck-out/
 # Native files
 ios/
 android/
+
+# Local
+local/

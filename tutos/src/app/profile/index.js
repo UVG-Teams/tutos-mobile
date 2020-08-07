@@ -21,6 +21,7 @@ import {
 } from 'native-base'
 
 import { Col, Row, Grid } from 'react-native-easy-grid'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 
 import { theme } from './../../layout/themes'
 
@@ -35,7 +36,7 @@ const Profile = ({ navigation }) => (
                     <Button transparent
                         onPress={ () => navigation.openDrawer() }
                     >
-                        {/* <FontAwesomeIcon icon='bars' size={ 25 } /> */}
+                        <FontAwesomeIcon icon='bars' size={ 25 } />
                     </Button>
                 </Left>
                 <Body></Body>
@@ -43,7 +44,7 @@ const Profile = ({ navigation }) => (
             </Header>
             <Content style={ theme.content }>
                 <View>
-                    <Text style={{ fontSize: 35 }}>BIENVENIDO</Text>
+                    <Text style={{ fontSize: 35 }}>Profile</Text>
                     <Text style={{ fontSize: 20 }}>My Name</Text>
                 </View>
             </Content>

@@ -33,26 +33,15 @@ const SideBar = ({ props, isAuthenticated, logout, navigation }) => (
                     }
                 </View>
                 {
-                    isAuthenticated ? (
-                        <>
-                            {
-                                routes.map(route => (
-                                    <DrawerItem
-                                        key={ route.name }
-                                        label={ route.name }
-                                        onPress={ () => navigation.navigate(route.name) }
-                                    />
-                                ))
-                            }
-                        </>
-                    ) : (
-                        <>
-                            <DrawerItem
-                                label='Login'
-                                onPress={() => navigation.navigate('Login')}
-                            />
-                        </>
-                    )
+                    routes.filter(
+                        route => route.authProtection == isAuthenticated
+                    ).map(route => (
+                        <DrawerItem
+                            key={ route.name }
+                            label={ route.name }
+                            onPress={ () => navigation.navigate(route.name) }
+                        />
+                    ))
                 }
             </View>
         </DrawerContentScrollView>
@@ -64,9 +53,7 @@ const SideBar = ({ props, isAuthenticated, logout, navigation }) => (
                         onPress={ logout }
                     />
                 </>
-            ) : (
-                <></>
-            )
+            ) : (<></>)
         }
     </View>
 )
