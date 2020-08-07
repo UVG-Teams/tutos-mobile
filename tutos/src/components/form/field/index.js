@@ -6,11 +6,13 @@ import {
     TextInput,
 } from 'react-native'
 
+import { theme } from '../../../layout/themes'
+
 export const RenderInput = ({ input, meta, type, placeholder }) => (
     <View style={{ width: '100%' }}>
         {
             meta.dirty && meta.error && (
-                <Text style={ styles.textError }>
+                <Text style={ theme.textError }>
                     { meta.error }
                 </Text>
             )
@@ -34,7 +36,4 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         elevation: 5,
     },
-    textError: {
-        color: 'red',
-    }
 })

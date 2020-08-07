@@ -31,12 +31,12 @@ const Profile = ({ navigation }) => (
         style={ theme.background }
     >
         <Container style={{ backgroundColor: 'transparent'}}>
-            <Header>
+            <Header style={ theme.header }>
                 <Left>
                     <Button transparent
                         onPress={ () => navigation.openDrawer() }
                     >
-                        <FontAwesomeIcon icon='bars' size={ 25 } />
+                        <FontAwesomeIcon style={ theme.headerIcon } icon='bars' size={ 25 } />
                     </Button>
                 </Left>
                 <Body></Body>

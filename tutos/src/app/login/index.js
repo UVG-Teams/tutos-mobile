@@ -3,12 +3,9 @@ import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
 import {
     StyleSheet,
-    ScrollView,
     View,
     ImageBackground,
-    Dimensions,
     Text,
-    TextInput,
     Button,
     TouchableHighlight,
     ActivityIndicator
@@ -35,9 +32,7 @@ const Login = ({
     return (
         <ImageBackground style={ styles.background }>
             <View style={ styles.content }>
-                <Text style={ styles.title }>
-                    Tuto's 
-                </Text>
+                <Text style={ styles.title }>Tuto's</Text>
                 <Field
                     name='email'
                     placeholder='email'
@@ -51,9 +46,7 @@ const Login = ({
                 />
                 {
                     error && (
-                        <Text style={ theme.errorText }>
-                            { error }
-                        </Text>
+                        <Text style={ theme.errorText }>{ error }</Text>
                     )
                 }
                 {
