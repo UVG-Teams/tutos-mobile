@@ -30,16 +30,18 @@ const Home = ({ navigation }) => (
         style={ theme.background }
     >
         <Container style={{ backgroundColor: 'transparent'}}>
-            <Header>
+            <Header style={ theme.header }>
                 <Left>
                     <Button transparent
                         onPress={ () => navigation.openDrawer() }
                     >
-                        <FontAwesomeIcon icon='bars' size={ 25 } />
+                        <FontAwesomeIcon style={ theme.headerIcon } icon='bars' size={ 25 } />
                     </Button>
                 </Left>
                 <Body></Body>
-                <Right></Right>
+                <Right>
+                    <FontAwesomeIcon style={ theme.headerIcon } icon='bell' size={ 25 } />
+                </Right>
             </Header>
             <Content style={ theme.content }>
                 <View>

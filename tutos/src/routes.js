@@ -10,7 +10,7 @@ export const routes = [
     {
         name: 'Login',
         component: Login,
-        icon: 'login',
+        icon: 'sign-in-alt',
         authProtection: false,
     },
     {
@@ -22,13 +22,13 @@ export const routes = [
     {
         name: 'SignUp',
         component: SignUp,
-        icon: 'signup',
+        icon: 'user-plus',
         authProtection: false,
     },
     {
         name: 'Profile',
         component: Profile,
-        icon: 'profile',
+        icon: 'user',
         authProtection: true,
     },
     {
@@ -40,7 +40,7 @@ export const routes = [
     {
         name: 'Tutores',
         component: Tutores,
-        icon: 'tutores',
+        icon: 'users',
         authProtection: true,
     },
 ]
