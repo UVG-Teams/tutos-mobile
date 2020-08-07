@@ -25,7 +25,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { theme } from './../../layout/themes'
 
 
-const Home = ({ navigation }) => (
+const Conversations = ({ navigation }) => (
     <ImageBackground
         style={ theme.background }
     >
@@ -39,22 +39,15 @@ const Home = ({ navigation }) => (
                     </Button>
                 </Left>
                 <Body></Body>
-                <Right>
-                    <Button transparent
-                        onPress={ () => navigation.navigate('Notifications') }
-                    >
-                        <FontAwesomeIcon style={ theme.headerIcon } icon='bell' size={ 25 } />
-                    </Button>
-                </Right>
+                <Right></Right>
             </Header>
             <Content style={ theme.content }>
                 <View>
-                    <Text style={{ fontSize: 35 }}>BIENVENIDO</Text>
-                    <Text style={{ fontSize: 20 }}>My Name</Text>
+                    <Text style={{ fontSize: 35 }}>Conversations</Text>
                 </View>
             </Content>
         </Container>
     </ImageBackground>
 )
 
-export default Home
+export default Conversations
