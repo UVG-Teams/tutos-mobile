@@ -15,6 +15,9 @@ import {
     faUserPlus,
     faSignOutAlt,
     faBell,
+    faComments,
+    faCalendarWeek,
+    faAddressCard,
 } from '@fortawesome/free-solid-svg-icons'
 
 import { routes } from './routes'
@@ -32,6 +35,9 @@ library.add(
     faUserPlus,
     faSignOutAlt,
     faBell,
+    faComments,
+    faCalendarWeek,
+    faAddressCard,
 )
 
 const Drawer = createDrawerNavigator()
