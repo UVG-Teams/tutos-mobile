@@ -1,107 +1,54 @@
 import React from 'react'
 import {
-    SafeAreaView,
-    StyleSheet,
     ScrollView,
-    View,
     Text,
-    StatusBar,
+    TextInput,
+    View,
+    ImageBackground,
 } from 'react-native'
 
 import {
+    Container,
+    Content,
+    Button,
     Header,
-    LearnMoreLinks,
-    Colors,
-    DebugInstructions,
-    ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen'
+    Left,
+    Body,
+    Right,
+    Title,
+    Card,
+    CardItem,
+} from 'native-base'
 
-const App: () => React$Node = () => (
-    <>
-        <StatusBar barStyle="dark-content" />
-        <SafeAreaView>
-            <ScrollView
-                contentInsetAdjustmentBehavior="automatic"
-                style={styles.scrollView}
-            >
-                <Header />
-                {
-                    global.HermesInternal == null ? null : (
-                        <View style={styles.engine}>
-                            <Text style={styles.footer}>Engine: Hermes</Text>
-                        </View>
-                    )
-                }
-                <View style={styles.body}>
-                    <View style={styles.sectionContainer}>
-                        <Text style={styles.sectionTitle}>Step One</Text>
-                        <Text style={styles.sectionDescription}>
-                            Edit <Text style={styles.highlight}>App.js</Text> to change this
-                            screen and then come back to see your edits.
-                        </Text>
-                    </View>
-                    <View style={styles.sectionContainer}>
-                        <Text style={styles.sectionTitle}>See Your Changes</Text>
-                        <Text style={styles.sectionDescription}>
-                            <ReloadInstructions />
-                        </Text>
-                    </View>
-                    <View style={styles.sectionContainer}>
-                        <Text style={styles.sectionTitle}>Debug</Text>
-                        <Text style={styles.sectionDescription}>
-                            <DebugInstructions />
-                        </Text>
-                    </View>
-                    <View style={styles.sectionContainer}>
-                        <Text style={styles.sectionTitle}>Learn More</Text>
-                        <Text style={styles.sectionDescription}>
-                            Read the docs to discover what to do next:
-                        </Text>
-                    </View>
-                    <LearnMoreLinks />
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+
+import { theme } from './../../layout/themes'
+
+
+const Home = ({ navigation }) => (
+    <ImageBackground
+        style={ theme.background }
+    >
+        <Container style={{ backgroundColor: 'transparent'}}>
+            <Header>
+                <Left>
+                    <Button transparent
+                        onPress={ () => navigation.openDrawer() }
+                    >
+                        <FontAwesomeIcon icon='bars' size={ 25 } />
+                    </Button>
+                </Left>
+                <Body></Body>
+                <Right></Right>
+            </Header>
+            <Content style={ theme.content }>
+                <View>
+                    <Text style={{ fontSize: 35 }}>BIENVENIDO</Text>
+                    <Text style={{ fontSize: 20 }}>My Name</Text>
                 </View>
-            </ScrollView>
-        </SafeAreaView>
-    </>
+            </Content>
+        </Container>
+    </ImageBackground>
 )
 
-const styles = StyleSheet.create({
-    scrollView: {
-        backgroundColor: Colors.lighter,
-    },
-    engine: {
-        position: 'absolute',
-        right: 0,
-    },
-    body: {
-        backgroundColor: Colors.white,
-    },
-    sectionContainer: {
-        marginTop: 32,
-        paddingHorizontal: 24,
-    },
-    sectionTitle: {
-        fontSize: 24,
-        fontWeight: '600',
-        color: Colors.black,
-    },
-    sectionDescription: {
-        marginTop: 8,
-        fontSize: 18,
-        fontWeight: '400',
-        color: Colors.dark,
-    },
-    highlight: {
-        fontWeight: '700',
-    },
-    footer: {
-        color: Colors.dark,
-        fontSize: 12,
-        fontWeight: '600',
-        padding: 4,
-        paddingRight: 12,
-        textAlign: 'right',
-    },
-})
-
-export default App
+export default Home

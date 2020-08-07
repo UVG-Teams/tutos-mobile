@@ -3,11 +3,16 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { connect } from 'react-redux'
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+
 import { routes } from './routes'
 import * as selectors from './tools/reducers'
-import Login from './app/login'
 import SideBar from './layout/sidebar'
 
+library.add(
+    faBars,
+)
 
 const Drawer = createDrawerNavigator()
 
@@ -18,23 +23,15 @@ const App = ({ isAuthenticated }) => (
             drawerContent={ props => <SideBar { ...props } /> }
         >
             {
-                isAuthenticated ? (
-                    <>
-                        {
-                            routes.map(route => (
-                                <Drawer.Screen
-                                    key={ route.name }
-                                    name={ route.name }
-                                    component={ route.component }
-                                />
-                            ))
-                        }
-                    </>
-                ) : (
-                    <>
-                        <Drawer.Screen name="Login" component={ Login } />
-                    </>
-                )
+                routes.filter(
+                    route => route.authProtection == isAuthenticated
+                ).map(route => (
+                    <Drawer.Screen
+                        key={ route.name }
+                        name={ route.name }
+                        component={ route.component }
+                    />
+                ))
             }
         </Drawer.Navigator>
     </NavigationContainer>
