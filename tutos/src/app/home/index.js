@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {component} from 'react'
 import {
     ScrollView,
     Text,
@@ -51,6 +51,45 @@ const Home = ({ navigation }) => (
                 <View>
                     <Text style={{ fontSize: 35 }}>BIENVENIDO</Text>
                     <Text style={{ fontSize: 20 }}>My Name</Text>
+
+                    <Card>
+                        <CardItem header bordered button onPress={() => alert("Que onda, esto es header")}>
+                            <Text style={{ fontSize: 18, fontWeight: "bold" }}>Programadas</Text>
+                        </CardItem>
+                        <CardItem bordered button onPress={() => alert("Hola, esto es el body")}>
+                            <Body>
+                                <Text>
+                                    Tutoría Física 3 José Block
+                                </Text>
+                            </Body>
+                        </CardItem>
+                    </Card>
+
+                    <Card>
+                        <CardItem header bordered button onPress={() => alert("Que onda, esto es header")}>
+                            <Text style={{ fontSize: 18, fontWeight: "bold" }}>En curso</Text>
+                        </CardItem>
+                        <CardItem bordered button onPress={() => alert("Hola, esto es el body")}>
+                            <Body>
+                                <Text>
+                                    Tutoría IPC Andy
+                                </Text>
+                            </Body>
+                        </CardItem>
+                    </Card>
+
+                    <Card>
+                        <CardItem header bordered button onPress={() => alert("Que onda, esto es header")}>
+                            <Text style={{ fontSize: 18, fontWeight: "bold" }}>Terminadas</Text>
+                        </CardItem>
+                        <CardItem bordered button onPress={() => alert("Hola, esto es el body")}>
+                            <Body>
+                                <Text>
+                                    Tutoría Estadística Willi
+                                </Text>
+                            </Body>
+                        </CardItem>
+                    </Card>
                 </View>
             </Content>
         </Container>
