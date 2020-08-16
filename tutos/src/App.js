@@ -3,10 +3,42 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { connect } from 'react-redux'
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+    faBars,
+    faHome,
+    faUser,
+    faUserCircle,
+    faCalendar,
+    faUsers,
+    faSignInAlt,
+    faUserPlus,
+    faSignOutAlt,
+    faBell,
+    faComments,
+    faCalendarWeek,
+    faAddressCard,
+} from '@fortawesome/free-solid-svg-icons'
+
 import { routes } from './routes'
 import * as selectors from './tools/reducers'
-import Login from './app/login'
+import SideBar from './layout/sidebar'
 
+library.add(
+    faBars,
+    faHome,
+    faUser,
+    faUserCircle,
+    faCalendar,
+    faUsers,
+    faSignInAlt,
+    faUserPlus,
+    faSignOutAlt,
+    faBell,
+    faComments,
+    faCalendarWeek,
+    faAddressCard,
+)
 
 const Drawer = createDrawerNavigator()
 
@@ -14,26 +46,18 @@ const App = ({ isAuthenticated }) => (
     <NavigationContainer>
         <Drawer.Navigator 
             initialRouteName="Login"
-            // drawerContent={ props => <SideBar { ...props } /> }
+            drawerContent={ props => <SideBar { ...props } /> }
         >
             {
-                isAuthenticated ? (
-                    <>
-                        {
-                            routes.map(route => (
-                                <Drawer.Screen
-                                    key={ route.name }
-                                    name={ route.name }
-                                    component={ route.component }
-                                />
-                            ))
-                        }
-                    </>
-                ) : (
-                    <>
-                        <Drawer.Screen name="Login" component={ Login } />
-                    </>
-                )
+                routes.filter(
+                    route => route.authProtection == isAuthenticated
+                ).map(route => (
+                    <Drawer.Screen
+                        key={ route.name }
+                        name={ route.name }
+                        component={ route.component }
+                    />
+                ))
             }
         </Drawer.Navigator>
     </NavigationContainer>

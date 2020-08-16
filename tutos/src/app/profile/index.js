@@ -7,7 +7,7 @@ import {
     ImageBackground,
 } from 'react-native'
 
-import {
+import { 
     Container,
     Content,
     Button,
@@ -20,12 +20,13 @@ import {
     CardItem,
 } from 'native-base'
 
+import { Col, Row, Grid } from 'react-native-easy-grid'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 
 import { theme } from './../../layout/themes'
 
 
-const Home = ({ navigation }) => (
+const Profile = ({ navigation }) => (
     <ImageBackground
         style={ theme.background }
     >
@@ -39,17 +40,11 @@ const Home = ({ navigation }) => (
                     </Button>
                 </Left>
                 <Body></Body>
-                <Right>
-                    <Button transparent
-                        onPress={ () => navigation.navigate('Notifications') }
-                    >
-                        <FontAwesomeIcon style={ theme.headerIcon } icon='bell' size={ 25 } />
-                    </Button>
-                </Right>
+                <Right></Right>
             </Header>
             <Content style={ theme.content }>
                 <View>
-                    <Text style={{ fontSize: 35 }}>BIENVENIDO</Text>
+                    <Text style={{ fontSize: 35 }}>Profile</Text>
                     <Text style={{ fontSize: 20 }}>My Name</Text>
                 </View>
             </Content>
@@ -57,4 +52,4 @@ const Home = ({ navigation }) => (
     </ImageBackground>
 )
 
-export default Home
+export default Profile
