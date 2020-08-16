@@ -49,6 +49,12 @@ const Home = ({ navigation, tutorias}) => (
                     >
                         <FontAwesomeIcon style={ theme.headerIcon } icon='bell' size={ 25 } />
                     </Button>
+
+                    <Button transparent
+                        onPress={ () => navigation.navigate('Inbox') }
+                    >
+                        <FontAwesomeIcon style={ theme.headerIcon } icon='inbox' size={ 25 } />
+                    </Button>
                 </Right>
             </Header>
             <Content style={ theme.content }>
