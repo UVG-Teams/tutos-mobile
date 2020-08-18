@@ -1,4 +1,4 @@
-import React, {component} from 'react'
+import React, {component, useEffect} from 'react'
 import {
     ScrollView,
     Text,
@@ -28,8 +28,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { theme } from './../../layout/themes'
 import { connect } from 'react-redux'
 
+import * as selectors from '../../tools/reducers';
+import * as actions from '../../tools/actions/tutorias'
 
-const Home = ({ navigation, tutorias}) => (
+const Home = ({ navigation, tutorias, onLoad}) => {
+    useEffect(onLoad, [])
+    
+    return(
     <ImageBackground
         style={ theme.background }
     >
@@ -128,16 +133,22 @@ const Home = ({ navigation, tutorias}) => (
             </Content>
         </Container>
     </ImageBackground>
-)
+)}
 
 export default connect(
     state => ({
-        tutorias: [{tutorado: "Willi", materia: "Estadistica", status: "Programada", fechaHora: "25/08 15:00:00"},
-            {tutorado: "Andy", materia: "IPC", status: "Programada", fechaHora: "26/08 17:30:00"},
-            {tutorado: "Block", materia: "Fisica 3", status: "Programada", fechaHora: "27/08 15:00:00"},
-            {tutorado: "Willi", materia: "Estadistica", status: "En curso", fechaHora: "20/08 15:00:00"},
-            {tutorado: "Willi", materia: "Estadistica", status: "Terminada", fechaHora: "18/08 15:00:00"},
-            {tutorado: "Luca", materia: "Ecuaciones Diferenciales", status: "Terminada", fechaHora: "15/08 15:00:00"},
-            {tutorado: "Marco", materia: "Android", status: "Terminada", fechaHora: "11/08 15:00:00"}]
+        tutorias: selectors.getTutorias(state)
+        // tutorias: [{tutorado: "Willi", materia: "Estadistica", status: "Programada", fechaHora: "25/08 15:00:00"},
+        //     {tutorado: "Andy", materia: "IPC", status: "Programada", fechaHora: "26/08 17:30:00"},
+        //     {tutorado: "Block", materia: "Fisica 3", status: "Programada", fechaHora: "27/08 15:00:00"},
+        //     {tutorado: "Willi", materia: "Estadistica", status: "En curso", fechaHora: "20/08 15:00:00"},
+        //     {tutorado: "Willi", materia: "Estadistica", status: "Terminada", fechaHora: "18/08 15:00:00"},
+        //     {tutorado: "Luca", materia: "Ecuaciones Diferenciales", status: "Terminada", fechaHora: "15/08 15:00:00"},
+        //     {tutorado: "Marco", materia: "Android", status: "Terminada", fechaHora: "11/08 15:00:00"}]
+    }),
+    dispatch => ({
+        onLoad(){
+            dispatch(actions.startGetTutorias())
+        }
     })
 )(Home);
