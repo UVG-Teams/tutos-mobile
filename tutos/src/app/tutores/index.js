@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {
     ScrollView,
     Text,
@@ -13,11 +13,13 @@ import {
     Button,
     Header,
     Left,
-    Body,
     Right,
+    Body,
     Title,
     Card,
     CardItem,
+    Row,
+    Col,
 } from 'native-base'
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
@@ -26,6 +28,7 @@ import { theme } from './../../layout/themes'
 
 
 const Tutores = ({ navigation }) => (
+    
     <ImageBackground
         style={ theme.background }
     >
@@ -39,11 +42,42 @@ const Tutores = ({ navigation }) => (
                     </Button>
                 </Left>
                 <Body></Body>
-                <Right></Right>
+            
             </Header>
             <Content style={ theme.content }>
                 <View>
-                    <Text style={{ fontSize: 35 }}>Tutores</Text>
+                    <Text style={{ fontSize: 35 }}>Tutores</Text>                   
+                    <Card>
+                      <CardItem>
+                        <Body>
+                            <Row>
+                                <Col>
+                                    <Text style={{ fontWeight: "bold" }}>
+                                        Marco Polo
+                                    </Text>
+                                </Col>
+                                <Col >
+                                    <Text style={{textAlign:'right'}}>
+                                        <FontAwesomeIcon style={ theme.CardItem} icon='star' size={ 10 } />
+                                        5
+                                    </Text>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <Text>
+                                        Fisica3
+                                    </Text>
+                                </Col>
+                                <Col>         
+                                    <Text style={{textAlign:'right'}}>
+                                        Q100
+                                    </Text>   
+                                </Col>
+                            </Row>
+                        </Body>
+                      </CardItem>
+                    </Card>
                 </View>
             </Content>
         </Container>
