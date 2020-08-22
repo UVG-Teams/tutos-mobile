@@ -5,11 +5,14 @@ import {
     watchRefreshTokenStarted,
 } from './auth'
 
+import {watchGetProfile} from './profile'
+
 import {
     watchGetTutorias,
     watchAddTutoria,
     watchDeleteTutoria
 }from './tutorias'
+
 
 
 function* mainSaga() {
@@ -18,7 +21,8 @@ function* mainSaga() {
         fork(watchRefreshTokenStarted),
         fork(watchGetTutorias),
         fork(watchAddTutoria),
-        fork(watchDeleteTutoria)
+        fork(watchDeleteTutoria),
+        fork(watchGetProfile),
     ])
 }
 

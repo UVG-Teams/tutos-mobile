@@ -5,7 +5,7 @@ import omit from 'lodash/omit'
 const byid = (state = {} , action) => {
     switch(action.type){
         case types.GET_TUTORIAS_COMPLETED :{
-            const newState = {...state};
+            const newState = {};
             const { entities, order } = action.payload;
             order.forEach(id => {
                 newState[id] = {
@@ -56,9 +56,7 @@ const byid = (state = {} , action) => {
 const order = (state = [] , action) => {
   switch (action.type){
     case types.GET_TUTORIAS_COMPLETED: {
-        // console.log('ENTRAMOOOOS')
         return [
-            ...state, 
             ...action.payload.order
         ]
     }

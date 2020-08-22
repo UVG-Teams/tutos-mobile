@@ -5,6 +5,7 @@ import {
     put,
 } from 'redux-saga/effects';
 
+
 import * as types from './../types/tutorias'
 import * as selectors from '../reducers/index'
 import * as actions from './../actions/tutorias'
@@ -20,7 +21,6 @@ function* getTutorias(action){
         const isAuth = yield select(selectors.isAuthenticated)
         if (isAuth){
             const token = yield select(selectors.getToken)
-            console.log('TOKEN: ',token)
             const response = yield call(
                 fetch,
                 `${API_BASE_URL}/tutorias/`,
@@ -35,16 +35,13 @@ function* getTutorias(action){
             if(http.isSuccessful(response.status)){
                 const jsonResult = yield response.json();
                 const {
-                    entities: { tutorias , users , location, topic, course }, 
+                    entities: { tutorias , users }, 
                     result,
                 } = normalize(jsonResult, schemas.tutorias)
-                console.log({tutorias, users})
-                // console.log(result)
                 result.map(index => {
                     tutorias[index]['tutor'] = users[tutorias[index]['tutor']]
                     tutorias[index]['tutorado'] = users[tutorias[index]['tutorado']]
                 })
-                console.log(tutorias)
                 yield put (actions.completeGetTutorias(tutorias, result))
             }else{
                 const {non_field_errors } = yield response.json()

@@ -3,10 +3,12 @@ import { reducer as formReducer } from 'redux-form'
 
 import auth, * as authSelectors from './auth';
 import tutorias, * as tutoriasSelectors from './tutorias';
+import profile, * as profileSelectors from './profile';
 
 const reducer = combineReducers({
     auth,
     tutorias,
+    profile,
     form: formReducer,
 })
 
@@ -28,3 +30,7 @@ export const getTutoria = (state, id) => tutoriasSelectors.getTutoria(state.tuto
 export const getTutorias = (state) => tutoriasSelectors.getTutorias(state.tutorias )
 export const isFetchingTutorias = (state) => tutoriasSelectors.isFetchingTutorias(state.tutorias )
 export const getTutoriaError = (state) => tutoriasSelectors.getTutoriaError(state.tutorias )
+
+export const getProfile = (state, id) => profileSelectors.getProfile(state.profile)
+export const isFetchingProfile = (state) => profileSelectors.isFetchingProfile(state.profile )
+export const getProfileError = (state) => profileSelectors.getProfileError(state.profile )
