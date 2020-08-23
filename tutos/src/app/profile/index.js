@@ -5,6 +5,8 @@ import {
     TextInput,
     View,
     ImageBackground,
+    Image,
+    StyleSheet
 } from 'react-native'
 
 import { 
@@ -19,14 +21,24 @@ import {
     Card,
     CardItem,
 } from 'native-base'
-
+import { connect } from 'react-redux'
 import { Col, Row, Grid } from 'react-native-easy-grid'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 
 import { theme } from './../../layout/themes'
 
+import * as selectors from '../../tools/reducers/profile'
+import profileImg from '../../assets/profile1.png'
+const style = StyleSheet.create({
+    img:{
+        width: 150,
+        height: 150,
+    }
+})
 
-const Profile = ({ navigation }) => (
+const Profile = ({ navigation , profile }) => {
+    console.log(profile)
+    return(
     <ImageBackground
         style={ theme.background }
     >
@@ -44,12 +56,28 @@ const Profile = ({ navigation }) => (
             </Header>
             <Content style={ theme.content }>
                 <View>
-                    <Text style={{ fontSize: 35 }}>Profile</Text>
-                    <Text style={{ fontSize: 20 }}>My Name</Text>
+                    <Grid>
+                        <Col>
+                            <Image style={style.img} source =  {profileImg}/>
+                        </Col>
+                        <Col>
+                            <Text style={{ fontSize: 35 }}>{profile.username} </Text>
+                            <Text style={{ fontSize: 25 }}>{profile.first_name} {profile.last_name} </Text>
+                            <Text style={{ fontSize: 20 }}>{profile.email}</Text>
+                        </Col>
+                    </Grid>
+                    
                 </View>
             </Content>
         </Container>
-    </ImageBackground>
-)
+    </ImageBackground>)
+}
 
-export default Profile
+export default connect(
+    state => ({
+        profile : selectors.getProfile(state) 
+    }),
+    dispatch => ({
+
+    })
+)(Profile)

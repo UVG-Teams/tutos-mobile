@@ -10,6 +10,7 @@ import {
 
 import * as selectors from '../reducers'
 import * as actions from '../actions/auth'
+import * as profileActions from '../actions/profile'
 import * as types from '../types/auth'
 import * as http from '../utils/http'
 import {
@@ -35,6 +36,7 @@ function* login(action) {
         if (http.isSuccessful(response.status)) {
             const { token } = yield response.json()
             yield put(actions.completeLogin(token))
+            yield put(profileActions.startFetchProfile())
         } else {
             const { non_field_errors } = yield response.json()
             yield put(actions.failLogin(non_field_errors[0]))
