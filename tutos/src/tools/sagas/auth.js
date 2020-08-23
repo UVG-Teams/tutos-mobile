@@ -32,11 +32,11 @@ function* login(action) {
                 },
             },
         )
-            
+
         if (http.isSuccessful(response.status)) {
             const { token } = yield response.json()
             yield put(actions.completeLogin(token))
-            yield put(profileActions.startFetchProfile())
+            yield put(profileActions.startGetProfile())
         } else {
             const { non_field_errors } = yield response.json()
             yield put(actions.failLogin(non_field_errors[0]))
