@@ -4,15 +4,25 @@ import {
     watchLoginStarted,
     watchRefreshTokenStarted,
 } from './auth'
+
+import {watchGetProfile} from './profile'
+
 import {
-    watchFetchProfile
-} from './profile'
+    watchGetTutorias,
+    watchAddTutoria,
+    watchDeleteTutoria
+}from './tutorias'
+
+
 
 function* mainSaga() {
     yield all([
         fork(watchLoginStarted),
         fork(watchRefreshTokenStarted),
-        fork(watchFetchProfile),
+        fork(watchGetTutorias),
+        fork(watchAddTutoria),
+        fork(watchDeleteTutoria),
+        fork(watchGetProfile),
     ])
 }
 
