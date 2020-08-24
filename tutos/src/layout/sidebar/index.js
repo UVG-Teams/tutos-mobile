@@ -40,7 +40,7 @@ const SideBar = ({ props, isAuthenticated, logout, navigation }) => (
                     routes.filter(
                         route => route.authProtection == isAuthenticated
                     ).map(route => route.showOnSidebar && (
-                        <Row>
+                        <Row key={ route.name }>
                             <FontAwesomeIcon icon={ route.icon } size={ 25 } style={{ ...theme.sidebarIcon, marginTop: 15, marginLeft: 15 }} />
                             <DrawerItem
                                 key={ route.name }
