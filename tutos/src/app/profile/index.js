@@ -27,11 +27,13 @@ import {
 import { connect } from 'react-redux'
 import { Col, Row, Grid } from 'react-native-easy-grid'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import dayjs from 'dayjs'
 
 import { theme } from './../../layout/themes'
 
 import * as selectors from '../../tools/reducers'
 import profileImg from '../../assets/profile1.png'
+
 const style = StyleSheet.create({
     img:{
         width: 150,
@@ -69,7 +71,7 @@ const Profile = ({ navigation , profile} ) => {
                         </Col>
                         <Col>
                             <Text style={{ fontSize: 35 }}>{profile.first_name} {profile.last_name} </Text>
-                                <Text style={{ fontSize: 20 }}>En tutos desde {profile.date_joined.substring(0,10)}</Text>
+                                <Text style={{ fontSize: 20 }}>En tutos desde { dayjs(profile.date_joined).format('DD/MM/YYYY') }</Text>
                         </Col>
                     </Grid>
                     <Text></Text>
@@ -80,7 +82,7 @@ const Profile = ({ navigation , profile} ) => {
                             <ListItem>
                                 <FontAwesomeIcon style={theme.headerIcon} icon='at' size={25} />
                                 <Text style={{ fontSize: 15 }}>
-                                     {'\t'+profile.username}
+                                     {'\t'+ profile.username}
                                 </Text>
                             </ListItem>
                             <ListItem>
@@ -92,13 +94,13 @@ const Profile = ({ navigation , profile} ) => {
                             <ListItem>
                                 <FontAwesomeIcon style={theme.headerIcon} icon='location-arrow' size={25} />
                                 <Text style={{ fontSize: 15 }}>
-                                    {'\t' + profile.location.name}
+                                    {'\t' + profile && profile.location && profile.location.name}
                                 </Text>
                             </ListItem>
                             <ListItem>
                                 <FontAwesomeIcon style={theme.headerIcon} icon='graduation-cap' size={25} />
                                 <Text style={{ fontSize: 15 }}>
-                                    {'\t' + profile.institution.name}
+                                    {'\t' + profile && profile.institution && profile.institution.name}
                                 </Text>
                             </ListItem>
                         </Content>

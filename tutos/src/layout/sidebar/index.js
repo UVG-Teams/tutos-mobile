@@ -14,7 +14,7 @@ import * as selectors from '../../tools/reducers'
 import * as actions from '../../tools/actions/auth'
 
 
-const SideBar = ({ props, isAuthenticated, logout, navigation }) => (
+const SideBar = ({ props, isAuthenticated, logout, profile, navigation }) => (
     <View style={{ flex:1 }}>
         <DrawerContentScrollView { ...props }>
             <View>
@@ -30,7 +30,8 @@ const SideBar = ({ props, isAuthenticated, logout, navigation }) => (
                                 /> */}
                                 <FontAwesomeIcon icon='user-circle' size={ 125 } style={{ ...theme.sidebarIcon, margin: 20 }} />
                                 <View>
-                                    <Text style={ styles.username }>MY NAME</Text>
+                                    <Text style={ styles.username }>{ profile.first_name + ' ' + profile.last_name }</Text>
+                                    <Text style={ styles.role }>{ profile.is_tutor ? 'Tutor' : 'Tutorado' }</Text>
                                 </View>
                             </>
                         ) : (<></>)
@@ -73,6 +74,7 @@ const SideBar = ({ props, isAuthenticated, logout, navigation }) => (
 export default connect(
     state => ({
         isAuthenticated: selectors.isAuthenticated(state),
+        profile : selectors.getProfile(state),
     }),
     dispatch => ({
         logout() {
@@ -91,6 +93,10 @@ const styles = StyleSheet.create({
     username: {
         fontSize: 20,
         marginTop: 10,
+        marginLeft: 15,
+    },
+    role: {
+        fontSize: 16,
         marginLeft: 15,
     },
 })
