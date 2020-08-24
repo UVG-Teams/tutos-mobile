@@ -33,6 +33,36 @@ function* getProfile(action){
             )
             if(http.isSuccessful(response.status)){
                 const jsonResult = yield response.json();
+                const institutionResponse = yield call(
+                    fetch,
+                    `${API_BASE_URL}/institutions/${jsonResult.institution}/`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `JWT ${token}`,
+                        }
+                    }
+                )
+                if (http.isSuccessful(institutionResponse.status)){
+                    jsonInstitution  = yield institutionResponse.json()
+                    jsonResult.institution = jsonInstitution
+                }
+                const locationResponse = yield call(
+                    fetch,
+                    `${API_BASE_URL}/locations/${jsonResult.location}/`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `JWT ${token}`,
+                        }
+                    }
+                )
+                if (http.isSuccessful(locationResponse.status)){
+                    jsonLocation = yield locationResponse.json()
+                    jsonResult.location = jsonLocation
+                }
                 yield put(actions.completeGetProfile(jsonResult))
             }else{
                 const { non_field_errors } = yield response.json()
