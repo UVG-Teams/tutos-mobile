@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import createSagaMiddleware from 'redux-saga'
-
+import devToolsEnhancer from 'remote-redux-devtools';
 import reducer from './tools/reducers'
 import mainSaga from './tools/sagas'
 
