@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect } from 'react'
+import { connect } from 'react-redux';
 import {
     ScrollView,
     Text,
@@ -26,9 +27,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 
 import { theme } from './../../layout/themes'
 
+import * as selectors from '../../tools/reducers'
+import * as actions from '../../tools/actions/users'
 
-const Tutores = ({ navigation }) => (
-    
+const Tutores = ({ 
+    navigation,
+    users,
+    isLoading,
+    onLoad,
+}) => {
+    useEffect(onLoad, [])
+    console.log(users);
+    return(
     <ImageBackground
         style={ theme.background }
     >
@@ -46,42 +56,61 @@ const Tutores = ({ navigation }) => (
             </Header>
             <Content style={ theme.content }>
                 <View>
-                    <Text style={{ fontSize: 35 }}>Tutores</Text>                   
-                    <Card>
-                      <CardItem>
-                        <Body>
-                            <Row>
-                                <Col>
-                                    <Text style={{ fontWeight: "bold" }}>
-                                        Marco Polo
-                                    </Text>
-                                </Col>
-                                <Col >
-                                    <Text style={{textAlign:'right'}}>
-                                        <FontAwesomeIcon style={ theme.CardItem} icon='star' size={ 10 } />
-                                        5
-                                    </Text>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <Text>
-                                        Fisica3
-                                    </Text>
-                                </Col>
-                                <Col>         
-                                    <Text style={{textAlign:'right'}}>
-                                        Q100
-                                    </Text>   
-                                </Col>
-                            </Row>
-                        </Body>
-                      </CardItem>
-                    </Card>
+                    <Text style={{ fontSize: 35 }}>Tutores</Text>   
+                    {
+                        users.map(user => user.is_tutor && (
+                            <Card>
+                                <CardItem>
+                                    <Body>
+                                        <Row>
+                                            <Col>
+                                                <Text style={{ fontWeight: "bold" }}>
+                                                    {user.first_name}
+                                                    {" "} 
+                                                    {user.last_name}
+                                                </Text>
+                                            </Col>
+                                            <Col >
+                                                <Text style={{textAlign:'right'}}>
+                                                    <FontAwesomeIcon style={ theme.CardItem} icon='star' size={ 10 } />
+                                                    {/* {user.calificacion} */}
+                                                    5
+                                                </Text>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                <Text>
+                                                    {/* {user.themes} */}
+                                                    Fisica3
+                                                </Text>
+                                            </Col>
+                                            <Col>         
+                                                <Text style={{textAlign:'right'}}>
+                                                    {/* {user.price} */}
+                                                    Q100
+                                                </Text>   
+                                            </Col>
+                                        </Row>
+                                    </Body>
+                                </CardItem>
+                            </Card>
+                        ))      
+                    }
                 </View>
             </Content>
         </Container>
     </ImageBackground>
-)
+)}
 
-export default Tutores
+export default connect(
+    state => ({
+        users: selectors.getUsers(state),
+        isLoading: selectors.isFetchingUsers(state),
+    }),
+    dispatch => ({
+        onLoad() {
+            dispatch(actions.startFetchingUsers());
+        },
+    }),
+)(Tutores);

@@ -13,6 +13,9 @@ import {
     watchDeleteTutoria
 }from './tutorias'
 
+import {
+    watchFetchUsers,
+} from './users'
 
 
 function* mainSaga() {
@@ -23,6 +26,7 @@ function* mainSaga() {
         fork(watchAddTutoria),
         fork(watchDeleteTutoria),
         fork(watchGetProfile),
+        fork(watchFetchUsers),
     ])
 }
 

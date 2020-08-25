@@ -1,13 +1,15 @@
-import * as types from '../types/tutores'
 import omit from 'lodash/omit'; 
 import { combineReducers } from 'redux';
 
+import * as types from '../types/users';
+import actions from 'redux-form/lib/actions';
+
 const byId = (state = {}, action) =>{
-    switch(action.types){
-        case types.FETCH_TUTORES_COMPLETED: {
+    switch(action.type){
+        case types.FETCH_USERS_COMPLETED: {
             const newState = {...state};
             const {entities, order} = action.payload;
-            order.foreach(id => {
+            order.forEach(id => {
                 newState[id] ={
                     ...entities[id],
                     isConfirmed: true,
@@ -15,7 +17,7 @@ const byId = (state = {}, action) =>{
             });
             return newState;
         }
-        case types.ADD_TUTOR_STARTED: {
+        case types.ADD_USER_STARTED: {
             const newState = {...state};
             newState[action.payload.id] ={
                 ...action.payload,
@@ -23,19 +25,19 @@ const byId = (state = {}, action) =>{
             }
             return newState;
         }
-        case types.ADD_TUTOR_COMPLETED: {
-            const {tempId, tutor} = action.payload;
+        case types.ADD_USER_COMPLETED: {
+            const {tempId, user} = action.payload;
             const newState = omit(state, tempId);
-            newState[tutor.id] = {
-                ...tutor,
+            newState[user.id] = {
+                ...user,
                 isConfirmed: true
             }
             return newState;
         }
-        case types.REMOVE_TUTOR_STARTED: {
+        case types.REMOVE_USER_STARTED: {
             return omit(state, action.payload.id);
         }
-        // case types.REMOVE_TUTOR_COMPLETED: {
+        // case types.REMOVE_USER_COMPLETED: {
         //     return
         // }
         default:{
@@ -44,27 +46,27 @@ const byId = (state = {}, action) =>{
     }
 };
 const order = (state = [], action) =>{
-    switch(action.types){
-        case types.FETCH_TUTORES_COMPLETED: {
+    switch(action.type){
+        case types.FETCH_USERS_COMPLETED: {
             return [
                 ...state, 
                 ...action.payload.order
             ];
         }
-        case types.ADD_TUTOR_STARTED: {
+        case types.ADD_USER_STARTED: {
             return [
                 ...state, 
-                ...action.payload.tutor.id
+                ...action.payload.user.id
             ];
         }
-        case types.ADD_TUTOR_COMPLETED: {
-            const {tempId, tutor} = action.payload;
-            return state.map(id => id === tempId ? tutor.id : id);
+        case types.ADD_USER_COMPLETED: {
+            const {tempId, user} = action.payload;
+            return state.map(id => id === tempId ? user.id : id);
         }
-        case types.REMOVE_TUTOR_STARTED: {
+        case types.REMOVE_USER_STARTED: {
             return state.filter(id => id !== action.payload.id);
         }
-        // case types.REMOVE_TUTOR_COMPLETED: {
+        // case types.REMOVE_USER_COMPLETED: {
         //     return
         // }
         default:{
@@ -73,14 +75,14 @@ const order = (state = [], action) =>{
     }
 };
 const isFetching = (state = false, action) =>{
-    switch(action.types){
-        case types.FETCH_TUTORES_STARTED: {
+    switch(action.type){
+        case types.FETCH_USERS_STARTED: {
             return true;
         }
-        case types.FETCH_TUTORES_COMPLETED: {
+        case types.FETCH_USERS_COMPLETED: {
             return false;
         }
-        case types.FETCH_TUTORES_FAILED: {
+        case types.FETCH_USERS_FAILED: {
             return false;
         }
         default:{
@@ -89,17 +91,17 @@ const isFetching = (state = false, action) =>{
     }
 };
 const error = (state = null, action) =>{
-    switch(action.types){
-        case types.FETCH_TUTORES_STARTED:
-        case types.FETCH_TUTORES_COMPLETED:
-        case types.ADD_TUTOR_STARTED:
-        case types.ADD_TUTOR_COMPLETED:
-        case types.REMOVE_TUTOR_STARTED:
-        case types.REMOVE_TUTOR_COMPLETED:
+    switch(action.type){
+        case types.FETCH_USERS_STARTED:
+        case types.FETCH_USERS_COMPLETED:
+        case types.ADD_USER_STARTED:
+        case types.ADD_USER_COMPLETED:
+        case types.REMOVE_USER_STARTED:
+        case types.REMOVE_USER_COMPLETED:
             return null;
-        case types.REMOVE_TUTOR_FAILED:
-        case types.FETCH_TUTORES_FAILED:
-        case types.ADD_TUTOR_FAILED:
+        case types.REMOVE_USER_FAILED:
+        case types.FETCH_USERS_FAILED:
+        case types.ADD_USER_FAILED:
             return action.payload.error
         default:{
             return state;
@@ -114,7 +116,7 @@ export default combineReducers({
     error,
 })
 
-export const getTutor = (state, id) => state.byId[id];
-export const getTutores = state => state.order.map(id => getTutor(state, id));
-export const isFetchingTutores = state => state.isFetching;
-export const getTutorError = state => state.error;
+export const getUser = (state, id) => state.byId[id];
+export const getUsers = state => state.order.map(id => getUser(state, id));
+export const isFetchingUsers = state => state.isFetching;
+export const getUserError = state => state.error;
