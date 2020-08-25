@@ -5,9 +5,11 @@ import auth, * as authSelectors from './auth';
 import tutorias, * as tutoriasSelectors from './tutorias';
 import profile, * as profileSelectors from './profile';
 import users, * as usersSelectors from './users';
+import signUp, * as signUpSelectors from './signUp';
 
 const reducer = combineReducers({
     auth,
+    signUp,
     tutorias,
     profile,
     users,
@@ -26,6 +28,9 @@ export const getAuthUsername = state => authSelectors.getAuthUsername(state.auth
 export const getAuthExpiration = state => authSelectors.getAuthExpiration(state.auth)
 export const getIsRefreshingToken = state => authSelectors.getIsRefreshingToken(state.auth)
 export const getRefreshingError = state => authSelectors.getRefreshingError(state.auth)
+
+export const getIsSigningUp = state => signUpSelectors.getIsSigningUp(state.signUp);
+export const getSignUpError = state => signUpSelectors.getSignUpError(state.signUp);
 
 
 export const getTutoria = (state, id) => tutoriasSelectors.getTutoria(state.tutorias , id)

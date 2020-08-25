@@ -6,6 +6,7 @@
 //export const API_BASE_URL = 'http://192.168.1.24:3000/api'   // IP - B
 export const API_BASE_URL = 'http://192.168.1.21:3000/api'   // IP - B
 //export const API_BASE_URL = 'http://192.168.1.13:3000/api'   // IP - L
+// export const API_BASE_URL = 'http://192.168.1.181:3000/api'   // IP - A
 
 // Django token expiration = 1800 seconds
 export const tokenReviewTime = 300 * 1000 // Seconds * 1000

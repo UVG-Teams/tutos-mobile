@@ -7,6 +7,8 @@ import {
 
 import {watchGetProfile} from './profile'
 
+import { watchSignUpStarted } from './signUp'
+
 import {
     watchGetTutorias,
     watchAddTutoria,
@@ -21,6 +23,7 @@ import {
 function* mainSaga() {
     yield all([
         fork(watchLoginStarted),
+        fork(watchSignUpStarted),
         fork(watchRefreshTokenStarted),
         fork(watchGetTutorias),
         fork(watchAddTutoria),
