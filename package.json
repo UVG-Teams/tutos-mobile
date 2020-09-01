@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "cypress": "^5.0.0",
+    "moment": "^2.27.0"
+  },
+  "devDependencies": {
+    "cavy": "^4.0.1"
+  }
+}
