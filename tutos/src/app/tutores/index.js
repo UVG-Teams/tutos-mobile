@@ -37,7 +37,6 @@ const Tutores = ({
     onLoad,
 }) => {
     useEffect(onLoad, [])
-    console.log(users);
     return(
     <ImageBackground
         style={ theme.background }

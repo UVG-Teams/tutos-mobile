@@ -33,12 +33,10 @@ function* fetchUser(action){
             )
             if(http.isSuccessful(response.status)){
                 const jsonResult = yield response.json();
-                console.log("lo que sea mano", jsonResult);
                 const {
                     entities:{users},
                     result,
                 } = normalize(jsonResult, schemas.users);
-                console.log("derrito",users);
                 yield put(actions.completeFetchingUsers(users, result));
             }else{
                 const {non_field_errors} = yield response.json;
