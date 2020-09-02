@@ -4,11 +4,15 @@ import {
     View,
     Dimensions,
     TouchableHighlight,
+    ImageBackground,
     StyleSheet,
     Button,
-    YellowBox,
 } from 'react-native';
 import Carousel from 'react-native-looped-carousel';
+
+import imgCarousel1 from '../../../media/1.png';
+import imgCarousel2 from '../../../media/2.png';
+import imgCarousel3 from '../../../media/3.png';
 
 const { width, height } = Dimensions.get('window');
 
@@ -34,15 +38,19 @@ export default class Index extends Component {
                     delay={2000}
                     style={this.state.size}
                     autoplay
-                    // pageInfo
                     onAnimateNextPage={(p) => console.log(p)}
                 >
-                    <View style={[{ backgroundColor: '#BADA55' }, this.state.size]}>
-                        <Text>HOLAAAAAA</Text>
-                        
+                    <View style={this.state.size}>
+                        <ImageBackground source={imgCarousel1} style={styles.image}></ImageBackground>
                     </View>
-                    <View style={[{ backgroundColor: 'red' }, this.state.size]}><Text>2</Text></View>
-                    <View style={[{ backgroundColor: 'blue' }, this.state.size]}><Text>3</Text></View>
+
+                    <View style={this.state.size}>
+                        <ImageBackground source={imgCarousel2} style={styles.image}></ImageBackground>
+                    </View>
+
+                    <View style={this.state.size}>
+                        <ImageBackground source={imgCarousel3} style={styles.image}></ImageBackground>
+                    </View>
                 </Carousel>
                 <View style={styles.options}>
                     <TouchableHighlight style={ styles.buttonLogin }>
@@ -69,15 +77,15 @@ export default class Index extends Component {
 const styles = StyleSheet.create({
     buttonLogin: {
         width: '40%',
-        // marginTop: 15,
         marginRight: 20,
         backgroundColor: '#ffffff',
+        borderRadius: 10,
     },
 
     buttonSignup: {
         width: '40%',
-        // marginTop: 15,
         backgroundColor: '#ffffff',
+        borderRadius: 10,
     },
 
     options: {
@@ -90,4 +98,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+
+    image: {
+        flex: 1,
+        resizeMode: "cover",
+        justifyContent: "center"
+      },
 })
