@@ -8,6 +8,7 @@ import {
     StyleSheet,
     Button,
 } from 'react-native';
+
 import Carousel from 'react-native-looped-carousel';
 
 import imgCarousel1 from '../../../media/1.png';
@@ -35,27 +36,33 @@ export default class Index extends Component {
         return (
             <View style={{ flex: 1 }} onLayout={this._onLayoutDidChange}>
                 <Carousel
-                    delay={2000}
+                    delay={8000}
                     style={this.state.size}
                     autoplay
                     onAnimateNextPage={(p) => console.log(p)}
                 >
                     <View style={this.state.size}>
-                        <ImageBackground source={imgCarousel1} style={styles.image}></ImageBackground>
+                        <ImageBackground source={imgCarousel1} style={styles.image}>
+                            <Text style={styles.text}>Encuentra una tutoría a la hora que puedas, de la materia que quieras</Text>
+                        </ImageBackground>
                     </View>
 
                     <View style={this.state.size}>
-                        <ImageBackground source={imgCarousel2} style={styles.image}></ImageBackground>
+                        <ImageBackground source={imgCarousel2} style={styles.image}>
+                            <Text style={styles.textUp}>Encuentra tutores cerca de ti</Text>
+                        </ImageBackground>
                     </View>
 
                     <View style={this.state.size}>
-                        <ImageBackground source={imgCarousel3} style={styles.image}></ImageBackground>
+                        <ImageBackground source={imgCarousel3} style={styles.image}>
+                            <Text style={styles.textUp}>Si eres tutor, crea tu perfil y ten ingresos económicos</Text>
+                        </ImageBackground>
                     </View>
                 </Carousel>
                 <View style={styles.options}>
                     <TouchableHighlight style={ styles.buttonLogin }>
                         <Button
-                            // onPress={ handleSubmit }
+                            onPress={ () => this.props.navigation.navigate('Login') }
                             color="black"
                             title="Login"
                         />
@@ -63,7 +70,7 @@ export default class Index extends Component {
 
                     <TouchableHighlight style={ styles.buttonSignup }>
                         <Button
-                            // onPress={ handleSubmit }
+                            onPress={ () => this.props.navigation.navigate('SignUp') }
                             color="black"
                             title="Sign Up"
                         />
@@ -78,13 +85,17 @@ const styles = StyleSheet.create({
     buttonLogin: {
         width: '40%',
         marginRight: 20,
-        backgroundColor: '#ffffff',
+        marginBottom: 70,
+        padding: 10,
+        backgroundColor: '#6BB5FF',
         borderRadius: 10,
     },
 
     buttonSignup: {
         width: '40%',
-        backgroundColor: '#ffffff',
+        marginBottom: 70,
+        padding: 10,
+        backgroundColor: '#6BB5FF',
         borderRadius: 10,
     },
 
@@ -102,6 +113,31 @@ const styles = StyleSheet.create({
     image: {
         flex: 1,
         resizeMode: "cover",
-        justifyContent: "center"
-      },
+        justifyContent: "center",
+    },
+
+    text: {
+        fontSize: 45,
+        color: '#ffffff',
+        textAlign: 'center',
+        textShadowColor: '#000000',
+        textShadowOffset: {width: 15, height: 10},
+        textShadowRadius: 15,
+        paddingLeft: 20,
+        paddingRight: 20,
+    },
+
+    textUp: {
+        fontSize: 45,
+        color: '#ffffff',
+        textAlign: 'center',
+        textShadowColor: '#000000',
+        textShadowOffset: {width: 15, height: 10},
+        textShadowRadius: 15,
+        paddingLeft: 20,
+        paddingRight: 20,
+        marginBottom: '120%',
+    },
+
+    
 })
