@@ -16,6 +16,7 @@
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/drawer": "^5.8.6",
     "@react-navigation/native": "^5.7.1",
+    "cavy-cli": "^2.1.0",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.19",
     "moment": "^2.27.0",
@@ -40,7 +41,9 @@
   "devDependencies": {
     "@babel/core": "^7.8.4",
     "@babel/runtime": "^7.8.4",
+    "@types/cavy": "^3.2.0",
     "babel-jest": "^25.1.0",
+    "cavy": "^4.0.1",
     "eslint": "^6.5.1",
     "jest": "^25.1.0",
     "metro-react-native-babel-preset": "^0.59.0",

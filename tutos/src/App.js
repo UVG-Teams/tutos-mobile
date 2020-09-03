@@ -24,10 +24,12 @@ import {
     faLocationArrow,
     faGraduationCap
 } from '@fortawesome/free-solid-svg-icons'
+import { useCavy, hook, wrap } from 'cavy'
 
 import { routes } from './routes'
 import * as selectors from './tools/reducers'
 import SideBar from './layout/sidebar'
+
 
 library.add(
     faBars,
@@ -52,8 +54,13 @@ library.add(
 
 const Drawer = createDrawerNavigator()
 
-const App = ({ isAuthenticated }) => (
-    <NavigationContainer>
+const App = ({ isAuthenticated }) => {
+    const generateTestHook = useCavy();
+
+    return (
+    <NavigationContainer
+        ref={ generateTestHook('AppNavigation') }
+    >
         <Drawer.Navigator 
             initialRouteName="Login"
             drawerContent={ props => <SideBar { ...props } /> }
@@ -71,7 +78,7 @@ const App = ({ isAuthenticated }) => (
             }
         </Drawer.Navigator>
     </NavigationContainer>
-)
+)}
 
 
 export default connect(

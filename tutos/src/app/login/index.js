@@ -13,6 +13,7 @@ import {
 
 import { theme } from '../../layout/themes'
 import { RenderInput } from '../../components/form/field'
+import { useCavy, hook, wrap } from 'cavy'
 
 import * as actions from '../../tools/actions/auth'
 import * as selectors from "../../tools/reducers"
@@ -26,23 +27,30 @@ const Login = ({
     isAuthenticated = false,
     navigation,
 }) => {
+    const generateTestHook = useCavy();
+
     if (isAuthenticated) {
         navigation.navigate('Home')
     }
     return (
-        <ImageBackground style={ styles.background }>
+        <ImageBackground
+            style={ styles.background }
+            ref={generateTestHook('Login')}
+        >
             <View style={ styles.content }>
                 <Text style={ styles.title }>Tuto's</Text>
                 <Field
                     name='email'
                     placeholder='email'
                     component={ RenderInput }
+                    ref={generateTestHook('LoginScreen.Username')}
                 />
                 <Field
                     type={'password'}
                     name='password'
                     placeholder='password'
                     component={ RenderInput }
+                    ref={generateTestHook('LoginScreen.Password')}
                 />
                 {
                     error && (
@@ -59,12 +67,14 @@ const Login = ({
                                     onPress={ handleSubmit }
                                     color="black"
                                     title="Login"
+                                    ref={generateTestHook('LoginScreen.Button')}
                                 />
                             </TouchableHighlight>
                             <TouchableHighlight style={ styles.buttonPassword }>
                                 <Button
                                     onPress={ rememberPassword }
                                     title="Forgot your password?"
+                                    ref={generateTestHook('LoginScreen.ButtonForgot')}
                                 />
                             </TouchableHighlight>
                         </>
