@@ -42,12 +42,20 @@ const Today = ({
                                 >
                                     <Grid>
                                         <Col>
-                                            {
-                                                event.start && event.end && 
-                                                    <Row><Text style={ styles.eventHora }>{ dayjs(event.start).format('HH:mm') + ' - ' + dayjs(event.end).format('HH:mm') }</Text></Row>
-                                            }
-                                            <Row><Text style={ styles.eventTitle }>{ event.title }</Text></Row>
-                                            <Row><Text style={ styles.eventType }>{ event.event_type }</Text></Row>
+                                            <Row>
+                                                <Col>
+                                                    <Text style={ styles.eventImportant }>{ dayjs(event.datetime).format('HH:mm') }</Text>
+                                                </Col>
+                                                <Col>
+                                                    <Text style={ styles.eventImportant }>{ 'Q.' + event.total_price }</Text>
+                                                </Col>
+                                                <Col>
+                                                    <Text style={ styles.eventImportant }>{ event.status.name }</Text>
+                                                </Col>
+                                            </Row>
+                                            <Row><Text style={ styles.eventTitle }>{ 'Tutoria de ' + event.course }</Text></Row>
+                                            <Row><Text style={ styles.eventParticipant }>{ 'Tutor ' + event.tutor.first_name + ' ' + event.tutor.last_name }</Text></Row>
+                                            <Row><Text style={ styles.eventParticipant }>{ 'Tutorado ' + event.tutorado.first_name + ' ' + event.tutorado.last_name }</Text></Row>
                                         </Col>
                                     </Grid>
                                 </CardItem>
@@ -82,7 +90,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         margin: 10,
     },
-    eventHora: {
+    eventImportant: {
         fontFamily: 'monospace',
         fontWeight: 'bold',
         fontSize: 14,
@@ -93,7 +101,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 16,
     },
-    eventType: {
+    eventParticipant: {
         fontFamily: 'monospace',
         fontSize: 12,
     },
