@@ -1,6 +1,7 @@
 import * as types from '../types/tutorias'
 import { combineReducers } from 'redux';
 import omit from 'lodash/omit'
+import dayjs from 'dayjs'
 
 const byid = (state = {} , action) => {
     switch(action.type){
@@ -149,3 +150,4 @@ export const getTutorias = state => state.order.map(id => getTutoria(state, id))
 export const isFetchingTutorias = (state) => state.isFetching;
 export const getTutoriaError = (state) => state.error
 export const getTutoriaStatus = (state, id ) => state.byid[id].status
+export const getTutoriasOnDate = (state, date) => getTutorias(state).filter(tutoria => dayjs(tutoria.datetime).format('YYYY-MM-DD') == date)
