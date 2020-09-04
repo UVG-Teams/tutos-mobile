@@ -84,8 +84,8 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                             <CardItem bordered button onPress={() => alert("info")}>
                                                 <Body>
                                                     <Row>
-                                                        <Col>
-                                                            <Text>{tutoria.course} {tutoria.tutorado.first_name}</Text>
+                                                        <Col>                                                            
+                                                            <Text>{tutoria.course.name}, {tutoria.tutorado.first_name}</Text>
                                                         </Col>
                                                         <Col>
                                                             <Text style={{textAlign: 'right'}}>{moment(tutoria.datetime).format('L LT')}</Text>
@@ -107,7 +107,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                                 <Body>
                                                     <Row>
                                                         <Col>
-                                                            <Text>{tutoria.course} {tutoria.tutorado.first_name}</Text>
+                                                            <Text>{tutoria.course.name}, {tutoria.tutorado.first_name}</Text>
                                                         </Col>
                                                         <Col>
                                                             <Text style={{textAlign: 'right'}}>{moment(tutoria.datetime).format('L LT')}</Text>
@@ -129,7 +129,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                                 <Body>
                                                     <Row>
                                                         <Col>
-                                                            <Text>{tutoria.course} {tutoria.tutorado.first_name}</Text>
+                                                            <Text>{tutoria.course.name}, {tutoria.tutorado.first_name}</Text>
                                                         </Col>
                                                         <Col>
                                                             <Text style={{textAlign: 'right'}}>{moment(tutoria.datetime).format('L LT')}</Text>
@@ -151,7 +151,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                                 <Body>
                                                     <Row>
                                                         <Col>
-                                                            <Text>{tutoria.course} {tutoria.tutorado.first_name}</Text>
+                                                            <Text>{tutoria.course.name}, {tutoria.tutorado.first_name}</Text>
                                                         </Col>
                                                         <Col>
                                                             <Text style={{textAlign: 'right'}}>{moment(tutoria.datetime).format('L LT')}</Text>
@@ -175,7 +175,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                                 <Body>
                                                     <Row>
                                                         <Col>
-                                                            <Text>{tutoria.course} {tutoria.tutor.first_name}</Text>
+                                                            <Text>{tutoria.course.name}, {tutoria.tutor.first_name}</Text>
                                                         </Col>
                                                         <Col>
                                                             <Text style={{textAlign: 'right'}}>{moment(tutoria.datetime).format('L LT')}</Text>
@@ -197,7 +197,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                                 <Body>
                                                     <Row>
                                                         <Col>
-                                                            <Text>{tutoria.course} {tutoria.tutor.first_name}</Text>
+                                                            <Text>{tutoria.course.name}, {tutoria.tutor.first_name}</Text>
                                                         </Col>
                                                         <Col>
                                                             <Text style={{textAlign: 'right'}}>{moment(tutoria.datetime).format('L LT')}</Text>
