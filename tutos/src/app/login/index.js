@@ -11,6 +11,15 @@ import {
     ActivityIndicator
 } from 'react-native'
 
+import {
+    Container,
+    Header,
+    Left,
+    Button as Btn
+} from 'native-base'
+
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+
 import { theme } from '../../layout/themes'
 import { RenderInput } from '../../components/form/field'
 
@@ -30,48 +39,60 @@ const Login = ({
         navigation.navigate('Home')
     }
     return (
-        <ImageBackground style={ styles.background }>
-            <View style={ styles.content }>
-                <Text style={ styles.title }>Tuto's</Text>
-                <Field
-                    name='email'
-                    placeholder='email'
-                    component={ RenderInput }
-                />
-                <Field
-                    type={'password'}
-                    name='password'
-                    placeholder='password'
-                    component={ RenderInput }
-                />
-                {
-                    error && (
-                        <Text style={ theme.errorText }>{ error }</Text>
-                    )
-                }
-                {
-                    isLoading ? (
-                        <ActivityIndicator size="large" color="#0000ff" />
-                    ) : (
-                        <>
-                            <TouchableHighlight style={ styles.buttonLogin }>
-                                <Button
-                                    onPress={ handleSubmit }
-                                    color="black"
-                                    title="Login"
-                                />
-                            </TouchableHighlight>
-                            <TouchableHighlight style={ styles.buttonPassword }>
-                                <Button
-                                    onPress={ rememberPassword }
-                                    title="Forgot your password?"
-                                />
-                            </TouchableHighlight>
-                        </>
-                    )
-                }
-            </View>
-        </ImageBackground>
+        <Container style={ styles.background }>
+            <Header transparent>
+                <Left>
+                    <Btn transparent
+                        onPress={ () => navigation.navigate('Index') }
+                    >
+                        <FontAwesomeIcon style={ theme.headerIcon } icon='chevron-left' size={ 25 } /> 
+                        <Text style={styles.backTxt}>Atrás</Text>
+                    </Btn>
+                </Left>
+            </Header>
+            <ImageBackground style={ styles.background }>
+                <View style={ styles.content }>
+                    <Text style={ styles.title }>Tuto's</Text>
+                    <Field
+                        name='email'
+                        placeholder='email'
+                        component={ RenderInput }
+                    />
+                    <Field
+                        type={'password'}
+                        name='password'
+                        placeholder='password'
+                        component={ RenderInput }
+                    />
+                    {
+                        error && (
+                            <Text style={ theme.errorText }>{ error }</Text>
+                        )
+                    }
+                    {
+                        isLoading ? (
+                            <ActivityIndicator size="large" color="#0000ff" />
+                        ) : (
+                            <>
+                                <TouchableHighlight style={ styles.buttonLogin }>
+                                    <Button
+                                        onPress={ handleSubmit }
+                                        color="white"
+                                        title="Login"
+                                    />
+                                </TouchableHighlight>
+                                <TouchableHighlight style={ styles.buttonPassword }>
+                                    <Button
+                                        onPress={ rememberPassword }
+                                        title="Forgot your password?"
+                                    />
+                                </TouchableHighlight>
+                            </>
+                        )
+                    }
+                </View>
+            </ImageBackground>
+        </Container>
     )
 }
 
@@ -122,8 +143,13 @@ const styles = StyleSheet.create({
     buttonLogin: {
         width: '100%',
         marginTop: 15,
+        backgroundColor: 'black',
     },
     buttonPassword: {
         marginTop: 100,
     },
+
+    backTxt: {
+        fontSize: 20
+    }
 })

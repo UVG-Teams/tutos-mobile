@@ -1,8 +1,8 @@
 // export const API_BASE_URL = 'http://localhost:8000/api'
-export const API_BASE_URL = 'http://192.168.1.5:3000/api'   // IP - W
+// export const API_BASE_URL = 'http://192.168.1.5:3000/api'   // IP - W
 // export const API_BASE_URL = 'http://192.168.1.8:3000/api'   //IP - MARCO
 // export const API_BASE_URL = 'http://192.168.1.22:3000/api'   // IP - B
-// export const API_BASE_URL = 'http://192.168.1.22:3000/api'   // IP - L
+export const API_BASE_URL = 'http://192.168.1.22:3000/api'   // IP - L
 // export const API_BASE_URL = 'http://192.168.1.181:3000/api'   // IP - A
 // export const API_BASE_URL = 'http://192.168.1.13:3000/api'   // IP - L
 

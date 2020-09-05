@@ -35,12 +35,13 @@ function* getTutorias(action){
             if(http.isSuccessful(response.status)){
                 const jsonResult = yield response.json();
                 const {
-                    entities: { tutorias , users }, 
+                    entities: { tutorias, users, course }, 
                     result,
                 } = normalize(jsonResult, schemas.tutorias)
                 result.map(index => {
                     tutorias[index]['tutor'] = users[tutorias[index]['tutor']]
                     tutorias[index]['tutorado'] = users[tutorias[index]['tutorado']]
+                    tutorias[index]['course'] = course[tutorias[index]['course']]
                 })
                 yield put (actions.completeGetTutorias(tutorias, result))
             }else{
