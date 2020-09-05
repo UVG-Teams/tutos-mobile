@@ -15,8 +15,7 @@ import {
     Container,
     Header,
     Left,
-    Body,
-    Right,
+    Button as Btn
 } from 'native-base'
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
@@ -43,12 +42,12 @@ const Login = ({
         <Container style={ styles.background }>
             <Header transparent>
                 <Left>
-                    <Button transparent
+                    <Btn transparent
                         onPress={ () => navigation.navigate('Index') }
-                        title = "< Atrás"
                     >
-                        <FontAwesomeIcon style={ theme.headerIcon } icon='chevronLeft' size={ 25 } />
-                    </Button>
+                        <FontAwesomeIcon style={ theme.headerIcon } icon='chevron-left' size={ 25 } /> 
+                        <Text style={styles.backTxt}>Atrás</Text>
+                    </Btn>
                 </Left>
             </Header>
             <ImageBackground style={ styles.background }>
@@ -149,4 +148,8 @@ const styles = StyleSheet.create({
     buttonPassword: {
         marginTop: 100,
     },
+
+    backTxt: {
+        fontSize: 20
+    }
 })

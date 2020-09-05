@@ -84,7 +84,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                             <CardItem bordered button onPress={() => alert("info")}>
                                                 <Body>
                                                     <Row>
-                                                        <Col>                                                            
+                                                        <Col>
                                                             <Text>{tutoria.course.name}, {tutoria.tutorado.first_name}</Text>
                                                         </Col>
                                                         <Col>
