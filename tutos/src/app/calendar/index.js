@@ -109,9 +109,9 @@ export default connect(
 )(Calendar)
 
 const calendarTheme = {
-    textDayFontFamily: 'monospace',
-    textMonthFontFamily: 'monospace',
-    textDayHeaderFontFamily: 'monospace',
+    // textDayFontFamily: 'monospace',
+    // textMonthFontFamily: 'monospace',
+    // textDayHeaderFontFamily: 'monospace',
     textDayFontWeight: '300',
     textMonthFontWeight: 'bold',
     textDayHeaderFontWeight: '300',
