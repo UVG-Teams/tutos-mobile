@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
     ScrollView,
     Text,
@@ -32,6 +32,7 @@ import dayjs from 'dayjs'
 import { theme } from './../../layout/themes'
 
 import * as selectors from '../../tools/reducers'
+import * as actions from '../../tools/actions/tutorProfile'
 import profileImg from '../../assets/profile1.png'
 
 const style = StyleSheet.create({
@@ -46,7 +47,13 @@ const style = StyleSheet.create({
 })
 
 
-const Profile = ({ navigation , profile} ) => {
+const Profile = ({ navigation , profile , tutorProfile , getTutorProfile} ) => {
+    const onLoad = () => {
+        if (profile.is_tutor){
+            getTutorProfile()
+        }
+    }
+    useEffect(onLoad , [])
     return(
     <ImageBackground
         style={ theme.background }
@@ -75,6 +82,17 @@ const Profile = ({ navigation , profile} ) => {
                         </Col>
                     </Grid>
                     <Text></Text>
+                        {profile.is_tutor ? 
+                        (<Content>
+                            <Separator bordered>
+                                <Text style={{ fontSize: 20 }}>Descripción</Text>
+                            </Separator>
+                            <ListItem>
+                                <Text style={{ fontSize: 15 }}>
+                                     {'\t'+ tutorProfile.description}
+                                </Text>
+                            </ListItem>
+                        </Content>) : (<Text></Text>)}
                         <Content>
                             <Separator bordered>
                                 <Text style={{ fontSize: 20 }}>Información personal</Text>
@@ -105,11 +123,48 @@ const Profile = ({ navigation , profile} ) => {
                             </ListItem>
                         </Content>
                     <Text></Text>
+                    { profile.is_tutor && tutorProfile ? (
+                        <Content>
+                            <Separator bordered>
+                                <Text style={{ fontSize: 20 }}>Información de tutor</Text>
+                            </Separator>
+                            <ListItem>
+                                <FontAwesomeIcon style={theme.headerIcon} icon='adjust' size={25} />
+                                <Text style={{ fontSize: 15 }}>
+                                    {'\t' + `Puntuación en promedio: ${tutorProfile.score}` }
+                                </Text>
+                            </ListItem>
+                            <ListItem>
+                                <FontAwesomeIcon style={theme.headerIcon} icon='adjust' size={25} />
+                                <Text style={{ fontSize: 15 }}>
+                                    {'\t' + `Horas realizadas: ${tutorProfile.hours_done}` }
+                                </Text>
+                            </ListItem>
+                            <ListItem>
+                                <FontAwesomeIcon style={theme.headerIcon} icon='adjust' size={25} />
+                                <Text style={{ fontSize: 15 }}>
+                                    {'\t' + `Precio individual: ${tutorProfile.individual_price}` }
+                                </Text>
+                            </ListItem>
+                            <ListItem>
+                                <FontAwesomeIcon style={theme.headerIcon} icon='adjust' size={25} />
+                                <Text style={{ fontSize: 15 }}>
+                                    {'\t' + `Precio por grupo: ${tutorProfile.grupal_price}` }
+                                </Text>
+                            </ListItem>
+                        </Content>
+                    ) : (
+                        <Text> </Text>
+                        )}
+                        <Text> </Text>
+                        <Text> </Text>
                     <Button block  info 
                         onPress = {() => alert('Pendiente')}
                     >
                         <Text>Editar mi perfil</Text>
                     </Button>
+                    <Text> </Text>
+                    <Text> </Text>
 
                 </View>
             </Content>
@@ -119,9 +174,12 @@ const Profile = ({ navigation , profile} ) => {
 
 export default connect(
     state => ({
-        profile : selectors.getProfile(state) 
+        profile : selectors.getProfile(state) ,
+        tutorProfile : selectors.getTutorProfile(state)
     }),
     dispatch => ({
-
+        getTutorProfile(){
+            dispatch(actions.startGetTutorProfile())
+        }
     })
 )(Profile)
