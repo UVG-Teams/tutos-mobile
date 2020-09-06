@@ -15,18 +15,37 @@ import {
     Body,
     Right,
 } from 'native-base'
-
-import { Calendar as CalendarComponent } from 'react-native-calendars'
+import dayjs from "dayjs"
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-
+import { Calendar as CalendarComponent } from 'react-native-calendars'
 
 import { theme } from './../../layout/themes'
+import * as actions from '../../tools/actions/selects'
+import * as selectors from '../../tools/reducers'
+import Today from '../today'
 
+// Event types
+const tutoria = { color: 'red' }
+const other = { color: 'blue' }
+
+const getEventType = enumType => {
+    switch (enumType) {
+        case 'tutoria':
+            return tutoria
+        case 'otra':
+            return other
+        default:
+            return tutoria
+    }
+}
 
 const Calendar = ({
     navigation,
     events,
     selectDay,
+    daysEvents = {},
+    weekStartsOn,
+    createEvent,
 }) => (
     <ImageBackground
         style={ theme.background }
@@ -45,20 +64,29 @@ const Calendar = ({
             </Header>
             <Content style={ theme.content }>
                 <View>
-                    <Text style={{ fontSize: 35 }}>Calendar</Text>
+                    {
+                        events.map(event => {
+                            const event_date = dayjs(event.datetime).format('YYYY-MM-DD')
+                            if (daysEvents[event_date] && daysEvents[event_date]['dots']) {
+                                daysEvents[event_date]['dots'].push(getEventType(event.event_type))
+                            } else if (daysEvents[event_date]) {
+                                daysEvents[event_date]['dots'] = [getEventType(event.event_type)]
+                            } else {
+                                daysEvents[event_date] = {dots: [getEventType(event.event_type)]}
+                            }
+                        })
+                    }
                     <CalendarComponent
                         markingType={ 'multi-dot' }
-                        markedDates={{
-                            '2020-08-10': {dots: [{color: 'blue'}, {color: 'red'}]},
-                            '2020-08-16': {dots: [{color: 'blue'}]},
-                        }}
                         onDayPress={ day => selectDay(day.dateString) }
                         onDayLongPress={ day => createEvent(day.dateString) }
+                        markedDates={ daysEvents }
                         // onMonthChange={(month) => {console.log('month changed', month)}}
-                        firstDay={ 0 }
+                        firstDay={ weekStartsOn }
                         style={ calendarStyles }
                         theme={ calendarTheme }
                     />
+                    <Today />
                 </View>
             </Content>
         </Container>
@@ -67,13 +95,12 @@ const Calendar = ({
 
 export default connect(
     state => ({
-        events: [],
-        // selectedDay: selectors.getSelectedDay(state.driver) || dayjs().format('YYYY-MM-DD'),
+        events: selectors.getTutorias(state),
         weekStartsOn: 0, // Sunday
     }),
     dispatch => ({
         createEvent(day) {
-            console.log("Crear evento", day)
+            alert("Crear evento", day)
         },
         selectDay(day) {
             dispatch(actions.selectDay(day))
@@ -82,9 +109,9 @@ export default connect(
 )(Calendar)
 
 const calendarTheme = {
-    textDayFontFamily: 'monospace',
-    textMonthFontFamily: 'monospace',
-    textDayHeaderFontFamily: 'monospace',
+    // textDayFontFamily: 'monospace',
+    // textMonthFontFamily: 'monospace',
+    // textDayHeaderFontFamily: 'monospace',
     textDayFontWeight: '300',
     textMonthFontWeight: 'bold',
     textDayHeaderFontWeight: '300',

@@ -23,7 +23,8 @@ import {
     faEnvelope,
     faLocationArrow,
     faGraduationCap,
-    faAdjust
+    faAdjust,
+    faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons'
 
 import { routes } from './routes'
@@ -49,7 +50,8 @@ library.add(
     faEnvelope,
     faLocationArrow,
     faGraduationCap,
-    faAdjust
+    faAdjust,
+    faChevronLeft,
 )
 
 const Drawer = createDrawerNavigator()
@@ -57,7 +59,7 @@ const Drawer = createDrawerNavigator()
 const App = ({ isAuthenticated }) => (
     <NavigationContainer>
         <Drawer.Navigator 
-            initialRouteName="Login"
+            initialRouteName="Index"
             drawerContent={ props => <SideBar { ...props } /> }
         >
             {
