@@ -19,6 +19,7 @@ import {
     watchFetchUsers,
 } from './users'
 
+import { watchGetTutorProfile } from './tutorProfile'
 
 function* mainSaga() {
     yield all([
@@ -30,6 +31,7 @@ function* mainSaga() {
         fork(watchDeleteTutoria),
         fork(watchGetProfile),
         fork(watchFetchUsers),
+        fork(watchGetTutorProfile),
     ])
 }
 

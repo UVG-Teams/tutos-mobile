@@ -7,6 +7,7 @@ import tutorias, * as tutoriasSelectors from './tutorias';
 import profile, * as profileSelectors from './profile';
 import users, * as usersSelectors from './users';
 import signUp, * as signUpSelectors from './signUp';
+import tutorProfile , * as tutorProfileSelectors from './tutorProfile'
 
 const reducer = combineReducers({
     auth,
@@ -15,6 +16,7 @@ const reducer = combineReducers({
     tutorias,
     profile,
     users,
+    tutorProfile,
     form: formReducer,
 })
 
@@ -40,6 +42,9 @@ export const getUser = (state, id) => usersSelectors.getUser(state.users, id);
 export const getUsers = state => usersSelectors.getUsers(state.users);
 export const isFetchingUsers = state => usersSelectors.isFetchingUsers(state.users);
 export const getUserError = state => usersSelectors.getUserError(state.users);
+
+export const getTutorProfile = (state) => tutorProfileSelectors.getTutorProfie(state.tutorProfile)
+export const isFetchingTutorProfile = (state) => tutorProfileSelectors.isFetchingTutorProfile(state.tutorProfile)
 
 export const getTutoria = (state, id) => tutoriasSelectors.getTutoria(state.tutorias , id)
 export const getTutorias = state => tutoriasSelectors.getTutorias(state.tutorias)

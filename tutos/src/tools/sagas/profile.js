@@ -17,8 +17,8 @@ import {
 function* getProfile(action){
     try{
         const isAuth = yield select(selectors.isAuthenticated)
-        const id = yield select(selectors.getAuthUserID)
         if (isAuth){
+            const id = yield select(selectors.getAuthUserID)
             const token = yield select(selectors.getToken)
             const response = yield call(
                 fetch,
