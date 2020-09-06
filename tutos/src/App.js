@@ -22,7 +22,8 @@ import {
     faAt,
     faEnvelope,
     faLocationArrow,
-    faGraduationCap
+    faGraduationCap,
+    faAdjust
 } from '@fortawesome/free-solid-svg-icons'
 
 import { routes } from './routes'
@@ -47,7 +48,8 @@ library.add(
     faAt,
     faEnvelope,
     faLocationArrow,
-    faGraduationCap
+    faGraduationCap,
+    faAdjust
 )
 
 const Drawer = createDrawerNavigator()

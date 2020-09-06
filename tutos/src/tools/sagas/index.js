@@ -15,7 +15,7 @@ import {
     watchDeleteTutoria
 }from './tutorias'
 
-
+import { watchGetTutorProfile } from './tutorProfile'
 
 function* mainSaga() {
     yield all([
@@ -26,6 +26,7 @@ function* mainSaga() {
         fork(watchAddTutoria),
         fork(watchDeleteTutoria),
         fork(watchGetProfile),
+        fork(watchGetTutorProfile),
     ])
 }
 
