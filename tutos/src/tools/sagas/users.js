@@ -46,7 +46,6 @@ function* fetchUser(action){
     } catch (error){
         yield put(actions.failFetchingUsers('Connection failed!'))
     }
-
 }
 export function* watchFetchUsers(){
     yield takeEvery(
