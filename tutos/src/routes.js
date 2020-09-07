@@ -14,7 +14,7 @@ export const routes = [
     {
         name: 'Index',
         component: Index,
-        icon: 'sign-in-alt',
+        icon: 'home',
         authProtection: false,
         showOnSidebar: true,
     },

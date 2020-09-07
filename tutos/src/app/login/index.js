@@ -8,14 +8,15 @@ import {
     Text,
     Button,
     TouchableHighlight,
-    ActivityIndicator
+    ActivityIndicator,
+    Platform,
 } from 'react-native'
 
 import {
     Container,
     Header,
     Left,
-    Button as Btn
+    Button as Btn,
 } from 'native-base'
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
@@ -42,12 +43,18 @@ const Login = ({
         <Container style={ styles.background }>
             <Header transparent>
                 <Left>
-                    <Btn transparent
-                        onPress={ () => navigation.navigate('Index') }
-                    >
-                        <FontAwesomeIcon style={ theme.headerIcon } icon='chevron-left' size={ 25 } /> 
-                        <Text style={styles.backTxt}>Atrás</Text>
-                    </Btn>
+                    {
+                        Platform.select({
+                            ios: (
+                                <Btn transparent
+                                    onPress={ () => navigation.navigate('Index') }
+                                >
+                                    <FontAwesomeIcon style={ theme.headerIcons } icon='chevron-left' size={ 25 } /> 
+                                    <Text style={styles.backTxt}>Atrás</Text>
+                                </Btn>
+                            )
+                        })
+                    }
                 </Left>
             </Header>
             <ImageBackground style={ styles.background }>
@@ -77,7 +84,7 @@ const Login = ({
                                 <TouchableHighlight style={ styles.buttonLogin }>
                                     <Button
                                         onPress={ handleSubmit }
-                                        color="white"
+                                        // color="white"
                                         title="Login"
                                     />
                                 </TouchableHighlight>
@@ -140,16 +147,28 @@ const styles = StyleSheet.create({
         fontSize: 40,
         marginBottom: 30,
     },
-    buttonLogin: {
-        width: '100%',
-        marginTop: 15,
-        backgroundColor: 'black',
-    },
-    buttonPassword: {
-        marginTop: 100,
-    },
-
-    backTxt: {
-        fontSize: 20
-    }
+    ...Platform.select({
+        ios: {
+            buttonLogin: {
+                width: '100%',
+                marginTop: 15,
+                backgroundColor: 'black',
+            },
+            buttonPassword: {
+                marginTop: 100,
+            },
+            backTxt: {
+                fontSize: 20
+            }
+        },
+        android: {
+            buttonLogin: {
+                width: '100%',
+                marginTop: 15,
+            },
+            buttonPassword: {
+                marginTop: 100,
+            },
+        }
+    })
 })
