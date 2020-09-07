@@ -5,6 +5,7 @@
 //export const API_BASE_URL = 'http://192.168.1.24:3000/api'   // IP - B
 // export const API_BASE_URL = 'http://192.168.1.21:3000/api'   // IP - B
 //export const API_BASE_URL = 'http://192.168.1.13:3000/api'   // IP - L
+//export const API_BASE_URL = 'http://192.168.100.80:3000/api'  // Lomax F
 // export const API_BASE_URL = 'http://192.168.1.181:3000/api'   // IP - A
 export const API_BASE_URL = 'http://192.168.1.16:3000/api'   // IP - B/L
 
