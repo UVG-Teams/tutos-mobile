@@ -26,6 +26,7 @@ import {
     faGraduationCap,
     faAdjust,
     faChevronLeft,
+    faClock,
 } from '@fortawesome/free-solid-svg-icons'
 
 import { routes } from './routes'
@@ -54,6 +55,7 @@ library.add(
     faGraduationCap,
     faAdjust,
     faChevronLeft,
+    faClock,
 )
 
 const Drawer = createDrawerNavigator()
