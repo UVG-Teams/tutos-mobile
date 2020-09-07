@@ -84,7 +84,7 @@ const Login = ({
                                 <TouchableHighlight style={ styles.buttonLogin }>
                                     <Button
                                         onPress={ handleSubmit }
-                                        // color="white"
+                                        {...Platform.select({ios: color = 'white'}) }
                                         title="Login"
                                     />
                                 </TouchableHighlight>
