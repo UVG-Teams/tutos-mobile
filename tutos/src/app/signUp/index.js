@@ -23,6 +23,7 @@ import {
     Form,
     Item,
     Input,
+    DatePicker,
 } from 'native-base'
 
 import { RenderInput } from '../../components/form/field'
@@ -37,7 +38,12 @@ import * as selectors from '../../tools/reducers'
 import * as actions from '../../tools/actions/signUp'
 
 
-const SignUp = ({ navigation, handleSubmit, isSigningUp }) => (
+const SignUp = ({ navigation, handleSubmit, isSigningUp, }) => {
+    const date = new Date();
+    const setDate = (newDate) => {
+        date = newDate
+    };
+    return(
     <ImageBackground
         style={ theme.background }
     >
@@ -88,6 +94,19 @@ const SignUp = ({ navigation, handleSubmit, isSigningUp }) => (
                         placeholder='Confirmar Contraseña'
                         component={ RenderInput }
                     />
+                    <DatePicker
+                        default={new Date(2019, 1, 1)}
+                        minimumDate={new Date(1920, 1, 1)}
+                        maximumDate={new Date(2020,1,1)}
+                        locale={'en'}
+                        modalTransparent={false}
+                        animationType={"fade"}
+                        androidMode={"default"}
+                        placeHolderText="Fecha de nacimiento"
+                        textStyle={{color:"black"}}
+                        disabled={false}
+                        onDataChange={setDate}
+                    />
                     <View>
                         {
                             isSigningUp ? (
@@ -103,7 +122,7 @@ const SignUp = ({ navigation, handleSubmit, isSigningUp }) => (
             </Content>
         </Container>
     </ImageBackground>
-)
+)}
 export default connect(
     state=> ({
         isSigningUp: selectors.getIsSigningUp(state),
@@ -113,7 +132,7 @@ export default connect(
         form: 'signUp',
         onSubmit({username, password, confirmPassword, firstName, lastName, email}, dispatch){
             dispatch(
-                actions.startSignUp(username, password, firstName, lastName, email),
+                actions.startSignUp(username, password, firstName, lastName, email, "1999-9-9","M",true,342343454,100),
             );
         },
         validate(values) {
