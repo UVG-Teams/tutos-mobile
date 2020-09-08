@@ -1,53 +1,44 @@
 import React from 'react'
-import {
-    ScrollView,
-    Text,
-    TextInput,
-    View,
-    ImageBackground,
-} from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
 
-import {
-    Container,
-    Content,
-    Button,
-    Header,
-    Left,
-    Body,
-    Right,
-    Title,
-    Card,
-    CardItem,
-} from 'native-base'
+import List from './apps/list'
+import Show from './apps/show'
 
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+const Stack = createStackNavigator()
 
-import { theme } from './../../layout/themes'
+export const routes = [
+    {
+        displayName: 'List',
+        name: 'list',
+        component: List,
+    },
+    {
+        displayName: 'Show',
+        name: 'show',
+        component: Show,
+    },
+]
 
 
-const Tutores = ({ navigation }) => (
-    <ImageBackground
-        style={ theme.background }
-    >
-        <Container style={{ backgroundColor: 'transparent'}}>
-            <Header style={ theme.header }>
-                <Left>
-                    <Button transparent
-                        onPress={ () => navigation.openDrawer() }
-                    >
-                        <FontAwesomeIcon style={ theme.headerIcon } icon='bars' size={ 25 } />
-                    </Button>
-                </Left>
-                <Body></Body>
-                <Right></Right>
-            </Header>
-            <Content style={ theme.content }>
-                <View>
-                    <Text style={{ fontSize: 35 }}>Tutores</Text>
-                </View>
-            </Content>
-        </Container>
-    </ImageBackground>
+
+const TutoresApp = () => (
+    <NavigationContainer independent={ true }>
+        <Stack.Navigator
+            initialRouteName="list"
+            screenOptions={{ headerShown: false }}
+        >
+            {
+                routes.map(route => (
+                    <Stack.Screen
+                        key={ route.name }
+                        name={ route.name }
+                        component={ route.component }
+                    />
+                ))
+            }
+        </Stack.Navigator>
+    </NavigationContainer>
 )
 
-export default Tutores
+export default TutoresApp
