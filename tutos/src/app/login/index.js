@@ -62,13 +62,13 @@ const Login = ({
                     <Text style={ styles.title }>Tuto's</Text>
                     <Field
                         name='email'
-                        placeholder='email'
+                        placeholder='Usuario'
                         component={ RenderInput }
                     />
                     <Field
                         type={'password'}
                         name='password'
-                        placeholder='password'
+                        placeholder='Contraseña'
                         component={ RenderInput }
                     />
                     {
@@ -85,13 +85,13 @@ const Login = ({
                                     <Button
                                         onPress={ handleSubmit }
                                         {...Platform.select({ios: color = 'white'}) }
-                                        title="Login"
+                                        title="Ingresar"
                                     />
                                 </TouchableHighlight>
                                 <TouchableHighlight style={ styles.buttonPassword }>
                                     <Button
                                         onPress={ rememberPassword }
-                                        title="Forgot your password?"
+                                        title="¿Olvidaste tu contraseña?"
                                     />
                                 </TouchableHighlight>
                             </>

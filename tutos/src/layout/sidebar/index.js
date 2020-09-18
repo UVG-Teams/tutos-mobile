@@ -61,7 +61,7 @@ const SideBar = ({ props, isAuthenticated, logout, profile, navigation }) => (
                         <FontAwesomeIcon icon='sign-out-alt' size={ 25 } style={{ marginTop: 15, marginLeft: 15 }} />
                     </Row> */}
                     <DrawerItem
-                        label='Logout'
+                        label='Cerrar Sesión'
                         onPress={ logout }
                         style={{ width: '75%' }}
                     />
