@@ -197,13 +197,13 @@ const styles = StyleSheet.create({
             }
         },
         android: {
-            buttonLogin: {
-                width: '100%',
-                marginTop: 15,
-            },
-            buttonPassword: {
-                marginTop: 100,
-            },
+            // buttonLogin: {
+            //     width: '100%',
+            //     marginTop: 15,
+            // },
+            // buttonPassword: {
+            //     marginTop: 100,
+            // },
         }
     })
 })
