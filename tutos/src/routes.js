@@ -50,7 +50,7 @@ export const routes = [
         component: Profile,
         icon: 'user',
         authProtection: true,
-        showOnSidebar: true,
+        showOnSidebar: false,
     },
     {
         name: 'calendar',
@@ -66,7 +66,7 @@ export const routes = [
         component: Events,
         icon: 'calendar-day',
         authProtection: true,
-        showOnSidebar: true,
+        showOnSidebar: false,
     },
     {
         name: 'tutores',
@@ -98,6 +98,6 @@ export const routes = [
         component: Notifications,
         icon: 'bell',
         authProtection: true,
-        showOnSidebar: true,
+        showOnSidebar: false,
     },
 ]
