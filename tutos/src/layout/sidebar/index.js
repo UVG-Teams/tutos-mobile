@@ -21,19 +21,19 @@ const SideBar = ({ props, isAuthenticated, logout, profile, navigation }) => (
                 <View>
                     {
                         isAuthenticated ? (
-                            <>
+                            <View style={ theme.background }> 
                                 {/* <Image
                                     style={ styles.logo }
                                     source={{
                                         uri: 'https://happytravel.viajes/wp-content/uploads/2020/04/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'
                                     }}
                                 /> */}
-                                <FontAwesomeIcon icon='user-circle' size={ 125 } style={{ ...theme.sidebarIcon, margin: 20 }} />
+                                <FontAwesomeIcon icon='user-circle' size={ 80 } style={{ ...theme.sidebarIcon, marginTop: 20, marginLeft: 10 }} />
                                 <View>
                                     <Text style={ styles.username }>{ profile.first_name + ' ' + profile.last_name }</Text>
                                     <Text style={ styles.role }>{ profile.is_tutor ? 'Tutor' : 'Tutorado' }</Text>
                                 </View>
-                            </>
+                            </View>
                         ) : (<></>)
                     }
                 </View>
@@ -94,9 +94,14 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginTop: 10,
         marginLeft: 15,
+        fontWeight: 'bold',
     },
     role: {
         fontSize: 16,
         marginLeft: 15,
+        marginBottom: 20
     },
+    userInfo: {
+        flex: 1,
+    }
 })
