@@ -45,7 +45,7 @@ const SideBar = ({ props, isAuthenticated, logout, profile, navigation }) => (
                             <FontAwesomeIcon icon={ route.icon } size={ 25 } style={{ ...theme.sidebarIcon, marginTop: 15, marginLeft: 15 }} />
                             <DrawerItem
                                 key={ route.name }
-                                label={ route.name }
+                                label={ route.displayName }
                                 onPress={ () => navigation.navigate(route.name) }
                                 style={{ width: '75%' }}
                             />

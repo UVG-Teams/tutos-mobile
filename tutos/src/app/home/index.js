@@ -64,7 +64,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                     </Button>
 
                     <Button transparent
-                        onPress={ () => navigation.navigate('Inbox') }
+                        onPress={ () => navigation.navigate('Bandeja de entrada') }
                     >
                         <FontAwesomeIcon style={ theme.headerIcon } icon='inbox' size={ 25 } />
                     </Button>
@@ -81,7 +81,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                     </CardItem>
                                     {
                                         tutorias.map(tutoria => tutoria.status.name === "scheduled" && (
-                                            <CardItem bordered button onPress={() => alert("info")}>
+                                            <CardItem bordered button key={tutoria.id} onPress={() => alert("info")}>
                                                 <Body>
                                                     <Row>
                                                         <Col>
@@ -103,7 +103,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                     </CardItem>
                                     {
                                         tutorias.map(tutoria => tutoria.status.name === "in_process" && (
-                                            <CardItem bordered button onPress={() => alert("info")}>
+                                            <CardItem bordered button key={tutoria.id} onPress={() => alert("info")}>
                                                 <Body>
                                                     <Row>
                                                         <Col>
@@ -125,7 +125,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                     </CardItem>
                                     {
                                         tutorias.map(tutoria => tutoria.status.name === "end" && (
-                                            <CardItem bordered button onPress={() => alert("info")}>
+                                            <CardItem bordered button key={tutoria.id} onPress={() => alert("info")}>
                                                 <Body>
                                                     <Row>
                                                         <Col>
@@ -147,7 +147,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                     </CardItem>
                                     {
                                         tutorias.map(tutoria => tutoria.status.name === "canceled" && (
-                                            <CardItem bordered button onPress={() => alert("Info")}>
+                                            <CardItem bordered button key={tutoria.id} onPress={() => alert("Info")}>
                                                 <Body>
                                                     <Row>
                                                         <Col>
@@ -171,7 +171,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                     </CardItem>
                                     {
                                         tutorias.map(tutoria => tutoria.status.name ===  "end" && (
-                                            <CardItem bordered button onPress={() => alert("info")}>
+                                            <CardItem bordered button key={tutoria.id} onPress={() => alert("info")}>
                                                 <Body>
                                                     <Row>
                                                         <Col>
@@ -193,7 +193,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                     </CardItem>
                                     {
                                         tutorias.map(tutoria => tutoria.status.name ===  "scheduled" && (
-                                            <CardItem bordered button onPress={() => alert("Información tutoria")}>
+                                            <CardItem bordered button key={tutoria.id} onPress={() => alert("Información tutoria")}>
                                                 <Body>
                                                     <Row>
                                                         <Col>

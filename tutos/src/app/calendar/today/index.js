@@ -8,18 +8,20 @@ import {
 import dayjs from 'dayjs'
 import { Content, List, ListItem, Card, CardItem, Grid, Col, Row } from 'native-base'
 
-import { theme } from './../../layout/themes'
-import * as selectors from '../../tools/reducers'
+import { theme } from './../../../layout/themes'
+import * as selectors from '../../../tools/reducers'
 
 
 const Today = ({
-    events,
     navigation,
+    events,
     selectedDay,
 }) => (
     <Content style={ styles.contentView }>
         <View>
-            <Text style={{ fontSize: 25 }}>{ dayjs(selectedDay).format('DD/MM/YYYY') }</Text>
+            <Text style={ styles.title }>
+                { selectedDay == dayjs().format('YYYY-MM-DD') ? 'TODAY' : dayjs(selectedDay).format('DD/MM/YYYY') }
+            </Text>
             <List>
                 {
                     events.length == 0 && <Text>{'No hay'}</Text>
@@ -27,7 +29,7 @@ const Today = ({
                 {
                     events.length > 0 && events.map(event =>
                         <ListItem key={ event.id }>
-                            <Card  style={styles.cardEvent}>
+                            <Card style={ styles.cardEvent }>
                                 <CardItem
                                     button
                                     onPress={
@@ -70,7 +72,7 @@ const Today = ({
 export default connect(
     (state, { today }) => ({
         state: state,
-        selectedDay: today ? dayjs().format('YYYY-MM-DD') : selectors.getSelectedDay(state),
+        selectedDay: (today ? dayjs().format('YYYY-MM-DD') : selectors.getSelectedDay(state)) || dayjs().format('YYYY-MM-DD'),
     }),
     dispatch => ({}),
     (stateProps, dispatchProps, ownProps) => ({
@@ -83,25 +85,22 @@ export default connect(
 
 const styles = StyleSheet.create({
     title: {
-        // fontFamily: 'monospace',
         fontWeight: 'bold',
-        fontSize: 18,
+        fontSize: 25,
         textAlign: 'center',
-        margin: 10,
+        margin: 2,
+        flex: 1,
     },
     eventImportant: {
-        // fontFamily: 'monospace',
         fontWeight: 'bold',
         fontSize: 14,
         marginBottom: 15,
     },
     eventTitle: {
-        // fontFamily: 'monospace',
         fontWeight: 'bold',
         fontSize: 16,
     },
     eventParticipant: {
-        // fontFamily: 'monospace',
         fontSize: 12,
     },
     contentView: {
