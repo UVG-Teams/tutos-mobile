@@ -9,6 +9,7 @@ import {
     Platform,
     Button,
 } from 'react-native';
+import { useCavy, hook, wrap } from 'cavy'
 
 import Carousel from 'react-native-looped-carousel';
 
@@ -18,7 +19,7 @@ import imgCarousel3 from '../../../media/3.png';
 
 const { width, height } = Dimensions.get('window');
 
-export default class Index extends Component {
+class Index extends Component {
     
     constructor(props) {
         super(props);
@@ -35,7 +36,11 @@ export default class Index extends Component {
     
     render() {
         return (
-            <View style={{ flex: 1 }} onLayout={this._onLayoutDidChange}>
+            <View
+                style={{ flex: 1 }}
+                onLayout={this._onLayoutDidChange}
+                ref={this.props.generateTestHook('Index')}
+            >
                 <Carousel
                     delay={8000}
                     style={this.state.size}
@@ -66,6 +71,7 @@ export default class Index extends Component {
                             onPress={ () => this.props.navigation.navigate('Login') }
                             color="black"
                             title="Iniciar sesión"
+                            ref={this.props.generateTestHook('IndexScreen.ButtonLogin')}
                         />
                     </TouchableHighlight>
 
@@ -74,13 +80,16 @@ export default class Index extends Component {
                             onPress={ () => this.props.navigation.navigate('SignUp') }
                             color="black"
                             title="Regístrate"
+                            ref={this.props.generateTestHook('IndexScreen.ButtonRegister')}
                         />
                     </TouchableHighlight>
                 </View>
             </View>
-            );
-        }
+        );
     }
+}
+
+export default hook(Index)
 
 const styles = StyleSheet.create({
 
@@ -205,10 +214,4 @@ const styles = StyleSheet.create({
             
         }
     })
-
-    
-
-    
-
-    
 })

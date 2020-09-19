@@ -11,20 +11,30 @@ export default function(spec) {
         //     await spec.press('LoginScreen.ButtonForgot');
         // });
         
-        spec.it('Fail', async function() {
-            await spec.exists('Login');
-            // await spec.fillIn('LoginScreen.Username', 'Willi');
-            // await spec.fillIn('LoginScreen.Password', 'Admin');
-            await spec.press('LoginScreen.Button');
-            await spec.exists('Login');
-        });
+        // spec.it('Fail', async function() {
+        //     await spec.exists('Login');
+        //     // await spec.fillIn('LoginScreen.Username', 'Willi');
+        //     // await spec.fillIn('LoginScreen.Password', 'Admin');
+        //     await spec.press('LoginScreen.Button');
+        //     await spec.exists('Login');
+        // });
         
-        spec.it('Success', async function() {
+        // spec.it('Success', async function() {
+        //     await spec.exists('Login');
+        //     await spec.fillIn('LoginScreen.Username', 'Willi');
+        //     // await spec.fillIn('LoginScreen.Password', 'Admin');
+        //     await spec.press('LoginScreen.Button');
+        //     await spec.exists('Login');
+        // });
+
+        spec.it('Success Index', async function() {
+            await spec.exists('Index');
+            await spec.press('IndexScreen.ButtonLogin');
             await spec.exists('Login');
+            // await spec.press('LoginScreen.ButtonForgot');
             await spec.fillIn('LoginScreen.Username', 'Willi');
-            // await spec.fillIn('LoginScreen.Password', 'Admin');
+            await spec.fillIn('LoginScreen.Password', 'Admin');
             await spec.press('LoginScreen.Button');
-            await spec.exists('Login');
         });
     });
 }

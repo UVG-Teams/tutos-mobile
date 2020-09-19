@@ -90,26 +90,19 @@ const Login = ({
                             <ActivityIndicator size="large" color="#0000ff" />
                         ) : (
                             <>
-                                {/* <TouchableHighlight style={ styles.buttonLogin }>
-                                    <Button
-                                        onPress={ handleSubmit }
-                                        color = 'white'
-                                        title="Ingresar"
-                                        ref={generateTestHook('LoginScreen.Button')}
-                                    />
-                                </TouchableHighlight> */}
-                                <TouchableOpacity style={ styles.buttonLogin } onPress={ handleSubmit } >
+                                <TouchableOpacity
+                                    style={ styles.buttonLogin }
+                                    onPress={ handleSubmit }
+                                    ref={generateTestHook('LoginScreen.Button')}
+                                >
                                     <Text style={styles.txtButtonLogin}>Ingresar</Text>
                                 </TouchableOpacity>
 
-                                {/* <TouchableHighlight style={ styles.buttonPassword }>
-                                    <Button
-                                        onPress={ rememberPassword }
-                                        title="Forgot your password?"
-                                        ref={generateTestHook('LoginScreen.ButtonForgot')}
-                                    />
-                                </TouchableHighlight> */}
-                                <TouchableOpacity  style={ styles.buttonPassword } onPress={ rememberPassword }>
+                                <TouchableOpacity
+                                    style={ styles.buttonPassword }
+                                    onPress={ rememberPassword }
+                                    ref={generateTestHook('LoginScreen.ButtonForgot')}
+                                >
                                     <Text style={styles.txtButtonPassword}>¿Olvidaste tu contraseña?</Text>
                                 </TouchableOpacity>
                             </>
