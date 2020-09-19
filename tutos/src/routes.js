@@ -26,7 +26,7 @@ export const routes = [
         showOnSidebar: true,
     },
     {
-        name: 'Home',
+        name: 'Inicio',
         component: Home,
         icon: 'home',
         authProtection: true,
@@ -40,14 +40,14 @@ export const routes = [
         showOnSidebar: true,
     },
     {
-        name: 'Profile',
+        name: 'Perfil',
         component: Profile,
         icon: 'user',
         authProtection: true,
         showOnSidebar: true,
     },
     {
-        name: 'Calendar',
+        name: 'Calendario',
         component: Calendar,
         icon: 'calendar',
         authProtection: true,
@@ -61,14 +61,14 @@ export const routes = [
         showOnSidebar: true,
     },
     {
-        name: 'Conversations',
+        name: 'Bandeja de entrada',
         component: Conversations,
         icon: 'comments',
         authProtection: true,
         showOnSidebar: true,
     },
     {
-        name: 'Schedule',
+        name: 'Horario',
         component: Schedule,
         icon: 'calendar-week',
         authProtection: true,

@@ -65,7 +65,7 @@ export default class Index extends Component {
                         <Button
                             onPress={ () => this.props.navigation.navigate('Login') }
                             color="black"
-                            title="Login"
+                            title="Iniciar sesión"
                         />
                     </TouchableHighlight>
 
@@ -73,7 +73,7 @@ export default class Index extends Component {
                         <Button
                             onPress={ () => this.props.navigation.navigate('SignUp') }
                             color="black"
-                            title="Sign Up"
+                            title="Regístrate"
                         />
                     </TouchableHighlight>
                 </View>
