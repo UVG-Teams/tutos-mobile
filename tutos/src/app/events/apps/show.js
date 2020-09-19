@@ -54,41 +54,28 @@ const Show = ({ navigation, event }) => {
                 <Content style={ theme.content }>
                     <Card style={{ flex:1 }}>
                         <CardItem header bordered>
-                            <Text style={ styles.title }>{ event.title }</Text>
+                            {/* <Text style={ styles.title }>{ event.title }</Text> */}
                         </CardItem>
                         <CardItem>
+                            {
+                                console.log(event)
+                            }
                             <Grid>
                                 <Col>
-                                    <Row><Text style={ styles.label }>{'Organizer'}</Text></Row>
-                                    <Row><Text style={ styles.text }>{ event.user_main_id }</Text></Row>
-                                </Col>
-                                <Col>
-                                    <Row><Text style={ styles.label }>{'Date'}</Text></Row>
-                                    <Row><Text style={ styles.text }>{ dayjs(event.date).format('DD/MMMM/YYYY') }</Text></Row>
-                                    {
-                                        event.start && event.end && 
-                                            <Row><Text style={ styles.text }>{ dayjs(event.start).format('HH:mm') + ' - ' + dayjs(event.end).format('HH:mm') }</Text></Row>
-                                    }
-                                </Col>
-                            </Grid>
-                        </CardItem>
-                        <CardItem>
-                            <Grid>
-                                <Col>
-                                    <Row><Text style={ styles.label }>{'Address'}</Text></Row>
-                                    <Row><Text style={ styles.text }>{ event.location }</Text></Row>
-                                </Col>
-                            </Grid>
-                        </CardItem>
-                        <CardItem>
-                            <Grid>
-                                <Col>
-                                    <Row><Text style={ styles.label }>{'Type of event'}</Text></Row>
-                                    <Row><Text style={ styles.text }>{ event.event_type }</Text></Row>
-                                </Col>
-                                <Col>
-                                    <Row><Text style={ styles.label }>{'Public'}</Text></Row>
-                                    <Row><Text style={ styles.text }>{ event.public ? 'True' : 'False' }</Text></Row>
+                                    <Row>
+                                        <Col>
+                                            <Text style={ styles.eventImportant }>{ dayjs(event.datetime).format('HH:mm') }</Text>
+                                        </Col>
+                                        <Col>
+                                            <Text style={ styles.eventImportant }>{ 'Q.' + event.total_price }</Text>
+                                        </Col>
+                                        <Col>
+                                            <Text style={ styles.eventImportant }>{ event.status.name }</Text>
+                                        </Col>
+                                    </Row>
+                                    <Row><Text style={ styles.eventTitle }>{ 'Tutoria de ' + event.course.name }</Text></Row>
+                                    <Row><Text style={ styles.eventParticipant }>{ 'Tutor ' + event.tutor.first_name + ' ' + event.tutor.last_name }</Text></Row>
+                                    <Row><Text style={ styles.eventParticipant }>{ 'Tutorado ' + event.tutorado.first_name + ' ' + event.tutorado.last_name }</Text></Row>
                                 </Col>
                             </Grid>
                         </CardItem>
@@ -96,30 +83,10 @@ const Show = ({ navigation, event }) => {
                             <Grid>
                                 <Col>
                                     <Row><Text style={ styles.label }>{'Description'}</Text></Row>
-                                    <Row><Text style={ styles.text }>{ event.description }</Text></Row>
+                                    {/* <Row><Text style={ styles.text }>{ event.description }</Text></Row> */}
                                 </Col>
                             </Grid>
                         </CardItem>
-                    </Card>
-                    <Card>
-                        <CardItem
-                            button
-                            onPress={() => alert("Go to project")}
-                        >
-                            <Text style={ styles.label }>{'Go to project'}</Text>
-                        </CardItem>
-                        <CardItem
-                            button
-                            onPress={() => alert("Edit event")}
-                        >
-                            <Text style={ styles.label }>{'Edit'}</Text>
-                        </CardItem>
-                        {/* <CardItem
-                            button
-                            onPress={() => alert("Delete event")}
-                        >
-                            <Text style={ styles.label }>{'Delete'}</Text>
-                        </CardItem> */}
                     </Card>
                 </Content>
             </Container>
@@ -128,8 +95,8 @@ const Show = ({ navigation, event }) => {
 }
 
 export default connect(
-    (state, { id }) => ({
-        event: {}
+    (state, { route }) => ({
+        event: selectors.getTutoria(state, route.params.id),
     }),
     dispatch => ({})
 )(Show)
@@ -148,5 +115,17 @@ const styles = StyleSheet.create({
     },
     cardHeader: {
         fontWeight: 'bold',
-    }
+    },
+    eventImportant: {
+        fontWeight: 'bold',
+        fontSize: 14,
+        marginBottom: 15,
+    },
+    eventTitle: {
+        fontWeight: 'bold',
+        fontSize: 16,
+    },
+    eventParticipant: {
+        fontSize: 12,
+    },
 })
