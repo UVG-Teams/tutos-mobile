@@ -18,11 +18,15 @@ import {
     faComments,
     faCalendarWeek,
     faAddressCard,
+    faStar,
     faInbox,
     faAt,
     faEnvelope,
     faLocationArrow,
-    faGraduationCap
+    faGraduationCap,
+    faAdjust,
+    faChevronLeft,
+    faClock,
 } from '@fortawesome/free-solid-svg-icons'
 import { useCavy, hook, wrap } from 'cavy'
 
@@ -45,11 +49,15 @@ library.add(
     faComments,
     faCalendarWeek,
     faAddressCard,
+    faStar,
     faInbox,
     faAt,
     faEnvelope,
     faLocationArrow,
-    faGraduationCap
+    faGraduationCap,
+    faAdjust,
+    faChevronLeft,
+    faClock,
 )
 
 const Drawer = createDrawerNavigator()
@@ -62,7 +70,7 @@ const App = ({ isAuthenticated }) => {
         ref={ generateTestHook('AppNavigation') }
     >
         <Drawer.Navigator 
-            initialRouteName="Login"
+            initialRouteName="Index"
             drawerContent={ props => <SideBar { ...props } /> }
         >
             {

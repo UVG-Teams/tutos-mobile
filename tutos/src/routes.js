@@ -7,9 +7,17 @@ import Tutores from './app/tutores'
 import Conversations from './app/conversations'
 import Schedule from './app/schedule'
 import Notifications from './app/notifications'
+import Index from './app/index'
 
 
 export const routes = [
+    {
+        name: 'Index',
+        component: Index,
+        icon: 'home',
+        authProtection: false,
+        showOnSidebar: true,
+    },
     {
         name: 'Login',
         component: Login,
