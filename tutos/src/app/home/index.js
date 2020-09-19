@@ -58,13 +58,13 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                 <Body></Body>
                 <Right>
                     <Button transparent
-                        onPress={ () => navigation.navigate('Notifications') }
+                        onPress={ () => navigation.navigate('notifications') }
                     >
                         <FontAwesomeIcon style={ theme.headerIcon } icon='bell' size={ 25 } />
                     </Button>
 
                     <Button transparent
-                        onPress={ () => navigation.navigate('Bandeja de entrada') }
+                        onPress={ () => navigation.navigate('inbox') }
                     >
                         <FontAwesomeIcon style={ theme.headerIcon } icon='inbox' size={ 25 } />
                     </Button>
