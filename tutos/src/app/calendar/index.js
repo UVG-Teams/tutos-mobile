@@ -17,12 +17,22 @@ import {
 } from 'native-base'
 import dayjs from "dayjs"
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { Calendar as CalendarComponent } from 'react-native-calendars'
+import { Calendar as CalendarComponent, LocaleConfig } from 'react-native-calendars'
 
 import { theme } from './../../layout/themes'
 import * as actions from '../../tools/actions/selects'
 import * as selectors from '../../tools/reducers'
-import Today from '../today'
+import Today from './today'
+
+LocaleConfig.locales['es'] = {
+    monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+    monthNamesShort: ['Ene.','Feb.','Mar.','Abr.','May.','Jun.','Jul.','Ago.','Sep.','Oct.','Nov.','Dic.'],
+    dayNames: ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'],
+    dayNamesShort: ['Do','Lun','Mar','Mie','Jue','Vie','Sáb'],
+    today: 'Hoy'
+};
+
+LocaleConfig.defaultLocale = 'es';
 
 // Event types
 const tutoria = { color: 'red' }
@@ -86,7 +96,7 @@ const Calendar = ({
                         style={ calendarStyles }
                         theme={ calendarTheme }
                     />
-                    <Today />
+                    <Today navigation={ navigation } />
                 </View>
             </Content>
         </Container>

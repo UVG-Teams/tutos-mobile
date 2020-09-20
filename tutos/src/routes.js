@@ -1,81 +1,100 @@
+import Index from './app/index'
 import Login from './app/login'
 import Home from './app/home'
 import Profile from './app/profile'
 import SignUp from './app/signUp'
 import Calendar from './app/calendar'
+import Events from './app/events'
 import Tutores from './app/tutores'
 import Conversations from './app/conversations'
 import Schedule from './app/schedule'
 import Notifications from './app/notifications'
-import Index from './app/index'
 
 
 export const routes = [
     {
-        name: 'Index',
+        name: 'index',
+        displayName: 'Index',
         component: Index,
-        icon: 'sign-in-alt',
+        icon: 'home',
         authProtection: false,
         showOnSidebar: true,
     },
     {
-        name: 'Login',
+        name: 'login',
+        displayName: 'Login',
         component: Login,
         icon: 'sign-in-alt',
         authProtection: false,
         showOnSidebar: true,
     },
     {
-        name: 'Home',
+        name: 'home',
+        displayName: 'Inicio',
         component: Home,
         icon: 'home',
         authProtection: true,
         showOnSidebar: true,
     },
     {
-        name: 'SignUp',
+        name: 'signup',
+        displayName: 'Sign Up',
         component: SignUp,
         icon: 'user-plus',
         authProtection: false,
         showOnSidebar: true,
     },
     {
-        name: 'Profile',
+        name: 'profile',
+        displayName: 'Perfil',
         component: Profile,
         icon: 'user',
         authProtection: true,
-        showOnSidebar: true,
+        showOnSidebar: false,
     },
     {
-        name: 'Calendar',
+        name: 'calendar',
+        displayName: 'Calendario',
         component: Calendar,
         icon: 'calendar',
         authProtection: true,
         showOnSidebar: true,
     },
     {
-        name: 'Tutores',
+        name: 'events',
+        displayName: 'Eventos',
+        component: Events,
+        icon: 'calendar-day',
+        authProtection: true,
+        showOnSidebar: false,
+    },
+    {
+        name: 'tutores',
+        displayName: 'Tutores',
         component: Tutores,
         icon: 'users',
         authProtection: true,
         showOnSidebar: true,
     },
     {
-        name: 'Conversations',
+        name: 'inbox',
+        displayName: 'Bandeja de entrada',
         component: Conversations,
         icon: 'comments',
         authProtection: true,
         showOnSidebar: true,
     },
     {
-        name: 'Schedule',
+        name: 'schedule',
+        displayName: 'Horario',
         component: Schedule,
-        icon: 'calendar-week',
+        icon: 'calendar-alt',
         authProtection: true,
         showOnSidebar: true,
     },
     {
-        name: 'Notifications',
+        name: 'notifications',
+        displayName: 'Notificaciones',
         component: Notifications,
         icon: 'bell',
         authProtection: true,

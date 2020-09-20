@@ -8,14 +8,15 @@ import {
     Text,
     Button,
     TouchableHighlight,
-    ActivityIndicator
+    ActivityIndicator,
+    Platform,
 } from 'react-native'
 
 import {
     Container,
     Header,
     Left,
-    Button as Btn
+    Button as Btn,
 } from 'native-base'
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
@@ -25,6 +26,7 @@ import { RenderInput } from '../../components/form/field'
 
 import * as actions from '../../tools/actions/auth'
 import * as selectors from "../../tools/reducers"
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 
 const Login = ({
@@ -42,12 +44,18 @@ const Login = ({
         <Container style={ styles.background }>
             <Header transparent>
                 <Left>
-                    <Btn transparent
-                        onPress={ () => navigation.navigate('Index') }
-                    >
-                        <FontAwesomeIcon style={ theme.headerIcon } icon='chevron-left' size={ 25 } /> 
-                        <Text style={styles.backTxt}>Atrás</Text>
-                    </Btn>
+                    {
+                        Platform.select({
+                            ios: (
+                                <Btn transparent
+                                    onPress={ () => navigation.navigate('Index') }
+                                >
+                                    <FontAwesomeIcon style={ theme.headerIcons } icon='chevron-left' size={ 25 } /> 
+                                    <Text style={styles.backTxt}>Atrás</Text>
+                                </Btn>
+                            )
+                        })
+                    }
                 </Left>
             </Header>
             <ImageBackground style={ styles.background }>
@@ -55,13 +63,13 @@ const Login = ({
                     <Text style={ styles.title }>Tuto's</Text>
                     <Field
                         name='email'
-                        placeholder='email'
+                        placeholder='Usuario'
                         component={ RenderInput }
                     />
                     <Field
                         type={'password'}
                         name='password'
-                        placeholder='password'
+                        placeholder='Contraseña'
                         component={ RenderInput }
                     />
                     {
@@ -74,19 +82,26 @@ const Login = ({
                             <ActivityIndicator size="large" color="#0000ff" />
                         ) : (
                             <>
-                                <TouchableHighlight style={ styles.buttonLogin }>
+                                {/* <TouchableHighlight style={ styles.buttonLogin }>
                                     <Button
                                         onPress={ handleSubmit }
-                                        color="white"
-                                        title="Login"
+                                        color = 'white'
+                                        title="Ingresar"
                                     />
-                                </TouchableHighlight>
-                                <TouchableHighlight style={ styles.buttonPassword }>
+                                </TouchableHighlight> */}
+                                <TouchableOpacity style={ styles.buttonLogin } onPress={ handleSubmit } >
+                                    <Text style={styles.txtButtonLogin}>Ingresar</Text>
+                                </TouchableOpacity>
+
+                                {/* <TouchableHighlight style={ styles.buttonPassword }>
                                     <Button
                                         onPress={ rememberPassword }
-                                        title="Forgot your password?"
+                                        title="¿Olvidaste tu contraseña?"
                                     />
-                                </TouchableHighlight>
+                                </TouchableHighlight> */}
+                                <TouchableOpacity  style={ styles.buttonPassword } onPress={ rememberPassword }>
+                                    <Text style={styles.txtButtonPassword}>¿Olvidaste tu contraseña?</Text>
+                                </TouchableOpacity>
                             </>
                         )
                     }
@@ -141,15 +156,54 @@ const styles = StyleSheet.create({
         marginBottom: 30,
     },
     buttonLogin: {
-        width: '100%',
         marginTop: 15,
+        borderRadius: 5,
         backgroundColor: 'black',
+        color: 'white',
+        paddingLeft: '39%',
+        paddingRight: '39%',
+        paddingTop: 7,
+        paddingBottom: 7,
+    },
+    txtButtonLogin: {
+        // width: '100%',
+        color: 'white',
+        fontSize: 19,
     },
     buttonPassword: {
+        width: '100%',
         marginTop: 100,
+        borderRadius: 5,
+        backgroundColor: '#146dc7',
+        color: 'white',
+        paddingLeft: '22%',
+        paddingRight: '22%',
+        paddingTop: 7,
+        paddingBottom: 7,
     },
-
-    backTxt: {
-        fontSize: 20
-    }
+    txtButtonPassword: {
+        width: '100%',
+        color: 'white',
+        fontSize: 15,
+    },
+    ...Platform.select({
+        ios: {
+            
+            // buttonPassword: {
+            //     marginTop: 100,
+            // },
+            backTxt: {
+                fontSize: 20
+            }
+        },
+        android: {
+            // buttonLogin: {
+            //     width: '100%',
+            //     marginTop: 15,
+            // },
+            // buttonPassword: {
+            //     marginTop: 100,
+            // },
+        }
+    })
 })

@@ -5,6 +5,7 @@ import auth, * as authSelectors from './auth';
 import selects, * as selectsSelectors from './selects';
 import tutorias, * as tutoriasSelectors from './tutorias';
 import profile, * as profileSelectors from './profile';
+import users, * as usersSelectors from './users';
 import signUp, * as signUpSelectors from './signUp';
 import tutorProfile , * as tutorProfileSelectors from './tutorProfile'
 
@@ -14,6 +15,7 @@ const reducer = combineReducers({
     signUp,
     tutorias,
     profile,
+    users,
     tutorProfile,
     form: formReducer,
 })
@@ -36,6 +38,11 @@ export const getSelectedDay = state => selectsSelectors.getSelectedDay(state.sel
 export const getIsSigningUp = state => signUpSelectors.getIsSigningUp(state.signUp)
 export const getSignUpError = state => signUpSelectors.getSignUpError(state.signUp)
 
+export const getUser = (state, id) => usersSelectors.getUser(state.users, id);
+export const getUsers = state => usersSelectors.getUsers(state.users);
+export const isFetchingUsers = state => usersSelectors.isFetchingUsers(state.users);
+export const getUserError = state => usersSelectors.getUserError(state.users);
+
 export const getTutorProfile = (state) => tutorProfileSelectors.getTutorProfie(state.tutorProfile)
 export const isFetchingTutorProfile = (state) => tutorProfileSelectors.isFetchingTutorProfile(state.tutorProfile)
 
@@ -48,3 +55,4 @@ export const getTutoriasOnDate = (state, date) => tutoriasSelectors.getTutoriasO
 export const getProfile = state => profileSelectors.getProfile(state.profile)
 export const isFetchingProfile = state => profileSelectors.isFetchingProfile(state.profile)
 export const getProfileError = state => profileSelectors.getProfileError(state.profile)
+

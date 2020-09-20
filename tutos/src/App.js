@@ -18,6 +18,7 @@ import {
     faComments,
     faCalendarWeek,
     faAddressCard,
+    faStar,
     faInbox,
     faAt,
     faEnvelope,
@@ -25,6 +26,9 @@ import {
     faGraduationCap,
     faAdjust,
     faChevronLeft,
+    faClock,
+    faCalendarDay,
+    faCalendarAlt,
 } from '@fortawesome/free-solid-svg-icons'
 
 import { routes } from './routes'
@@ -45,6 +49,7 @@ library.add(
     faComments,
     faCalendarWeek,
     faAddressCard,
+    faStar,
     faInbox,
     faAt,
     faEnvelope,
@@ -52,6 +57,9 @@ library.add(
     faGraduationCap,
     faAdjust,
     faChevronLeft,
+    faClock,
+    faCalendarDay,
+    faCalendarAlt,
 )
 
 const Drawer = createDrawerNavigator()
@@ -59,7 +67,7 @@ const Drawer = createDrawerNavigator()
 const App = ({ isAuthenticated }) => (
     <NavigationContainer>
         <Drawer.Navigator 
-            initialRouteName="Index"
+            initialRouteName="index"
             drawerContent={ props => <SideBar { ...props } /> }
         >
             {

@@ -6,6 +6,7 @@ import {
     TouchableHighlight,
     ImageBackground,
     StyleSheet,
+    Platform,
     Button,
 } from 'react-native';
 
@@ -62,17 +63,17 @@ export default class Index extends Component {
                 <View style={styles.options}>
                     <TouchableHighlight style={ styles.buttonLogin }>
                         <Button
-                            onPress={ () => this.props.navigation.navigate('Login') }
+                            onPress={ () => this.props.navigation.navigate('login') }
                             color="black"
-                            title="Login"
+                            title="Iniciar sesión"
                         />
                     </TouchableHighlight>
 
                     <TouchableHighlight style={ styles.buttonSignup }>
                         <Button
-                            onPress={ () => this.props.navigation.navigate('SignUp') }
+                            onPress={ () => this.props.navigation.navigate('signup') }
                             color="black"
-                            title="Sign Up"
+                            title="Regístrate"
                         />
                     </TouchableHighlight>
                 </View>
@@ -82,62 +83,132 @@ export default class Index extends Component {
     }
 
 const styles = StyleSheet.create({
-    buttonLogin: {
-        width: '40%',
-        marginRight: 20,
-        marginBottom: 70,
-        padding: 10,
-        backgroundColor: '#6BB5FF',
-        borderRadius: 10,
-    },
 
-    buttonSignup: {
-        width: '40%',
-        marginBottom: 70,
-        padding: 10,
-        backgroundColor: '#6BB5FF',
-        borderRadius: 10,
-    },
+    ...Platform.select({
+        ios: {
+            buttonLogin: {
+                width: '40%',
+                marginRight: 20,
+                marginBottom: 70,
+                padding: 10,
+                backgroundColor: '#6BB5FF',
+                borderRadius: 10,
+            },
+        
+            buttonSignup: {
+                width: '40%',
+                marginBottom: 70,
+                padding: 10,
+                backgroundColor: '#6BB5FF',
+                borderRadius: 10,
+            },
+            options: {
+                backgroundColor: 'transparent',
+                position: 'absolute',
+                width: width,
+                bottom: 24,
+                marginTop: 40,
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+            },
+        
+            image: {
+                flex: 1,
+                resizeMode: "cover",
+                justifyContent: "center",
+            },
+        
+            text: {
+                fontSize: 45,
+                color: '#ffffff',
+                textAlign: 'center',
+                textShadowColor: '#000000',
+                textShadowOffset: {width: 5, height: 5},
+                textShadowRadius: 5,
+                paddingLeft: 20,
+                paddingRight: 20,
+            },
+        
+            textUp: {
+                fontSize: 45,
+                color: '#ffffff',
+                textAlign: 'center',
+                textShadowColor: '#000000',
+                textShadowOffset: {width: 5, height: 5},
+                textShadowRadius: 5,
+                paddingLeft: 20,
+                paddingRight: 20,
+                marginBottom: '120%',
+            },
+        },
+        android: {
+            buttonLogin: {
+                width: '40%',
+                marginRight: 20,
+                marginBottom: 70,
+                padding: 10,
+                // backgroundColor: '#6BB5FF',
+                borderRadius: 10,
+                color: '#6BB5FF'
+            },
+        
+            buttonSignup: {
+                width: '40%',
+                marginBottom: 70,
+                padding: 10,
+                // backgroundColor: '#6BB5FF',
+                borderRadius: 10,
+                color: '#6BB5FF'
+            },
+            options: {
+                backgroundColor: 'transparent',
+                position: 'absolute',
+                width: width,
+                bottom: 24,
+                marginTop: 40,
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+            },
+        
+            image: {
+                flex: 1,
+                resizeMode: "cover",
+                justifyContent: "center",
+            },
+        
+            text: {
+                fontSize: 45,
+                color: '#ffffff',
+                textAlign: 'center',
+                textShadowColor: '#000000',
+                textShadowOffset: {width: 5, height: 5},
+                textShadowRadius: 5,
+                paddingLeft: 20,
+                paddingRight: 20,
+            },
+        
+            textUp: {
+                fontSize: 45,
+                color: '#ffffff',
+                textAlign: 'center',
+                textShadowColor: '#000000',
+                textShadowOffset: {width: 5, height: 5},
+                textShadowRadius: 5,
+                paddingLeft: 20,
+                paddingRight: 20,
+                marginBottom: '120%',
+            },
+        },
+        default: {
+            
+        }
+    })
 
-    options: {
-        backgroundColor: 'transparent',
-        position: 'absolute',
-        width: width,
-        bottom: 24,
-        marginTop: 40,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
+    
 
-    image: {
-        flex: 1,
-        resizeMode: "cover",
-        justifyContent: "center",
-    },
-
-    text: {
-        fontSize: 45,
-        color: '#ffffff',
-        textAlign: 'center',
-        textShadowColor: '#000000',
-        textShadowOffset: {width: 5, height: 5},
-        textShadowRadius: 5,
-        paddingLeft: 20,
-        paddingRight: 20,
-    },
-
-    textUp: {
-        fontSize: 45,
-        color: '#ffffff',
-        textAlign: 'center',
-        textShadowColor: '#000000',
-        textShadowOffset: {width: 5, height: 5},
-        textShadowRadius: 5,
-        paddingLeft: 20,
-        paddingRight: 20,
-        marginBottom: '120%',
-    },
+    
 
     
 })
