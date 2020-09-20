@@ -16,7 +16,7 @@ const store = configureStore()
 class AppWrapper extends Component {
     render() {
         return (
-            <Tester specs={[ LoginSpec ]} store={testHookStore}>
+            <Tester specs={[ LoginSpec, SignUpSpec ]} store={ testHookStore }>
                 <Provider store={ store }>
                     <App />
                 </Provider>
