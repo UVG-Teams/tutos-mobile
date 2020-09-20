@@ -6,7 +6,7 @@ import {
 } from '@react-navigation/drawer'
 import { connect } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { Row, Grid, List, ListItem } from 'native-base'
+import { Row, Grid, Col, Card, CardItem, Button, List, ListItem } from 'native-base'
 
 import { theme } from '../themes'
 import { routes } from '../../../src/routes'
@@ -22,17 +22,40 @@ const SideBar = ({ props, isAuthenticated, logout, profile, navigation }) => (
                     {
                         isAuthenticated ? (
                             <View style={ theme.background }> 
-                                {/* <Image
-                                    style={ styles.logo }
-                                    source={{
-                                        uri: 'https://happytravel.viajes/wp-content/uploads/2020/04/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'
-                                    }}
-                                /> */}
-                                <FontAwesomeIcon icon='user-circle' size={ 80 } style={{ ...theme.sidebarIcon, marginTop: 20, marginLeft: 10 }} />
-                                <View>
-                                    <Text style={ styles.username }>{ profile.first_name + ' ' + profile.last_name }</Text>
-                                    <Text style={ styles.role }>{ profile.is_tutor ? 'Tutor' : 'Tutorado' }</Text>
-                                </View>
+                                <Grid>
+                                    <Row>
+                                        <Col>
+                                            {/* <Image
+                                                style={ styles.logo }
+                                                source={{
+                                                    uri: 'https://happytravel.viajes/wp-content/uploads/2020/04/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'
+                                                }}
+                                            /> */}
+                                            <FontAwesomeIcon icon='user-circle' size={ 80 } style={{ ...theme.sidebarIcon, margin: 10 }} />
+                                        </Col>
+                                        <Col style={{ width: 50 }}>
+                                            <Button transparent
+                                                onPress={ () => navigation.navigate('notifications') }
+                                            >
+                                                <FontAwesomeIcon icon='bell' size={ 25 } style={{ ...theme.sidebarIcon, marginTop: 10 }} />
+                                            </Button>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Card style={ styles.infoCard }>
+                                            <CardItem
+                                                button
+                                                onPress={() => navigation.navigate('profile')}
+                                                style={ styles.infoCardItem }
+                                            >
+                                                <View>
+                                                    <Text style={ styles.username }>{ profile.first_name + ' ' + profile.last_name }</Text>
+                                                    <Text style={ styles.role }>{ profile.is_tutor ? 'Tutor' : 'Tutorado' }</Text>
+                                                </View>
+                                            </CardItem>
+                                        </Card>
+                                    </Row>
+                                </Grid>
                             </View>
                         ) : (<></>)
                     }
@@ -45,7 +68,7 @@ const SideBar = ({ props, isAuthenticated, logout, profile, navigation }) => (
                             <FontAwesomeIcon icon={ route.icon } size={ 25 } style={{ ...theme.sidebarIcon, marginTop: 15, marginLeft: 15 }} />
                             <DrawerItem
                                 key={ route.name }
-                                label={ route.name }
+                                label={ route.displayName }
                                 onPress={ () => navigation.navigate(route.name) }
                                 style={{ width: '75%' }}
                             />
@@ -103,5 +126,18 @@ const styles = StyleSheet.create({
     },
     userInfo: {
         flex: 1,
-    }
+    },
+    infoCard: {
+        backgroundColor: 'transparent',
+        shadowColor: null,
+        elevation: 0,
+        borderColor: 'transparent',
+        flex: 1,
+    },
+    infoCardItem: {
+        backgroundColor: 'transparent',
+        padding: 0,
+        margin: -20,
+        marginTop: -25,
+    },
 })

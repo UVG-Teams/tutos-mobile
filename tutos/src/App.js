@@ -27,6 +27,8 @@ import {
     faAdjust,
     faChevronLeft,
     faClock,
+    faCalendarDay,
+    faCalendarAlt,
 } from '@fortawesome/free-solid-svg-icons'
 import { useCavy, hook, wrap } from 'cavy'
 
@@ -58,6 +60,8 @@ library.add(
     faAdjust,
     faChevronLeft,
     faClock,
+    faCalendarDay,
+    faCalendarAlt,
 )
 
 const Drawer = createDrawerNavigator()
@@ -70,7 +74,7 @@ const App = ({ isAuthenticated }) => {
         ref={ generateTestHook('AppNavigation') }
     >
         <Drawer.Navigator 
-            initialRouteName="Index"
+            initialRouteName="index"
             drawerContent={ props => <SideBar { ...props } /> }
         >
             {
