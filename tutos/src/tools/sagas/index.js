@@ -19,6 +19,10 @@ import {
     watchFetchUsers,
 } from './users'
 
+import {
+    watchFetchTutores,
+} from './tutores'
+
 import { watchGetTutorProfile } from './tutorProfile'
 
 function* mainSaga() {
@@ -32,6 +36,7 @@ function* mainSaga() {
         fork(watchGetProfile),
         fork(watchFetchUsers),
         fork(watchGetTutorProfile),
+        fork(watchFetchTutores),
     ])
 }
 
