@@ -29,13 +29,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { theme } from './../../layout/themes'
 import { connect } from 'react-redux'
 
+import * as actionsTutorProfile from '../../tools/actions/tutorProfile'
+
 import * as selectors from '../../tools/reducers';
 import * as actions from '../../tools/actions/tutorias'
 import * as actionsProfile from '../../tools/actions/profile'
 import { tutoria } from '../../tools/schemas/tutorias'
 import profileReducer from '../../tools/reducers/profile'
 
-const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
+const Home = ({ navigation, tutorias, onLoad, isTutor, profile , getTutorProfile}) => {
+    const getTutorInfo = () => {
+        if (profile.is_tutor) {
+            getTutorProfile()
+        }
+    }
+    useEffect(getTutorInfo , [])
     useEffect(onLoad, [])
     if (isTutor){
         tutorias = tutorias.filter(tutoria => tutoria.tutor.id === profile.id)
@@ -227,6 +235,9 @@ export default connect(
         onLoad(){
             dispatch(actions.startGetTutorias())
             dispatch(actionsProfile.startGetProfile())
+        },
+        getTutorProfile(){
+            dispatch(actionsTutorProfile.startGetTutorProfile())
         }
     })
 )(Home);

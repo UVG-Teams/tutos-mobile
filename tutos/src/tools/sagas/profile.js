@@ -81,4 +81,42 @@ export function* watchGetProfile(){
     )
 }
 
+function* updateProfile(action){
+    try{
+        const isAuth = yield select(selectors.isAuthenticated)
+        if (isAuth) {
+            const id = yield select(selectors.getAuthUserID)
+            const token = yield select(selectors.getToken)
+            console.log(action.payload)
+            const response = yield call(
+                fetch,
+                `${API_BASE_URL}/users/${id}/`,
+                {
+                    method: 'PATCH',
+                    body: JSON.stringify(action.payload),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `JWT ${token}`,
+                    }
+                }
+            )
+            if (http.isSuccessful(response.status)) {
+                const jsonResult = yield response.json();
+                yield put(actions.completeEditProfile(jsonResult))
+                yield put(actions.startGetProfile())
+            } else {
+                const { non_field_errors } = yield response.json()
+                yield put(actions.failEditProfile(non_field_errors[0]))
+            }
+        }
+    }catch(error){
+        yield put(actions.failEditProfile('Connection error!'))
+    }
+}
 
+export function* watchUpdateProfile() {
+    yield takeEvery(
+        types.EDIT_PROFILE_STARTED,
+        updateProfile
+    )
+}
