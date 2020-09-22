@@ -53,3 +53,43 @@ export function* watchGetTutorProfile(){
     getTutorProfile
   )
 }
+
+function* updateTutorProfile(action){
+    try{
+        const isAuth = yield select(selectors.isAuthenticated)
+        if (isAuth) {
+            const id = yield select(selectors.getAuthUserID)
+            const token = yield select(selectors.getToken)
+            console.log(action.payload)
+            const response = yield call(
+                fetch,
+                `${API_BASE_URL}/tutores/${id}/`,
+                {
+                    method: 'PATCH',
+                    body: JSON.stringify(action.payload),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `JWT ${token}`,
+                    }
+                }
+            )
+            if (http.isSuccessful(response.status)) {
+                const jsonResult = yield response.json();
+                yield put(actions.completeEditTutorProfile(jsonResult))
+                yield put(actions.startGetTutorProfile())
+            } else {
+                const { non_field_errors } = yield response.json()
+                yield put(actions.failEditProfile(non_field_errors[0]))
+            }
+        }
+    }catch(error){
+        yield put(actions.failEditTutorProfile('Connection error!'))
+    }
+}
+
+export function* watchUpdateTutorProfile(){
+  yield takeEvery(
+    types.EDIT_TUTOR_PROFILE_STARTED,
+    updateTutorProfile
+  )
+}
