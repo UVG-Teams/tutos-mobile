@@ -29,12 +29,14 @@ import { theme } from '../../../layout/themes'
 
 import * as selectors from '../../../tools/reducers'
 import * as actions from '../../../tools/actions/users'
+import * as tutoresactions from '../../../tools/actions/tutores'
 
 const Tutores = ({ 
     navigation,
     users,
     isLoading,
     onLoad,
+    state,
 }) => {
     useEffect(onLoad, [])
     return(
@@ -51,7 +53,6 @@ const Tutores = ({
                     </Button>
                 </Left>
                 <Body></Body>
-            
             </Header>
             <Content style={ theme.content }>
                 <View>
@@ -72,22 +73,19 @@ const Tutores = ({
                                             <Col >
                                                 <Text style={{textAlign:'right'}}>
                                                     <FontAwesomeIcon style={ theme.CardItem} icon='star' size={ 10 } />
-                                                    {/* {user.calificacion} */}
-                                                    5
+                                                    {selectors.getTutor(state, user.id).score}
                                                 </Text>
                                             </Col>
                                         </Row>
                                         <Row>
                                             <Col>
                                                 <Text>
-                                                    {/* {user.themes} */}
-                                                    Fisica3
+                                                    {selectors.getTutor(state, user.id).description}
                                                 </Text>
                                             </Col>
                                             <Col>         
                                                 <Text style={{textAlign:'right'}}>
-                                                    {/* {user.price} */}
-                                                    Q100
+                                                Q{selectors.getTutor(state, user.id).individual_price}
                                                 </Text>   
                                             </Col>
                                         </Row>
@@ -106,10 +104,12 @@ export default connect(
     state => ({
         users: selectors.getUsers(state),
         isLoading: selectors.isFetchingUsers(state),
+        state: state,
     }),
     dispatch => ({
         onLoad() {
             dispatch(actions.startFetchingUsers());
+            dispatch(tutoresactions.startFetchingTutores());
         },
     }),
 )(Tutores);

@@ -27,6 +27,11 @@ import {
     watchUpdateTutorProfile
 } from './tutorProfile'
 
+import {
+    watchFetchTutores,
+} from './tutores'
+
+
 function* mainSaga() {
     yield all([
         fork(watchLoginStarted),
@@ -40,6 +45,7 @@ function* mainSaga() {
         fork(watchGetTutorProfile),
         fork(watchUpdateProfile),
         fork(watchUpdateTutorProfile),
+        fork(watchFetchTutores),
     ])
 }
 
