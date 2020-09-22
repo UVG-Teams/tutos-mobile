@@ -14,6 +14,7 @@ import * as selectors from '../reducers';
 import * as types from '../types/signUp';
 import * as actions from '../actions/signUp';
 import * as authActions from '../actions/auth';
+import * as http from '../utils/http'
 
 
 function* signUp (action) {
@@ -29,8 +30,7 @@ function* signUp (action) {
         },
       },
     );
-
-    if(response.status == 200){
+    if(http.isSuccessful(response.status)){
       const username = action.payload.username;
       const password = action.payload.password;
       yield put(actions.completeSignUp());

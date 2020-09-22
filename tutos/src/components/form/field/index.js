@@ -22,6 +22,7 @@ export const RenderInput = ({ input, meta, type, placeholder }) => (
             type={ type }
             style={ styles.input }
             placeholder={ placeholder }
+            autoCapitalize='none'
             secureTextEntry={ type == 'password' }
         />
     </View>
