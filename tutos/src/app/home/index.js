@@ -101,7 +101,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                         </CardItem>
                                         {
                                             tutorias.map(tutoria => tutoria.status.name === "scheduled" && (
-                                                <CardItem bordered button onPress={() => alert("info")}>
+                                                <CardItem bordered button onPress={() => toggleModal(tutoria.id)}>
                                                     <Body>
                                                         <Row>
                                                             <Col>
@@ -123,7 +123,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                         </CardItem>
                                         {
                                             tutorias.map(tutoria => tutoria.status.name === "in_process" && (
-                                                <CardItem bordered button onPress={() => alert("info")}>
+                                                <CardItem bordered button onPress={() => toggleModal(tutoria.id)}>
                                                     <Body>
                                                         <Row>
                                                             <Col>
@@ -145,7 +145,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                         </CardItem>
                                         {
                                             tutorias.map(tutoria => tutoria.status.name === "end" && (
-                                                <CardItem bordered button onPress={() => alert("info")}>
+                                                <CardItem bordered button onPress={() => toggleModal(tutoria.id)}>
                                                     <Body>
                                                         <Row>
                                                             <Col>
@@ -167,7 +167,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                         </CardItem>
                                         {
                                             tutorias.map(tutoria => tutoria.status.name === "canceled" && (
-                                                <CardItem bordered button onPress={() => alert("info")}>
+                                                <CardItem bordered button onPress={() => toggleModal(tutoria.id)}>
                                                     <Body>
                                                         <Row>
                                                             <Col>
@@ -191,7 +191,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                         </CardItem>
                                         {
                                             tutorias.map(tutoria => tutoria.status.name ===  "end" && (
-                                                <CardItem bordered button onPress={() => alert("info")}>
+                                                <CardItem bordered button onPress={() => toggleModal(tutoria.id)}>
                                                     <Body>
                                                         <Row>
                                                             <Col>
@@ -230,46 +230,48 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                             ))
                                         }
                                     </Card>
-                                    {/* https://github.com/react-native-community/react-native-modal */}
-                                    <Modal 
-                                        deviceWidth={deviceWidth} 
-                                        deviceHeight={deviceHeight} 
-                                        isVisible={isModalVisible} 
-                                        onBackdropPress={() => setModalVisible(false)}>
-                                        
-                                        <View>
-                                            
-                                            <Card>
-                                                <CardItem header bordered>
-                                                    {console.log("info", tutorias)}
-                                                    {console.log("Modal id: ", modalID)}
-                                                    {tutorias.map(tutoria => {
-                                                        if (tutoria.id === modalID){
-                                                            return (
-                                                                <View style={ styles.cardInfo }>
-                                                                    <Text>Tutor: {tutoria.tutor.first_name} {tutoria.tutor.last_name}</Text>
-                                                                    <Text>Curso: {tutoria.course.name}</Text>
-                                                                    <Text>Tema: {tutoria.topic}</Text>
-                                                                    <Text>Precio: Q{tutoria.total_price}</Text>
-                                                                    <Text>Ubicación: {tutoria.location}</Text>
-                                                                    <Text>Fecha: {moment(tutoria.datetime).format('L LT')}</Text>
-                                                                </View>
-                                                            )
-                                                        }
-                                                    })}
-                                                    {/* <Text>{tutorias.get(modalID).course.name}</Text> */}
-                                                    {/* <Text> {tutoria.tutor.first_name}</Text> */}
-                                                </CardItem>
-                                            </Card>
-                                            <TouchableOpacity style={ styles.buttonLogin } onPress={ toggleModal } >
-                                                <Text style={styles.txtButtonLogin}>Cerrar</Text>
-                                            </TouchableOpacity>
-                                        </View>
-
-                                    </Modal>
                                 </>
                             )
                         }
+                        {/* https://github.com/react-native-community/react-native-modal */}
+                        <Modal 
+                            deviceWidth={deviceWidth} 
+                            deviceHeight={deviceHeight} 
+                            isVisible={isModalVisible} 
+                            onBackdropPress={() => setModalVisible(false)}>
+                            <View>
+                                <Card>
+                                    <CardItem header bordered>
+                                        {/* {console.log("info", tutorias)} */}
+                                        {console.log("Modal id: ", modalID)}
+                                        {tutorias.map(tutoria => {
+                                            if (tutoria.id === modalID){
+                                                return (
+                                                    <View style={ styles.cardInfo }>
+                                                        <Text style = {{fontSize: 20, fontWeight: "bold", marginBottom: 10, textAlign: "center"}}>Información Tutoría</Text>
+                                                        {isTutor ? (
+                                                            <Text style = {{fontSize: 18}}>Tutorado: {tutoria.tutor.first_name} {tutoria.tutor.last_name}</Text>
+                                                        ) : (
+                                                            <Text style = {{fontSize: 18}}>Tutor: {tutoria.tutorado.first_name} {tutoria.tutorado.last_name}</Text>
+                                                        ) 
+                                                        }
+                                                        <Text style = {{fontSize: 18}}>Tutor: {tutoria.tutor.first_name} {tutoria.tutor.last_name}</Text>
+                                                        <Text style = {{fontSize: 18}}>Curso: {tutoria.course.name}</Text>
+                                                        <Text style = {{fontSize: 18}}>Tema: {tutoria.topic}</Text>
+                                                        <Text style = {{fontSize: 18}}>Precio: Q{tutoria.total_price}</Text>
+                                                        <Text style = {{fontSize: 18}}>Ubicación: {tutoria.location}</Text>
+                                                        <Text style = {{fontSize: 18}}>Fecha: {moment(tutoria.datetime).format('L LT')}</Text>
+                                                    </View>
+                                                )
+                                            }
+                                        })}
+                                    </CardItem>
+                                </Card>
+                                <TouchableOpacity style={ styles.buttonLogin } onPress={ toggleModal } >
+                                    <Text style={styles.txtButtonLogin}>Cerrar</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </Modal>
                     </View>
                 </Content>
             </Container>
@@ -295,7 +297,7 @@ const styles = StyleSheet.create({
     buttonLogin: {
         marginTop: 15,
         borderRadius: 5,
-        backgroundColor: 'black',
+        backgroundColor: '#146dc7',
         color: 'white',
         paddingLeft: '39%',
         paddingRight: '39%',
@@ -305,5 +307,8 @@ const styles = StyleSheet.create({
     txtButtonLogin: {
         color: 'white',
         fontSize: 19,
+    },
+    cardInfo: {
+        width: "100%",
     }
 })
