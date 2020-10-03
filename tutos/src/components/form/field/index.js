@@ -5,10 +5,16 @@ import {
     Text,
     TextInput,
 } from 'react-native'
+import { useCavy, hook, wrap } from 'cavy'
 
 import { theme } from '../../../layout/themes'
 
-export const RenderInput = ({ input, meta, type, placeholder }) => (
+
+export const RenderInput = ({ input, meta, type, placeholder, cavyName }) => {
+    const generateTestHook = useCavy();
+    const TestableTextInput = wrap(TextInput);
+
+    return (
     <View style={{ width: '100%' }}>
         {
             meta.dirty && meta.error && (
@@ -17,16 +23,17 @@ export const RenderInput = ({ input, meta, type, placeholder }) => (
                 </Text>
             )
         }
-        <TextInput 
+        <TestableTextInput
             { ...input }
             type={ type }
             style={ styles.input }
             placeholder={ placeholder }
             autoCapitalize='none'
             secureTextEntry={ type == 'password' }
+            ref={generateTestHook(cavyName)}
         />
     </View>
-)
+)}
 
 const styles = StyleSheet.create({
     input: {

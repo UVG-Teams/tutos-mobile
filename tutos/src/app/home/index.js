@@ -78,13 +78,13 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                     <Body></Body>
                     <Right>
                         <Button transparent
-                            onPress={ () => navigation.navigate('Notifications') }
+                            onPress={ () => navigation.navigate('notifications') }
                         >
                             <FontAwesomeIcon style={ theme.headerIcon } icon='bell' size={ 25 } />
                         </Button>
 
                         <Button transparent
-                            onPress={ () => navigation.navigate('Inbox') }
+                            onPress={ () => navigation.navigate('inbox') }
                         >
                             <FontAwesomeIcon style={ theme.headerIcon } icon='inbox' size={ 25 } />
                         </Button>
@@ -250,12 +250,12 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                                     <View style={ styles.cardInfo }>
                                                         <Text style = {{fontSize: 20, fontWeight: "bold", marginBottom: 10, textAlign: "center"}}>Información Tutoría</Text>
                                                         {console.log(tutoria)}
-                                                        {isTutor ? (
-                                                            
-                                                            <Text style = {{fontSize: 18}}>Tutorado: {tutoria.tutorado.first_name} {tutoria.tutorado.last_name}</Text>
-                                                        ) : (
-                                                            <Text style = {{fontSize: 18}}>Tutor: {tutoria.tutor.first_name} {tutoria.tutor.last_name}</Text>
-                                                        ) 
+                                                        {
+                                                            isTutor ? (
+                                                                <Text style = {{fontSize: 18}}>Tutorado: {tutoria.tutorado.first_name} {tutoria.tutorado.last_name}</Text>
+                                                            ) : (
+                                                                <Text style = {{fontSize: 18}}>Tutor: {tutoria.tutor.first_name} {tutoria.tutor.last_name}</Text>
+                                                            )
                                                         }
                                                         <Text style = {{fontSize: 18}}>Curso: {tutoria.course.name}</Text>
                                                         <Text style = {{fontSize: 18}}>Tema: {tutoria.topic}</Text>

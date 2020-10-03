@@ -23,6 +23,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 
 import { theme } from '../../layout/themes'
 import { RenderInput } from '../../components/form/field'
+import { useCavy, hook, wrap } from 'cavy'
 
 import * as actions from '../../tools/actions/auth'
 import * as selectors from "../../tools/reducers"
@@ -37,11 +38,16 @@ const Login = ({
     isAuthenticated = false,
     navigation,
 }) => {
+    const generateTestHook = useCavy();
+
     if (isAuthenticated) {
         navigation.navigate('home')
     }
     return (
-        <Container style={ styles.background }>
+        <Container
+            style={ styles.background }
+            ref={generateTestHook('Login')}
+        >
             <Header transparent>
                 <Left>
                     {
@@ -64,12 +70,14 @@ const Login = ({
                     <Field
                         name='email'
                         placeholder='Usuario'
+                        cavyName='LoginScreen.Username'
                         component={ RenderInput }
                     />
                     <Field
                         type={'password'}
                         name='password'
                         placeholder='Contraseña'
+                        cavyName='LoginScreen.Password'
                         component={ RenderInput }
                     />
                     {
@@ -82,24 +90,19 @@ const Login = ({
                             <ActivityIndicator size="large" color="#0000ff" />
                         ) : (
                             <>
-                                {/* <TouchableHighlight style={ styles.buttonLogin }>
-                                    <Button
-                                        onPress={ handleSubmit }
-                                        color = 'white'
-                                        title="Ingresar"
-                                    />
-                                </TouchableHighlight> */}
-                                <TouchableOpacity style={ styles.buttonLogin } onPress={ handleSubmit } >
+                                <TouchableOpacity
+                                    style={ styles.buttonLogin }
+                                    onPress={ handleSubmit }
+                                    ref={generateTestHook('LoginScreen.Button')}
+                                >
                                     <Text style={styles.txtButtonLogin}>Ingresar</Text>
                                 </TouchableOpacity>
 
-                                {/* <TouchableHighlight style={ styles.buttonPassword }>
-                                    <Button
-                                        onPress={ rememberPassword }
-                                        title="¿Olvidaste tu contraseña?"
-                                    />
-                                </TouchableHighlight> */}
-                                <TouchableOpacity  style={ styles.buttonPassword } onPress={ rememberPassword }>
+                                <TouchableOpacity
+                                    style={ styles.buttonPassword }
+                                    onPress={ rememberPassword }
+                                    ref={generateTestHook('LoginScreen.ButtonForgot')}
+                                >
                                     <Text style={styles.txtButtonPassword}>¿Olvidaste tu contraseña?</Text>
                                 </TouchableOpacity>
                             </>

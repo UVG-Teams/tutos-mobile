@@ -26,6 +26,7 @@ import {
     DatePicker,
 } from 'native-base'
 
+import { useCavy } from 'cavy'
 import { RenderInput } from '../../components/form/field'
 
 import { reduxForm, Field } from 'redux-form'
@@ -38,15 +39,18 @@ import * as selectors from '../../tools/reducers'
 import * as actions from '../../tools/actions/signUp'
 
 
-const SignUp = ({ navigation, handleSubmit, isSigningUp, }) => {
+const SignUp = ({ navigation, handleSubmit, isSigningUp }) => {
+    const generateTestHook = useCavy();
     // const date = new Date();
     // const setDate = (newDate) => {
     //     date = newDate
     //     console.log(date)
     // };
-    return(
+    
+    return (
     <ImageBackground
         style={ theme.background }
+        ref={generateTestHook('SignUp')}
     >
         <Container style={{ backgroundColor: 'transparent'}}>
             <Header style={ theme.header }>
@@ -67,33 +71,39 @@ const SignUp = ({ navigation, handleSubmit, isSigningUp, }) => {
                         name='username'
                         placeholder='Usuario'
                         component={ RenderInput }
+                        ref={generateTestHook('SignupScreen.Username')}
                     />
                     <Field
                         name='firstName'
                         placeholder='Nombre'
                         component={ RenderInput }
+                        ref={generateTestHook('SignupScreen.FirstName')}
                     />
                     <Field
                         name='lastName'
                         placeholder='Apellido'
                         component={ RenderInput }
+                        ref={generateTestHook('SignupScreen.LastName')}
                     />
                     <Field
                         name='email'
                         placeholder='Email'
                         component={ RenderInput }
+                        ref={generateTestHook('SignupScreen.Email')}
                     />
                     <Field
                         type={'password'}
                         name='password'
                         placeholder='Contraseña'
                         component={ RenderInput }
+                        ref={generateTestHook('SignupScreen.Password')}
                     />
                     <Field
                         type={'password'}
                         name='confirmPassword'
                         placeholder='Confirmar Contraseña'
                         component={ RenderInput }
+                        ref={generateTestHook('SignupScreen.PasswordConfirm')}
                     />
                     <Field
                         name='birthdate'
@@ -129,7 +139,11 @@ const SignUp = ({ navigation, handleSubmit, isSigningUp, }) => {
                             isSigningUp ? (
                                 <Text style={styles.buttonSignUp}>{'Creando perfil...'}</Text>
                             ):(
-                                <TouchableOpacity style={ styles.buttonSignUp } onPress={handleSubmit}>
+                                <TouchableOpacity
+                                    style={ styles.buttonSignUp }
+                                    onPress={handleSubmit}
+                                    ref={generateTestHook('SignupScreen.Button')}
+                                >
                                     <Text>Crear cuenta</Text>
                                 </TouchableOpacity>
                             )
@@ -140,6 +154,8 @@ const SignUp = ({ navigation, handleSubmit, isSigningUp, }) => {
         </Container>
     </ImageBackground>
 )}
+
+
 export default connect(
     state=> ({
         isSigningUp: selectors.getIsSigningUp(state),
