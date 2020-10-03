@@ -65,24 +65,24 @@ export default class Index extends Component {
                 <View style={styles.options}>
                     {/* <TouchableHighlight style={ styles.buttonLogin }>
                         <Button
-                            onPress={ () => this.props.navigation.navigate('Login') }
+                            onPress={ () => this.props.navigation.navigate('login') }
                             color="black"
                             title="Iniciar sesión"
                         />
                     </TouchableHighlight> */}
-                    <TouchableOpacity  style={ styles.buttonLogin } onPress={  () => this.props.navigation.navigate('Login') }>
+                    <TouchableOpacity  style={ styles.buttonLogin } onPress={  () => this.props.navigation.navigate('login') }>
                         <Text style={styles.txtButtonLogin}>Iniciar sesión</Text>
                     </TouchableOpacity>
 
                     {/* <TouchableHighlight style={ styles.buttonSignup }>
                         <Button
-                            onPress={ () => this.props.navigation.navigate('SignUp') }
+                            onPress={ () => this.props.navigation.navigate('signup') }
                             color="black"
                             title="Regístrate"
                         />
                     </TouchableHighlight> */}
 
-                    <TouchableOpacity  style={ styles.buttonSignup } onPress={  () => this.props.navigation.navigate('SignUp') }>
+                    <TouchableOpacity  style={ styles.buttonSignup } onPress={  () => this.props.navigation.navigate('signup') }>
                         <Text style={styles.txtButtonSignup}>Regístrate</Text>
                     </TouchableOpacity>
                 </View>

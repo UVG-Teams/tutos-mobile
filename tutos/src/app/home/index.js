@@ -249,13 +249,14 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                                 return (
                                                     <View style={ styles.cardInfo }>
                                                         <Text style = {{fontSize: 20, fontWeight: "bold", marginBottom: 10, textAlign: "center"}}>Información Tutoría</Text>
+                                                        {console.log(tutoria)}
                                                         {isTutor ? (
-                                                            <Text style = {{fontSize: 18}}>Tutorado: {tutoria.tutor.first_name} {tutoria.tutor.last_name}</Text>
+                                                            
+                                                            <Text style = {{fontSize: 18}}>Tutorado: {tutoria.tutorado.first_name} {tutoria.tutorado.last_name}</Text>
                                                         ) : (
-                                                            <Text style = {{fontSize: 18}}>Tutor: {tutoria.tutorado.first_name} {tutoria.tutorado.last_name}</Text>
+                                                            <Text style = {{fontSize: 18}}>Tutor: {tutoria.tutor.first_name} {tutoria.tutor.last_name}</Text>
                                                         ) 
                                                         }
-                                                        <Text style = {{fontSize: 18}}>Tutor: {tutoria.tutor.first_name} {tutoria.tutor.last_name}</Text>
                                                         <Text style = {{fontSize: 18}}>Curso: {tutoria.course.name}</Text>
                                                         <Text style = {{fontSize: 18}}>Tema: {tutoria.topic}</Text>
                                                         <Text style = {{fontSize: 18}}>Precio: Q{tutoria.total_price}</Text>

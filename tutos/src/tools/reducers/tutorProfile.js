@@ -15,12 +15,21 @@ const profile = (state = {} , action) => {
   return state;
 }
 
+const isUpdating= (state = false , action)=>{
+  if (action.type === types.EDIT_TUTOR_PROFILE_STARTED){
+    return true;
+  }
+  return false;
+}
+
 const tutorProfile = combineReducers({
   profile,
-  isFetching
+  isFetching,
+  isUpdating
 })
 
 export default tutorProfile;
 
 export const getTutorProfie = state => state.profile;
 export const isFetchingTutorProfile = state => state.isFetching;
+export const isUpdatingTutorProfile = state => state.isUpdating;

@@ -5,7 +5,10 @@ import {
     watchRefreshTokenStarted,
 } from './auth'
 
-import {watchGetProfile} from './profile'
+import {
+    watchGetProfile,
+    watchUpdateProfile
+} from './profile'
 
 import { watchSignUpStarted } from './signUp'
 
@@ -19,7 +22,15 @@ import {
     watchFetchUsers,
 } from './users'
 
-import { watchGetTutorProfile } from './tutorProfile'
+import { 
+    watchGetTutorProfile,
+    watchUpdateTutorProfile
+} from './tutorProfile'
+
+import {
+    watchFetchTutores,
+} from './tutores'
+
 
 function* mainSaga() {
     yield all([
@@ -32,6 +43,9 @@ function* mainSaga() {
         fork(watchGetProfile),
         fork(watchFetchUsers),
         fork(watchGetTutorProfile),
+        fork(watchUpdateProfile),
+        fork(watchUpdateTutorProfile),
+        fork(watchFetchTutores),
     ])
 }
 
