@@ -41,7 +41,7 @@ const Login = ({
     const generateTestHook = useCavy();
 
     if (isAuthenticated) {
-        navigation.navigate('Home')
+        navigation.navigate('home')
     }
     return (
         <Container
@@ -54,7 +54,7 @@ const Login = ({
                         Platform.select({
                             ios: (
                                 <Btn transparent
-                                    onPress={ () => navigation.navigate('Index') }
+                                    onPress={ () => navigation.navigate('index') }
                                 >
                                     <FontAwesomeIcon style={ theme.headerIcons } icon='chevron-left' size={ 25 } /> 
                                     <Text style={styles.backTxt}>Atrás</Text>

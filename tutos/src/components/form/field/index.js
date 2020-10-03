@@ -28,6 +28,7 @@ export const RenderInput = ({ input, meta, type, placeholder, cavyName }) => {
             type={ type }
             style={ styles.input }
             placeholder={ placeholder }
+            autoCapitalize='none'
             secureTextEntry={ type == 'password' }
             ref={generateTestHook(cavyName)}
         />

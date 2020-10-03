@@ -11,6 +11,8 @@ import {
 } from 'react-native';
 import { useCavy, hook, wrap } from 'cavy'
 
+import { TouchableOpacity } from 'react-native-gesture-handler'
+
 import Carousel from 'react-native-looped-carousel';
 
 import imgCarousel1 from '../../../media/1.png';
@@ -66,23 +68,30 @@ class Index extends Component {
                     </View>
                 </Carousel>
                 <View style={styles.options}>
-                    <TouchableHighlight style={ styles.buttonLogin }>
+                    {/* <TouchableHighlight style={ styles.buttonLogin }>
                         <Button
                             onPress={ () => this.props.navigation.navigate('login') }
                             color="black"
                             title="Iniciar sesión"
                             ref={this.props.generateTestHook('IndexScreen.ButtonLogin')}
                         />
-                    </TouchableHighlight>
+                    </TouchableHighlight> */}
+                    <TouchableOpacity  style={ styles.buttonLogin } onPress={  () => this.props.navigation.navigate('login') }>
+                        <Text style={styles.txtButtonLogin}>Iniciar sesión</Text>
+                    </TouchableOpacity>
 
-                    <TouchableHighlight style={ styles.buttonSignup }>
+                    {/* <TouchableHighlight style={ styles.buttonSignup }>
                         <Button
                             onPress={ () => this.props.navigation.navigate('signup') }
                             color="black"
                             title="Regístrate"
                             ref={this.props.generateTestHook('IndexScreen.ButtonRegister')}
                         />
-                    </TouchableHighlight>
+                    </TouchableHighlight> */}
+
+                    <TouchableOpacity  style={ styles.buttonSignup } onPress={  () => this.props.navigation.navigate('signup') }>
+                        <Text style={styles.txtButtonSignup}>Regístrate</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );
@@ -93,125 +102,70 @@ export default hook(Index)
 
 const styles = StyleSheet.create({
 
-    ...Platform.select({
-        ios: {
-            buttonLogin: {
-                width: '40%',
-                marginRight: 20,
-                marginBottom: 70,
-                padding: 10,
-                backgroundColor: '#6BB5FF',
-                borderRadius: 10,
-            },
-        
-            buttonSignup: {
-                width: '40%',
-                marginBottom: 70,
-                padding: 10,
-                backgroundColor: '#6BB5FF',
-                borderRadius: 10,
-            },
-            options: {
-                backgroundColor: 'transparent',
-                position: 'absolute',
-                width: width,
-                bottom: 24,
-                marginTop: 40,
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-            },
-        
-            image: {
-                flex: 1,
-                resizeMode: "cover",
-                justifyContent: "center",
-            },
-        
-            text: {
-                fontSize: 45,
-                color: '#ffffff',
-                textAlign: 'center',
-                textShadowColor: '#000000',
-                textShadowOffset: {width: 5, height: 5},
-                textShadowRadius: 5,
-                paddingLeft: 20,
-                paddingRight: 20,
-            },
-        
-            textUp: {
-                fontSize: 45,
-                color: '#ffffff',
-                textAlign: 'center',
-                textShadowColor: '#000000',
-                textShadowOffset: {width: 5, height: 5},
-                textShadowRadius: 5,
-                paddingLeft: 20,
-                paddingRight: 20,
-                marginBottom: '120%',
-            },
-        },
-        android: {
-            buttonLogin: {
-                width: '40%',
-                marginRight: 20,
-                marginBottom: 70,
-                padding: 10,
-                // backgroundColor: '#6BB5FF',
-                borderRadius: 10,
-                color: '#6BB5FF'
-            },
-        
-            buttonSignup: {
-                width: '40%',
-                marginBottom: 70,
-                padding: 10,
-                // backgroundColor: '#6BB5FF',
-                borderRadius: 10,
-                color: '#6BB5FF'
-            },
-            options: {
-                backgroundColor: 'transparent',
-                position: 'absolute',
-                width: width,
-                bottom: 24,
-                marginTop: 40,
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-            },
-        
-            image: {
-                flex: 1,
-                resizeMode: "cover",
-                justifyContent: "center",
-            },
-        
-            text: {
-                fontSize: 45,
-                color: '#ffffff',
-                textAlign: 'center',
-                textShadowColor: '#000000',
-                textShadowOffset: {width: 5, height: 5},
-                textShadowRadius: 5,
-                paddingLeft: 20,
-                paddingRight: 20,
-            },
-        
-            textUp: {
-                fontSize: 45,
-                color: '#ffffff',
-                textAlign: 'center',
-                textShadowColor: '#000000',
-                textShadowOffset: {width: 5, height: 5},
-                textShadowRadius: 5,
-                paddingLeft: 20,
-                paddingRight: 20,
-                marginBottom: '120%',
-            },
-        },
-        default: {
-            
-        }
-    })
+    buttonLogin: {
+        // width: '90%',
+        marginRight: 20,
+        marginBottom: 70,
+        padding: 20,
+        backgroundColor: '#6BB5FF',
+        borderRadius: 10,
+    },
+
+    txtButtonLogin: {
+        fontSize: 20
+    },
+
+    buttonSignup: {
+        // width: '100%',
+        marginBottom: 70,
+        padding: 20,
+        paddingLeft: 30,
+        paddingRight: 30, 
+        backgroundColor: '#6BB5FF',
+        borderRadius: 10,
+    },
+
+    txtButtonSignup: {
+        fontSize: 20
+    },
+
+    options: {
+        backgroundColor: 'transparent',
+        position: 'absolute',
+        width: width,
+        bottom: 24,
+        marginTop: 40,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    image: {
+        flex: 1,
+        resizeMode: "cover",
+        justifyContent: "center",
+    },
+
+    text: {
+        fontSize: 45,
+        color: '#ffffff',
+        textAlign: 'center',
+        textShadowColor: '#000000',
+        textShadowOffset: {width: 5, height: 5},
+        textShadowRadius: 5,
+        paddingLeft: 20,
+        paddingRight: 20,
+    },
+
+    textUp: {
+        fontSize: 45,
+        color: '#ffffff',
+        textAlign: 'center',
+        textShadowColor: '#000000',
+        textShadowOffset: {width: 5, height: 5},
+        textShadowRadius: 5,
+        paddingLeft: 20,
+        paddingRight: 20,
+        marginBottom: '120%',
+    },
 })

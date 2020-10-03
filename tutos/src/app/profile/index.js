@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect , useState } from 'react'
 import {
     ScrollView,
     Text,
@@ -6,7 +6,8 @@ import {
     View,
     ImageBackground,
     Image,
-    StyleSheet
+    StyleSheet,
+    ActivityIndicator
 } from 'react-native'
 
 import { 
@@ -24,7 +25,7 @@ import {
     List, 
     ListItem,
 } from 'native-base'
-import { connect } from 'react-redux'
+import { connect, createStoreHook } from 'react-redux'
 import { Col, Row, Grid } from 'react-native-easy-grid'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import dayjs from 'dayjs'
@@ -33,8 +34,11 @@ import { theme } from './../../layout/themes'
 
 import * as selectors from '../../tools/reducers'
 import * as actions from '../../tools/actions/tutorProfile'
+import * as actionsP from '../../tools/actions/profile'
 import profileImg from '../../assets/profile1.png'
 
+import EditProfile from './editProfile'
+import { getProfile } from '../../tools/reducers/profile'
 const style = StyleSheet.create({
     img:{
         width: 150,
@@ -47,13 +51,14 @@ const style = StyleSheet.create({
 })
 
 
-const Profile = ({ navigation , profile , tutorProfile , getTutorProfile} ) => {
+const Profile = ({ navigation , profile , isFetchingProfile , tutorProfile , getTutorProfile , isFetchingTutorProfile , updateProfile } ) => {
     const onLoad = () => {
         if (profile.is_tutor){
             getTutorProfile()
         }
     }
     useEffect(onLoad , [])
+    const [isUpdating, setisUpdating] = useState(false)
     return(
     <ImageBackground
         style={ theme.background }
@@ -70,7 +75,7 @@ const Profile = ({ navigation , profile , tutorProfile , getTutorProfile} ) => {
                 <Body></Body>
                 <Right></Right>
             </Header>
-            <Content style={ theme.content }>
+            {!isUpdating ? (<Content style={ theme.content }>
                 <View>
                     <Grid>
                         <Col>
@@ -82,8 +87,9 @@ const Profile = ({ navigation , profile , tutorProfile , getTutorProfile} ) => {
                         </Col>
                     </Grid>
                     <Text></Text>
-                        {profile.is_tutor ? 
-                        (<Content>
+                        {isFetchingTutorProfile  && <ActivityIndicator size="large" color="#0000ff" />}
+                        {!isFetchingTutorProfile  ? (
+                        <Content>
                             <Separator bordered>
                                 <Text style={{ fontSize: 20 }}>Descripción</Text>
                             </Separator>
@@ -93,6 +99,7 @@ const Profile = ({ navigation , profile , tutorProfile , getTutorProfile} ) => {
                                 </Text>
                             </ListItem>
                         </Content>) : (<Text></Text>)}
+                        {isFetchingProfile ? <ActivityIndicator size="large" color="#0000ff" /> :
                         <Content>
                             <Separator bordered>
                                 <Text style={{ fontSize: 20 }}>Información personal</Text>
@@ -122,8 +129,10 @@ const Profile = ({ navigation , profile , tutorProfile , getTutorProfile} ) => {
                                 </Text>
                             </ListItem>
                         </Content>
+                        }
                     <Text></Text>
-                    { profile.is_tutor && tutorProfile ? (
+                        {isFetchingTutorProfile && <ActivityIndicator size="large" color="#0000ff" />}
+                        {profile.is_tutor && !isFetchingTutorProfile ? (
                         <Content>
                             <Separator bordered>
                                 <Text style={{ fontSize: 20 }}>Información de tutor</Text>
@@ -159,7 +168,7 @@ const Profile = ({ navigation , profile , tutorProfile , getTutorProfile} ) => {
                         <Text> </Text>
                         <Text> </Text>
                     <Button block  info 
-                        onPress = {() => alert('Pendiente')}
+                        onPress = {() => setisUpdating(true)}
                     >
                         <Text>Editar mi perfil</Text>
                     </Button>
@@ -168,18 +177,30 @@ const Profile = ({ navigation , profile , tutorProfile , getTutorProfile} ) => {
 
                 </View>
             </Content>
+            ) : (
+                <EditProfile 
+                end={setisUpdating}
+                />
+            )}
         </Container>
     </ImageBackground>)
+        
+    
 }
 
 export default connect(
     state => ({
         profile : selectors.getProfile(state) ,
-        tutorProfile : selectors.getTutorProfile(state)
+        tutorProfile : selectors.getTutorProfile(state),
+        isFetchingProfile : selectors.isFetchingProfile(state),
+        isFetchingTutorProfile : selectors.isFetchingTutorProfile(state)
     }),
     dispatch => ({
         getTutorProfile(){
             dispatch(actions.startGetTutorProfile())
-        }
+        },
+        updateProfile(){
+            dispatch(actionsP.startEditProfile())
+        },
     })
 )(Profile)

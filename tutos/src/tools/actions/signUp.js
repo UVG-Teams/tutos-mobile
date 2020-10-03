@@ -1,6 +1,6 @@
 import * as types from '../types/signUp';
 
-export const startSignUp = (username, password, firstName, lastName, email) => ({
+export const startSignUp = (username, password, firstName, lastName, email, birthdate, gender, isTutor,phone, price) => ({
   type: types.SIGN_UP_STARTED,
   payload: {
     username,
@@ -8,6 +8,11 @@ export const startSignUp = (username, password, firstName, lastName, email) => (
     firstName,
     lastName,
     email,
+    gender,
+    phone,
+    birthdate,
+    isTutor,
+    individualPrice: price,
   },
 });
 

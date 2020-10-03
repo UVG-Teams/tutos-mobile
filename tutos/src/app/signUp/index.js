@@ -23,6 +23,7 @@ import {
     Form,
     Item,
     Input,
+    DatePicker,
 } from 'native-base'
 
 import { useCavy } from 'cavy'
@@ -40,6 +41,11 @@ import * as actions from '../../tools/actions/signUp'
 
 const SignUp = ({ navigation, handleSubmit, isSigningUp }) => {
     const generateTestHook = useCavy();
+    // const date = new Date();
+    // const setDate = (newDate) => {
+    //     date = newDate
+    //     console.log(date)
+    // };
     
     return (
     <ImageBackground
@@ -99,6 +105,35 @@ const SignUp = ({ navigation, handleSubmit, isSigningUp }) => {
                         component={ RenderInput }
                         ref={generateTestHook('SignupScreen.PasswordConfirm')}
                     />
+                    <Field
+                        name='birthdate'
+                        placeholder='Fecha de nacimiento YYYY-MM-DD'
+                        component={ RenderInput }
+                    />
+                    <Field
+                        name='phone'
+                        placeholder='Teléfono'
+                        component={ RenderInput }
+                    />
+                    <Field
+                        name='gender'
+                        placeholder='Género M/F'
+                        component={ RenderInput }
+                    />
+                    {/* <DatePicker
+                        default={new Date(2019, 1, 1)}
+                        minimumDate={new Date(1920, 1, 1)}
+                        maximumDate={new Date(2020,1,1)}
+                        locale={'en'}
+                        modalTransparent={false}
+                        animationType={"fade"}
+                        androidMode={"default"}
+                        placeHolderText="Fecha de nacimiento"
+                        textStyle={{color:"black"}}
+                        disabled={false}
+                        onDataChange={setDate}
+                    /> */}
+
                     <View>
                         {
                             isSigningUp ? (
@@ -128,9 +163,10 @@ export default connect(
 )(
     reduxForm({
         form: 'signUp',
-        onSubmit({username, password, confirmPassword, firstName, lastName, email}, dispatch){
+        onSubmit({username, password, confirmPassword, firstName, lastName, email, birthdate, phone, gender}, dispatch){
+            phone = parseInt(phone)
             dispatch(
-                actions.startSignUp(username, password, firstName, lastName, email),
+                actions.startSignUp(username, password, firstName, lastName, email, birthdate,gender,true,phone,100),
             );
         },
         validate(values) {
@@ -158,12 +194,11 @@ const styles = StyleSheet.create({
         marginRight: 'auto',
     },
     title: {
-        marginTop:20,
         fontSize: 40,
-        marginBottom: 50,
+        marginBottom: 20,
     },
     buttonSignUp: {
         width: '100%',
-        marginTop: 50,
+        marginTop: 30,
     },
 })
