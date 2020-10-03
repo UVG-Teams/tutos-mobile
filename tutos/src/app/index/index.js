@@ -76,7 +76,11 @@ class Index extends Component {
                             ref={this.props.generateTestHook('IndexScreen.ButtonLogin')}
                         />
                     </TouchableHighlight> */}
-                    <TouchableOpacity  style={ styles.buttonLogin } onPress={  () => this.props.navigation.navigate('login') }>
+                    <TouchableOpacity
+                        style={ styles.buttonLogin }
+                        onPress={ () => this.props.navigation.navigate('login') }
+                        ref={this.props.generateTestHook('IndexScreen.ButtonLogin')}
+                    >
                         <Text style={styles.txtButtonLogin}>Iniciar sesión</Text>
                     </TouchableOpacity>
 
@@ -89,7 +93,11 @@ class Index extends Component {
                         />
                     </TouchableHighlight> */}
 
-                    <TouchableOpacity  style={ styles.buttonSignup } onPress={  () => this.props.navigation.navigate('signup') }>
+                    <TouchableOpacity
+                        style={ styles.buttonSignup }
+                        onPress={ () => this.props.navigation.navigate('signup') }
+                        ref={this.props.generateTestHook('IndexScreen.ButtonRegister')}
+                    >
                         <Text style={styles.txtButtonSignup}>Regístrate</Text>
                     </TouchableOpacity>
                 </View>
