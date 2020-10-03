@@ -37,6 +37,11 @@ export default function(spec) {
             await spec.exists('Login');
             // await spec.fillIn('LoginScreen.Username', 'Willi');
             // await spec.fillIn('LoginScreen.Password', 'Admin');
+            const usernameInput = await spec.findComponent('LoginScreen.Username');
+            usernameInput.props.onChange('Willi');
+
+            const passwordInput = await spec.findComponent('LoginScreen.Password');
+            passwordInput.props.onChange('Admin');
             await spec.press('LoginScreen.Button');
         });
     });

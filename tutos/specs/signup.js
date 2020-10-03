@@ -10,7 +10,7 @@ export default function(spec) {
 
         spec.it('works', async function() {
             const navigation = await spec.findComponent('AppNavigation')
-            await spec.exists('Index');
+            // await spec.exists('Index');
             await goTo(navigation, 'signup');
             await spec.exists('SignUp');
             // await spec.fillIn('SignupScreen.Username', 'Cavy1');

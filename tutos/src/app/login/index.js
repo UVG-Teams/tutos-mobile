@@ -70,15 +70,15 @@ const Login = ({
                     <Field
                         name='email'
                         placeholder='Usuario'
+                        cavyName='LoginScreen.Username'
                         component={ RenderInput }
-                        ref={generateTestHook('LoginScreen.Username')}
                     />
                     <Field
                         type={'password'}
                         name='password'
                         placeholder='Contraseña'
+                        cavyName='LoginScreen.Password'
                         component={ RenderInput }
-                        ref={generateTestHook('LoginScreen.Password')}
                     />
                     {
                         error && (
