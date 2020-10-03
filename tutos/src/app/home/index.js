@@ -5,6 +5,8 @@ import {
     TextInput,
     View,
     ImageBackground,
+    StyleSheet,
+    Dimensions,
 } from 'react-native'
 
 import {
@@ -25,6 +27,8 @@ import {
 
 import Modal from 'react-native-modal';
 
+import { TouchableOpacity } from 'react-native-gesture-handler'
+
 import moment from 'moment'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 
@@ -37,14 +41,21 @@ import * as actionsProfile from '../../tools/actions/profile'
 import { tutoria } from '../../tools/schemas/tutorias'
 import profileReducer from '../../tools/reducers/profile'
 
+import Profile from '../profile'
+
 
 
 const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
 
     const [isModalVisible, setModalVisible] = useState(false);
-    const toggleModal = () => {
+    const [modalID, setModalID] = useState(null);
+    const toggleModal = (id) => {
+        setModalID(id)
         setModalVisible(!isModalVisible);
     };
+
+    const deviceWidth = Dimensions.get("window").width;
+    const deviceHeight = Dimensions.get("window").height;
     useEffect(onLoad, [])
     if (isTutor){
         tutorias = tutorias.filter(tutoria => tutoria.tutor.id === profile.id)
@@ -85,7 +96,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                             isTutor ? (
                                 <>
                                     <Card>
-                                        <CardItem header bordered onPress={() => alert("Que onda, esto es header")}>
+                                        <CardItem header bordered>
                                             <Text style={{ fontSize: 18, fontWeight: "bold" }}>Programadas</Text>
                                         </CardItem>
                                         {
@@ -107,7 +118,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                     </Card>
 
                                     <Card>
-                                        <CardItem header bordered onPress={() => alert("info")}>
+                                        <CardItem header bordered>
                                             <Text style={{ fontSize: 18, fontWeight: "bold" }}>En curso</Text>
                                         </CardItem>
                                         {
@@ -156,7 +167,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                         </CardItem>
                                         {
                                             tutorias.map(tutoria => tutoria.status.name === "canceled" && (
-                                                <CardItem bordered button onPress={() => alert("Info")}>
+                                                <CardItem bordered button onPress={() => alert("info")}>
                                                     <Body>
                                                         <Row>
                                                             <Col>
@@ -202,25 +213,63 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                         </CardItem>
                                         {
                                             tutorias.map(tutoria => tutoria.status.name ===  "scheduled" && (
-                                                <CardItem bordered button onPress={() => alert(<Text>{tutoria.course.name}</Text>)}>
-                                                    <Body>
-                                                        <Row>
-                                                            <Col>
-                                                                <Text>{tutoria.course.name}, {tutoria.tutor.first_name}</Text>
-                                                            </Col>
-                                                            <Col>
-                                                                <Text style={{textAlign: 'right'}}>{moment(tutoria.datetime).format('L LT')}</Text>
-                                                            </Col>
-                                                        </Row>
-                                                    </Body>
-                                                </CardItem>
+                                                <>
+                                                    <CardItem bordered button onPress={() => toggleModal(tutoria.id)}>
+                                                        <Body>
+                                                            <Row>
+                                                                <Col>
+                                                                    <Text>{tutoria.course.name}, {tutoria.tutor.first_name}</Text>
+                                                                </Col>
+                                                                <Col>
+                                                                    <Text style={{textAlign: 'right'}}>{moment(tutoria.datetime).format('L LT')}</Text>
+                                                                </Col>
+                                                            </Row>
+                                                        </Body>
+                                                    </CardItem>
+                                                </>
                                             ))
                                         }
                                     </Card>
+                                    {/* https://github.com/react-native-community/react-native-modal */}
+                                    <Modal 
+                                        deviceWidth={deviceWidth} 
+                                        deviceHeight={deviceHeight} 
+                                        isVisible={isModalVisible} 
+                                        onBackdropPress={() => setModalVisible(false)}>
+                                        
+                                        <View>
+                                            
+                                            <Card>
+                                                <CardItem header bordered>
+                                                    {console.log("info", tutorias)}
+                                                    {console.log("Modal id: ", modalID)}
+                                                    {tutorias.map(tutoria => {
+                                                        if (tutoria.id === modalID){
+                                                            return (
+                                                                <View style={ styles.cardInfo }>
+                                                                    <Text>Tutor: {tutoria.tutor.first_name} {tutoria.tutor.last_name}</Text>
+                                                                    <Text>Curso: {tutoria.course.name}</Text>
+                                                                    <Text>Tema: {tutoria.topic}</Text>
+                                                                    <Text>Precio: Q{tutoria.total_price}</Text>
+                                                                    <Text>Ubicación: {tutoria.location}</Text>
+                                                                    <Text>Fecha: {moment(tutoria.datetime).format('L LT')}</Text>
+                                                                </View>
+                                                            )
+                                                        }
+                                                    })}
+                                                    {/* <Text>{tutorias.get(modalID).course.name}</Text> */}
+                                                    {/* <Text> {tutoria.tutor.first_name}</Text> */}
+                                                </CardItem>
+                                            </Card>
+                                            <TouchableOpacity style={ styles.buttonLogin } onPress={ toggleModal } >
+                                                <Text style={styles.txtButtonLogin}>Cerrar</Text>
+                                            </TouchableOpacity>
+                                        </View>
+
+                                    </Modal>
                                 </>
                             )
                         }
-                        
                     </View>
                 </Content>
             </Container>
@@ -240,3 +289,21 @@ export default connect(
         }
     })
 )(Home);
+
+
+const styles = StyleSheet.create({
+    buttonLogin: {
+        marginTop: 15,
+        borderRadius: 5,
+        backgroundColor: 'black',
+        color: 'white',
+        paddingLeft: '39%',
+        paddingRight: '39%',
+        paddingTop: 7,
+        paddingBottom: 7,
+    },
+    txtButtonLogin: {
+        color: 'white',
+        fontSize: 19,
+    }
+})
