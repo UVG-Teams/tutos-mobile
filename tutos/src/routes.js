@@ -76,6 +76,7 @@ export const routes = [
         icon: 'users',
         authProtection: true,
         showOnSidebar: true,
+        defaultRoute: 'list',
     },
     {
         name: 'tutores',
@@ -84,6 +85,7 @@ export const routes = [
         icon: 'users',
         authProtection: true,
         showOnSidebar: true,
+        defaultRoute: 'list',
     },
     {
         name: 'inbox',
@@ -92,6 +94,7 @@ export const routes = [
         icon: 'comments',
         authProtection: true,
         showOnSidebar: true,
+        defaultRoute: 'list',
     },
     {
         name: 'schedule',
@@ -100,6 +103,7 @@ export const routes = [
         icon: 'calendar-alt',
         authProtection: true,
         showOnSidebar: true,
+        defaultRoute: 'show',
     },
     {
         name: 'notifications',
@@ -108,5 +112,6 @@ export const routes = [
         icon: 'bell',
         authProtection: true,
         showOnSidebar: false,
+        defaultRoute: 'list',
     },
 ]
