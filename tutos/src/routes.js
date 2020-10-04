@@ -5,6 +5,7 @@ import Profile from './app/profile'
 import SignUp from './app/signUp'
 import Calendar from './app/calendar'
 import Events from './app/events'
+import Tutorias from './app/tutorias'
 import Tutores from './app/tutores'
 import Conversations from './app/conversations'
 import Schedule from './app/schedule'
@@ -69,12 +70,22 @@ export const routes = [
         showOnSidebar: false,
     },
     {
+        name: 'tutorias',
+        displayName: 'Tutorias',
+        component: Tutorias,
+        icon: 'users',
+        authProtection: true,
+        showOnSidebar: true,
+        defaultRoute: 'list',
+    },
+    {
         name: 'tutores',
         displayName: 'Tutores',
         component: Tutores,
         icon: 'users',
         authProtection: true,
         showOnSidebar: true,
+        defaultRoute: 'list',
     },
     {
         name: 'inbox',
@@ -83,6 +94,7 @@ export const routes = [
         icon: 'comments',
         authProtection: true,
         showOnSidebar: true,
+        defaultRoute: 'list',
     },
     {
         name: 'schedule',
@@ -91,6 +103,7 @@ export const routes = [
         icon: 'calendar-alt',
         authProtection: true,
         showOnSidebar: true,
+        defaultRoute: 'show',
     },
     {
         name: 'notifications',
@@ -99,5 +112,6 @@ export const routes = [
         icon: 'bell',
         authProtection: true,
         showOnSidebar: false,
+        defaultRoute: 'list',
     },
 ]

@@ -22,7 +22,7 @@ export const routes = [
 
 
 
-const TutoresApp = () => (
+const TutoriasApp = () => (
     <NavigationContainer independent={ true }>
         <Stack.Navigator
             initialRouteName="list"
@@ -41,4 +41,4 @@ const TutoresApp = () => (
     </NavigationContainer>
 )
 
-export default TutoresApp
+export default TutoriasApp

@@ -28,18 +28,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { theme } from '../../../layout/themes'
 
 import * as selectors from '../../../tools/reducers'
-import * as actions from '../../../tools/actions/users'
-import * as tutoresactions from '../../../tools/actions/tutores'
+import * as actions from '../../../tools/actions/tutorias'
 
-const Tutores = ({ 
+const List = ({ 
     navigation,
-    users,
+    tutorias,
     isLoading,
     onLoad,
-    state,
 }) => {
     useEffect(onLoad, [])
-    return (
+    return(
     <ImageBackground
         style={ theme.background }
     >
@@ -56,37 +54,35 @@ const Tutores = ({
             </Header>
             <Content style={ theme.content }>
                 <View>
-                    <Text style={{ fontSize: 35 }}>Tutores</Text>   
+                    <Text style={{ fontSize: 35 }}>Tutorias</Text>   
                     {
-                        users.map(user => user.is_tutor && (
-                            <Card key={ user.id }>
-                                <CardItem button onPress = {() => navigation.navigate("show", {id: user.id})}>
+                        tutorias.map(tutoria => (
+                            <Card key={ tutoria.id }>
+                                <CardItem button onPress = {() => navigation.navigate("show", { id: tutoria.id })}>
                                     <Body>
                                         <Row>
                                             <Col>
                                                 <Text style={{ fontWeight: "bold" }}>
-                                                    {user.first_name}
-                                                    {" "} 
-                                                    {user.last_name}
+                                                    {tutoria.total_price}
                                                 </Text>
                                             </Col>
                                             <Col >
-                                                <Text style={{textAlign:'right'}}>
+                                                {/* <Text style={{textAlign:'right'}}>
                                                     <FontAwesomeIcon style={ theme.CardItem} icon='star' size={ 10 } />
                                                     {selectors.getTutor(state, user.id).score}
-                                                </Text>
+                                                </Text> */}
                                             </Col>
                                         </Row>
                                         <Row>
                                             <Col>
-                                                <Text>
+                                                {/* <Text>
                                                     {selectors.getTutor(state, user.id).description}
-                                                </Text>
+                                                </Text> */}
                                             </Col>
                                             <Col>         
-                                                <Text style={{textAlign:'right'}}>
+                                                {/* <Text style={{textAlign:'right'}}>
                                                 Q{selectors.getTutor(state, user.id).individual_price}
-                                                </Text>   
+                                                </Text>    */}
                                             </Col>
                                         </Row>
                                     </Body>
@@ -98,19 +94,16 @@ const Tutores = ({
             </Content>
         </Container>
     </ImageBackground>
-    )
-}
+)}
 
 export default connect(
     state => ({
-        users: selectors.getUsers(state),
-        isLoading: selectors.isFetchingUsers(state),
-        state: state,
+        tutorias: selectors.getTutorias(state),
+        isLoading: selectors.isFetchingTutorias(state),
     }),
     dispatch => ({
         onLoad() {
-            dispatch(actions.startFetchingUsers());
-            dispatch(tutoresactions.startFetchingTutores());
+            dispatch(actions.startGetTutorias());
         },
     }),
-)(Tutores);
+)(List);

@@ -69,7 +69,7 @@ const SideBar = ({ props, isAuthenticated, logout, profile, navigation }) => (
                             <DrawerItem
                                 key={ route.name }
                                 label={ route.displayName }
-                                onPress={ () => navigation.navigate(route.name) }
+                                onPress={ () => navigation.navigate(route.name, { screen: route.defaultRoute }) }
                                 style={{ width: '75%' }}
                             />
                         </Row>
