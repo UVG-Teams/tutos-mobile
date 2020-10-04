@@ -23,7 +23,8 @@ export const RenderInput = ({ input, meta, type, placeholder, cavyName }) => {
                 </Text>
             )
         }
-        <TestableTextInput
+        {/* <TestableTextInput */}
+        <TextInput
             { ...input }
             type={ type }
             style={ styles.input }

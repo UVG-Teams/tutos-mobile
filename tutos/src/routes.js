@@ -5,6 +5,7 @@ import Profile from './app/profile'
 import SignUp from './app/signUp'
 import Calendar from './app/calendar'
 import Events from './app/events'
+import Tutorias from './app/tutorias'
 import Tutores from './app/tutores'
 import Conversations from './app/conversations'
 import Schedule from './app/schedule'
@@ -67,6 +68,14 @@ export const routes = [
         icon: 'calendar-day',
         authProtection: true,
         showOnSidebar: false,
+    },
+    {
+        name: 'tutorias',
+        displayName: 'Tutorias',
+        component: Tutorias,
+        icon: 'users',
+        authProtection: true,
+        showOnSidebar: true,
     },
     {
         name: 'tutores',
