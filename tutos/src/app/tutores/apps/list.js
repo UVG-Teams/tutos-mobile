@@ -39,7 +39,7 @@ const Tutores = ({
     state,
 }) => {
     useEffect(onLoad, [])
-    return(
+    return (
     <ImageBackground
         style={ theme.background }
     >
@@ -98,7 +98,8 @@ const Tutores = ({
             </Content>
         </Container>
     </ImageBackground>
-)}
+    )
+}
 
 export default connect(
     state => ({
