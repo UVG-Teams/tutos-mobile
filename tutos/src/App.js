@@ -29,6 +29,7 @@ import {
     faClock,
     faCalendarDay,
     faCalendarAlt,
+    faPhone,
     faTrash,
 } from '@fortawesome/free-solid-svg-icons'
 import { useCavy, hook, wrap } from 'cavy'
@@ -63,6 +64,7 @@ library.add(
     faClock,
     faCalendarDay,
     faCalendarAlt,
+    faPhone,
     faTrash,
 )
 

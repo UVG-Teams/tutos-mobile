@@ -57,9 +57,6 @@ const Show = ({ navigation, event }) => {
                             <Row><Text style={ styles.title }>{ 'Tutoria de ' + event.course.name }</Text></Row>
                         </CardItem>
                         <CardItem>
-                            {
-                                console.log(event)
-                            }
                             <Grid>
                                 <Col>
                                     <Row>

@@ -25,23 +25,36 @@ import {
   Form, 
   Item,
   Input,
-  Label 
+  Label,
+  Picker,
+  Icon
 } from 'native-base'
 
+import CheckBox from '@react-native-community/checkbox';
+import { find } from 'lodash'
 
-const EditProfile = ({ profile , tutorProfile={} , updateProfile , updateTutorProfile , end}) => {
+const EditProfile = ({ profile , tutorProfile={} , updateProfile , updateTutorProfile , end , languages}) => {
   const [nombres, setNombres] = useState(profile.first_name)
   const [apellidos, setApellidos] = useState(profile.last_name)
-  const [usuario, setUsuario] = useState(profile.username)
   const [correo, setCorreo] = useState(profile.email)
   const [precioIndividual, setPrecioIndividual] = useState(tutorProfile.individual_price)
   const [precioGrupal, setPrecioGrupal] = useState(tutorProfile.grupal_price)
   const [descripcion , setDescripcion] = useState(tutorProfile.description)
+  
+  // userdetail
+  const [phone, setPhone] = useState(profile.phone.toString())
+  const [isTutor , setIsTutor] = useState(profile.is_tutor) 
+  const [password0 , setPassword0 ] = useState('')
+  const [password1 , setPassword1 ] = useState('')
+  const [language , setLanguage] = useState({
+    id: profile.language,
+    name: find(languages , element => element.id === profile.language),
+  })
+
   const onSubmit = () => {
     updateProfile({
       'first_name': nombres,
       'last_name': apellidos,
-      'username': usuario,
       'email': correo
     })
     if (profile.is_tutor){
@@ -55,8 +68,8 @@ const EditProfile = ({ profile , tutorProfile={} , updateProfile , updateTutorPr
   }
   return(
     <Form>
-      <Text style={{ fontSize: 35 }}> Editar Perfil </Text>
-      <Item floatingLabel>
+      <Text style={{ fontSize: 35 }}> Editar Perfil  </Text>
+      {/* <Item floatingLabel>
         <Label>Nombres</Label>
         <Input 
         value = {nombres}
@@ -69,19 +82,20 @@ const EditProfile = ({ profile , tutorProfile={} , updateProfile , updateTutorPr
           value={apellidos}
           onChangeText={text => setApellidos(text)}
         />
-      </Item>
-      <Item floatingLabel>
-        <Label>Usuario</Label>
-        <Input
-          value={usuario}
-          onChangeText={text => setUsuario(text)}
-        />
-      </Item>
+      </Item> */}
       <Item floatingLabel>
         <Label>Correo</Label>
         <Input
           value={correo}
           onChangeText={text => setCorreo(text)}
+        />
+      </Item>
+      <Item floatingLabel>
+        <Label>No. de teléfono</Label>
+        <Input
+          value={ phone}
+          onChangeText={text => setPhone(text)}
+          keyboardType='numeric'
         />
       </Item>
       {profile.is_tutor ? (
@@ -107,11 +121,54 @@ const EditProfile = ({ profile , tutorProfile={} , updateProfile , updateTutorPr
               onChangeText={text => setPrecioGrupal(text)}
             />
           </Item>
+          <Item>
+            <Label>Es tutor: </Label>
+            <CheckBox
+              disabled={false}
+              value={isTutor}
+              onValueChange={(newValue) => setIsTutor(newValue)}
+            />
+          </Item>
+          <Item floatingLabel>
+            <Label>Nueva contraseña</Label>
+            <Input
+              value={password0}
+              placeholder="Dejar el campo en blanco para conservar la contraseña actual"
+              onChangeText={text => setPassword0(text)}
+            />
+          </Item>
+          <Item floatingLabel>
+            <Label>Confirmar Contraseña</Label>
+            <Input
+              value={password1}
+              placeholder="Dejar el campo en blanco para conservar la contraseña actual"
+              onChangeText={text => setPassword1(text)}
+            />
+          </Item>
+          <Item>
+            <Label>Cambiar tu idioma</Label>
+            <Picker
+              mode="dropdown"
+              iosIcon={<Icon name="arrow-down" />}
+              placeholder="Selecciona tu idioma"
+              placeholderStyle={{ color: "#bfc6ea" }}
+              placeholderIconColor="#007aff"
+              style={{ width: undefined }}
+              selectedValue={language}
+              onValueChange={value => setLanguage(value)}
+            >
+              {
+                languages.map(
+                  (element) => (<Picker.Item label={element.name} value={element.id} />)
+                )
+              }
+            </Picker>
+          </Item>
         </>
       ): (<Text></Text>)}
       <Text> </Text>
       <Button block info
-        onPress={() => onSubmit({nombres, apellidos, usuario, correo })}
+        onPress={() => onSubmit({nombres, apellidos, correo })}
       >
         <Text>Guardar Cambios</Text>
       </Button>
@@ -123,6 +180,7 @@ export default connect(
   state=>({
     profile: selectors.getProfile(state),
     tutorProfile: selectors.getTutorProfile(state),
+    languages: selectors.getLanguages(state),
   }),
   dispatch=>({
     updateProfile(data){
@@ -130,6 +188,9 @@ export default connect(
     },
     updateTutorProfile(data){
       dispatch(actionsTutor.startEditTutorProfile(data))
+    },
+    updateUserDetail(data){
+      // Despachar accion de editar userdetail
     }
   })
 )(EditProfile)

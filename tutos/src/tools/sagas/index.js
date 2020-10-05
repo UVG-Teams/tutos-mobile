@@ -31,6 +31,9 @@ import {
     watchFetchTutores,
 } from './tutores'
 
+import {
+    watchFetchLanguages,
+} from './languages'
 
 function* mainSaga() {
     yield all([
@@ -46,6 +49,7 @@ function* mainSaga() {
         fork(watchUpdateProfile),
         fork(watchUpdateTutorProfile),
         fork(watchFetchTutores),
+        fork(watchFetchLanguages),
     ])
 }
 

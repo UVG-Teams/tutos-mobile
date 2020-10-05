@@ -242,14 +242,11 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                             <View>
                                 <Card>
                                     <CardItem header bordered>
-                                        {/* {console.log("info", tutorias)} */}
-                                        {console.log("Modal id: ", modalID)}
                                         {tutorias.map(tutoria => {
                                             if (tutoria.id === modalID){
                                                 return (
                                                     <View style={ styles.cardInfo }>
                                                         <Text style = {{fontSize: 20, fontWeight: "bold", marginBottom: 10, textAlign: "center"}}>Información Tutoría</Text>
-                                                        {console.log(tutoria)}
                                                         {
                                                             isTutor ? (
                                                                 <Text style = {{fontSize: 18}}>Tutorado: {tutoria.tutorado.first_name} {tutoria.tutorado.last_name}</Text>
