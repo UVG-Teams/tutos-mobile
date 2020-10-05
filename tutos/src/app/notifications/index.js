@@ -57,6 +57,27 @@ const Notifications = ({ navigation }) => {
                                         <View style={ styles.cardInfo }>
                                             <Row>
                                                 <Col>
+                                                    <Text style = {{fontSize: 15, marginTop: 2}}>Actualización: </Text>
+                                                </Col>
+                                                <Right>
+                                                    <Col>
+                                                        <FontAwesomeIcon style={{color: "gray"}} icon='trash' size={ 15 }/>
+                                                    </Col>  
+                                                </Right>
+                                            </Row>
+                                        </View>
+                                    </CardItem>
+                                    <CardItem header bordered>
+                                            <View style={ styles.cardInfo }>
+                                                <Text style = {{fontSize: 15, color: "gray"}}>Se ha agregado el espacio para las notificaciones en Tutos app.</Text>
+                                            </View>
+                                    </CardItem>
+                                </Card>
+                                <Card>
+                                    <CardItem header bordered style = {{display: "flex", flex: 1, alignItems: "center"}}>
+                                        <View style={ styles.cardInfo }>
+                                            <Row>
+                                                <Col>
                                                     <Text style = {{fontSize: 15, marginTop: 2}}>Recordatorio tutoría: </Text>
                                                 </Col>
                                                 <Right>
@@ -70,6 +91,27 @@ const Notifications = ({ navigation }) => {
                                     <CardItem header bordered>
                                             <View style={ styles.cardInfo }>
                                                 <Text style = {{fontSize: 15, color: "gray"}}>Tutoría hoy a las 6:30 PM con Marco Fuentes.</Text>
+                                            </View>
+                                    </CardItem>
+                                </Card>
+                                <Card>
+                                    <CardItem header bordered style = {{display: "flex", flex: 1, alignItems: "center"}}>
+                                        <View style={ styles.cardInfo }>
+                                            <Row>
+                                                <Col>
+                                                    <Text style = {{fontSize: 15, marginTop: 2}}>App: </Text>
+                                                </Col>
+                                                <Right>
+                                                    <Col>
+                                                        <FontAwesomeIcon style={{color: "gray"}} icon='trash' size={ 15 }/>
+                                                    </Col>  
+                                                </Right>
+                                            </Row>
+                                        </View>
+                                    </CardItem>
+                                    <CardItem header bordered>
+                                            <View style={ styles.cardInfo }>
+                                                <Text style = {{fontSize: 15, color: "gray"}}>Estimado Willi, te agradeceríamos tu ayuda calificandonos en la tienda donde se descargó Tutos.</Text>
                                             </View>
                                     </CardItem>
                                 </Card>
