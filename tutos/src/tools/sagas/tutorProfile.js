@@ -60,7 +60,6 @@ function* updateTutorProfile(action){
         if (isAuth) {
             const id = yield select(selectors.getAuthUserID)
             const token = yield select(selectors.getToken)
-            console.log(action.payload)
             const response = yield call(
                 fetch,
                 `${API_BASE_URL}/tutores/${id}/`,
