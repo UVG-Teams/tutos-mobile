@@ -35,6 +35,7 @@ import { theme } from './../../layout/themes'
 import * as selectors from '../../tools/reducers'
 import * as actions from '../../tools/actions/tutorProfile'
 import * as actionsP from '../../tools/actions/profile'
+import * as actionsL from '../../tools/actions/languages'
 import profileImg from '../../assets/profile1.png'
 
 import EditProfile from './editProfile'
@@ -51,14 +52,16 @@ const style = StyleSheet.create({
 })
 
 
-const Profile = ({ navigation , profile , isFetchingProfile , tutorProfile , getTutorProfile , isFetchingTutorProfile , updateProfile } ) => {
+const Profile = ({ navigation, profile, isFetchingProfile, tutorProfile, getTutorProfile, isFetchingTutorProfile, updateProfile, getLanguage } ) => {
     const onLoad = () => {
+        getLanguage()
         if (profile.is_tutor){
             getTutorProfile()
         }
     }
     useEffect(onLoad , [])
     const [isUpdating, setisUpdating] = useState(false)
+    console.log('PROFILE IN PROFILE: ',profile)
     return(
     <ImageBackground
         style={ theme.background }
@@ -114,6 +117,12 @@ const Profile = ({ navigation , profile , isFetchingProfile , tutorProfile , get
                                 <FontAwesomeIcon style={theme.headerIcon} icon='envelope' size={25} />
                                 <Text style={{ fontSize: 15 }}>
                                     {'\t' + profile.email}
+                                </Text>
+                            </ListItem>
+                            <ListItem>
+                                <FontAwesomeIcon style={theme.headerIcon} icon='phone' size={25} />
+                                <Text style={{ fontSize: 15 }}>
+                                    {'\t' + profile.phone}
                                 </Text>
                             </ListItem>
                             <ListItem>
@@ -202,5 +211,8 @@ export default connect(
         updateProfile(){
             dispatch(actionsP.startEditProfile())
         },
+        getLanguage(){
+            dispatch(actionsL.startFetchLanguage())
+        }
     })
 )(Profile)
