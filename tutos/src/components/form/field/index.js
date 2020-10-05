@@ -36,6 +36,34 @@ export const RenderInput = ({ input, meta, type, placeholder, cavyName }) => {
     </View>
 )}
 
+export const RenderInputNumeric = ({ input, meta, type, placeholder, cavyName }) => {
+    const generateTestHook = useCavy();
+    const TestableTextInput = wrap(TextInput);
+
+    return (
+    <View style={{ width: '100%' }}>
+        {
+            meta.dirty && meta.error && (
+                <Text style={ theme.textError }>
+                    { meta.error }
+                </Text>
+            )
+        }
+        {/* <TestableTextInput */}
+        <TextInput
+            { ...input }
+            type={ type }
+            style={ styles.input }
+            placeholder={ placeholder }
+            autoCapitalize='none'
+            secureTextEntry={ type == 'password' }
+            keyboardType = 'numeric'
+            ref={generateTestHook(cavyName)}
+        />
+    </View>
+)}
+
+
 const styles = StyleSheet.create({
     input: {
         height: 40,
