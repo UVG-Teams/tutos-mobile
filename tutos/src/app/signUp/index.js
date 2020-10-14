@@ -44,7 +44,6 @@ const SignUp = ({ navigation, handleSubmit, isSigningUp }) => {
     // const date = new Date();
     // const setDate = (newDate) => {
     //     date = newDate
-    //     console.log(date)
     // };
     
     return (

@@ -13,6 +13,7 @@ import * as http from '../utils/http';
 import {
     API_BASE_URL,
 } from '../../settings';
+import { Body } from 'native-base';
 
 function* getProfile(action){
     try{
@@ -22,7 +23,7 @@ function* getProfile(action){
             const token = yield select(selectors.getToken)
             const response = yield call(
                 fetch,
-                `${API_BASE_URL}/users/${id}/detail/`,
+                `${API_BASE_URL}/userdetails/${id}/`,
                 {
                     method: 'GET',
                     headers : {
@@ -63,6 +64,24 @@ function* getProfile(action){
                     jsonLocation = yield locationResponse.json()
                     jsonResult.location = jsonLocation
                 }
+
+                const careerResponse = yield call(
+                    fetch,
+                    `${API_BASE_URL}/careers/${jsonResult.career}`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `JWT ${token}`,
+                        }
+                    }
+                )
+                if (http.isSuccessful(careerResponse.status)){
+                    jsonCareer = yield careerResponse.json()
+                    jsonResult.career = jsonCareer
+                }
+                
+                // FINAL ACTION PROFILE
                 yield put(actions.completeGetProfile(jsonResult))
             }else{
                 const { non_field_errors } = yield response.json()
@@ -85,13 +104,12 @@ function* updateProfile(action){
     try{
         const isAuth = yield select(selectors.isAuthenticated)
         if (isAuth) {
-            const id = yield select(selectors.getAuthUserID)
             const token = yield select(selectors.getToken)
             const response = yield call(
                 fetch,
-                `${API_BASE_URL}/users/${id}/`,
+                `${API_BASE_URL}/userdetails/edit/`,
                 {
-                    method: 'PATCH',
+                    method: 'POST',
                     body: JSON.stringify(action.payload),
                     headers: {
                         'Content-Type': 'application/json',
