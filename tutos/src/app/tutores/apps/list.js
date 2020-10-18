@@ -21,6 +21,7 @@ import {
     CardItem,
     Row,
     Col,
+    Grid,
 } from 'native-base'
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
@@ -61,33 +62,50 @@ const Tutores = ({
                         users.map(user => user.is_tutor && (
                             <Card key={ user.id }>
                                 <CardItem button onPress = {() => navigation.navigate("show", {id: user.id})}>
+                                    {/* <Body style={{ flex: 1, flexDirection: 'row'}}> */}
                                     <Body>
-                                        <Row>
-                                            <Col>
+                                        
+                                        <Grid>
+                                            <Col style={{ width: '20%' }}>
+                                                <FontAwesomeIcon icon='user-circle' size={ 50 } style={{ ...theme.sidebarIcon, margin: 10 }} />
+                                            </Col>
+
+                                            <Col style={{ flex: 1, alignSelf: 'center' }}>
                                                 <Text style={{ fontWeight: "bold" }}>
-                                                    {user.first_name}
-                                                    {" "} 
-                                                    {user.last_name}
+                                                    {user.first_name} {user.last_name}
                                                 </Text>
-                                            </Col>
-                                            <Col >
-                                                <Text style={{textAlign:'right'}}>
-                                                    <FontAwesomeIcon style={ theme.CardItem} icon='star' size={ 10 } />
-                                                    {selectors.getTutor(state, user.id).score}
-                                                </Text>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col>
                                                 <Text>
                                                     {selectors.getTutor(state, user.id).description}
                                                 </Text>
                                             </Col>
-                                            <Col>         
-                                                <Text style={{textAlign:'right'}}>
-                                                Q{selectors.getTutor(state, user.id).individual_price}
+
+                                            <Col style={{ flex: 0.3, alignSelf: 'center', width: '20%' }}>
+                                                <Text>
+                                                    <FontAwesomeIcon style={ theme.CardItem} icon='star' size={ 15 }/>
+                                                    {" "}{selectors.getTutor(state, user.id).score}
+                                                </Text>
+
+                                                <Text>
+                                                    Q{selectors.getTutor(state, user.id).individual_price}
                                                 </Text>   
                                             </Col>
+                                        </Grid>
+                                        <Row>
+                                            <Col>
+                                                
+                                            </Col>
+                                            <Right>
+                                                <Col style={{ flex: 1, flexDirection: 'row'}}>
+                                                    
+                                                </Col>
+                                            </Right>
+                                        </Row>
+                                        <Row>
+                                            <Right>
+                                                <Col>         
+                                                    
+                                                </Col>
+                                            </Right>
                                         </Row>
                                     </Body>
                                 </CardItem>
