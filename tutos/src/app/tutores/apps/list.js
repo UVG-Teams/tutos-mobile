@@ -90,23 +90,6 @@ const Tutores = ({
                                                 </Text>   
                                             </Col>
                                         </Grid>
-                                        <Row>
-                                            <Col>
-                                                
-                                            </Col>
-                                            <Right>
-                                                <Col style={{ flex: 1, flexDirection: 'row'}}>
-                                                    
-                                                </Col>
-                                            </Right>
-                                        </Row>
-                                        <Row>
-                                            <Right>
-                                                <Col>         
-                                                    
-                                                </Col>
-                                            </Right>
-                                        </Row>
                                     </Body>
                                 </CardItem>
                             </Card>
