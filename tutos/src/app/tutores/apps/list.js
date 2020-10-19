@@ -62,7 +62,6 @@ const Tutores = ({
                         users.map(user => user.is_tutor && (
                             <Card key={ user.id }>
                                 <CardItem button onPress = {() => navigation.navigate("show", {id: user.id})}>
-                                    {/* <Body style={{ flex: 1, flexDirection: 'row'}}> */}
                                     <Body>
                                         
                                         <Grid>
