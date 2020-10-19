@@ -35,6 +35,18 @@ import {
     watchFetchLanguages,
 } from './languages'
 
+import {
+    watchFetchCareers
+} from './careers'
+
+import {
+    watchFetchLocation
+} from './location'
+
+import {
+    watchFetchInstitution
+} from './institution'
+
 function* mainSaga() {
     yield all([
         fork(watchLoginStarted),
@@ -50,6 +62,9 @@ function* mainSaga() {
         fork(watchUpdateTutorProfile),
         fork(watchFetchTutores),
         fork(watchFetchLanguages),
+        fork(watchFetchCareers),
+        fork(watchFetchLocation ),
+        fork(watchFetchInstitution),
     ])
 }
 

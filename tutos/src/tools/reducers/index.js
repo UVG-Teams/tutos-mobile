@@ -9,7 +9,10 @@ import users, * as usersSelectors from './users';
 import signUp, * as signUpSelectors from './signUp';
 import tutorProfile , * as tutorProfileSelectors from './tutorProfile';
 import tutores, * as tutoresSelectors from './tutores';
-import languages , * as languagesSelectors from './languages'
+import languages , * as languagesSelectors from './languages';
+import careers , * as careersSelectors from './careers';
+import institutions, * as institutionsSelectors from './institution';
+import locations, * as locationsSelectors from './locations';
 
 const reducer = combineReducers({
     auth,
@@ -21,6 +24,9 @@ const reducer = combineReducers({
     tutores,
     tutorProfile,
     languages,
+    careers,
+    institutions,
+    locations,
     form: formReducer,
 })
 
@@ -72,3 +78,14 @@ export const getLanguagesById = (state , index) => languagesSelectors.getLanguag
 export const getIsFetchingLanguages = (state) => languagesSelectors.getIsFetchingLanguages(state.languages);
 export const getError = (state) => languagesSelectors.getError(state.languages);
 
+export const getCareers = (state) => careersSelectors.getCareers(state.careers);
+export const getCareerIsFetching = (state) => careersSelectors.getCareersIsFetching(state.careers);
+export const getCareerError = (state) => careersSelectors.getCareersError(state.careers);
+
+export const getInstitutions = (state) => institutionsSelectors.getInstitutions(state.institutions);
+export const getInstitutionIsFetching = (state) => institutionsSelectors.getInstitutionsIsFetching(state.institutions);
+export const getInstitutionError = (state) => institutionsSelectors.getInstitutionsError(state.institutions);
+
+export const getLocations = (state) => locationsSelectors.getLocations(state.locations);
+export const getLocationIsFetching = (state) => locationsSelectors.getLocationsIsFetching(state.locations);
+export const getLocationError = (state) => locationsSelectors.getLocationsError(state.locations);

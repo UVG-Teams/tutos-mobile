@@ -36,6 +36,9 @@ import * as selectors from '../../tools/reducers'
 import * as actions from '../../tools/actions/tutorProfile'
 import * as actionsP from '../../tools/actions/profile'
 import * as actionsL from '../../tools/actions/languages'
+import * as actionsLocations from '../../tools/actions/location'
+import * as actionsIns from '../../tools/actions/institution'
+import * as actionsCareers from '../../tools/actions/careers'
 import profileImg from '../../assets/profile1.png'
 
 import EditProfile from './editProfile'
@@ -52,16 +55,30 @@ const style = StyleSheet.create({
 })
 
 
-const Profile = ({ navigation, profile, isFetchingProfile, tutorProfile, getTutorProfile, isFetchingTutorProfile, updateProfile, getLanguage } ) => {
+const Profile = ({ 
+        navigation, 
+        profile, 
+        isFetchingProfile, 
+        tutorProfile, 
+        getTutorProfile, 
+        isFetchingTutorProfile, 
+        updateProfile, 
+        getLanguage , 
+        getLocations,
+        getInstitutions,
+        getCareers,
+}) => {
     const onLoad = () => {
         getLanguage()
+        getLocations()
+        getInstitutions()
+        getCareers()
         if (profile.is_tutor){
             getTutorProfile()
         }
     }
     useEffect(onLoad , [])
     const [isUpdating, setisUpdating] = useState(false)
-    console.log('PROFILE IN PROFILE: ',profile)
     return(
     <ImageBackground
         style={ theme.background }
@@ -137,6 +154,12 @@ const Profile = ({ navigation, profile, isFetchingProfile, tutorProfile, getTuto
                                     {'\t' + profile && profile.institution && profile.institution.name}
                                 </Text>
                             </ListItem>
+                            <ListItem>
+                                <FontAwesomeIcon style={theme.headerIcon} icon='graduation-cap' size={25} />
+                                <Text style={{ fontSize: 15 }}>
+                                    {'\t' + profile && profile.career && profile.career.name}
+                                </Text>
+                            </ListItem>
                         </Content>
                         }
                     <Text></Text>
@@ -188,7 +211,7 @@ const Profile = ({ navigation, profile, isFetchingProfile, tutorProfile, getTuto
             </Content>
             ) : (
                 <EditProfile 
-                end={setisUpdating}
+                    end={setisUpdating}
                 />
             )}
         </Container>
@@ -213,6 +236,15 @@ export default connect(
         },
         getLanguage(){
             dispatch(actionsL.startFetchLanguage())
+        },
+        getLocations() {
+            dispatch(actionsLocations.startFetchLocations())
+        },
+        getInstitutions() {
+            dispatch(actionsIns.startFetchInstitutions())
+        },
+        getCareers(){
+            dispatch(actionsCareers.startFetchCareers())
         }
     })
 )(Profile)
