@@ -28,6 +28,7 @@ import { connect } from 'react-redux'
 import { Col, Row, Grid } from 'react-native-easy-grid'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import dayjs from 'dayjs'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 import { theme } from './../../../layout/themes'
 
@@ -92,9 +93,7 @@ const TutorProfile = ({ navigation , tutor, user, onLoad }) => {
 
                         <Row style={{ marginTop: 8 }}>
                             <Text style={{ fontSize: 15}}>
-                                {/* {tutor.description} */}
-                                Ea anim amet sunt qui nostrud laboris laboris eiusmod minim do commodo mollit. Laborum duis magna minim est veniam cupidatat culpa in nulla anim.
-
+                                {tutor.description}
                             </Text>
                         </Row>
                     </Col>
@@ -102,17 +101,56 @@ const TutorProfile = ({ navigation , tutor, user, onLoad }) => {
 
                 <Content style={ theme.content }>
                     <Grid>
-                        <ListItem >
-                            <FontAwesomeIcon style={ theme.headerIcon } icon='envelope' size={ 25 }/>
-                            <Text style={{ fontSize: 15 , marginLeft: 8 }}>Correo</Text>
+                        <List style={{width: '100%'}}>
+                            <ListItem>
 
-                            <Text style={{ fontSize: 15 , marginLeft: 8, textAlign: 'right' }}>
-                                {user.email}
-                            </Text>
-                        </ListItem>
+                                <View style={{flex:1, flexDirection: 'row'}}>
+                                    <FontAwesomeIcon style={ theme.headerIcon } icon='envelope' size={ 25 }/>
+                                    <Text style={{ fontSize: 15 , marginLeft: 8, flex: 1, alignSelf: 'center' }}>
+                                        Correo
+                                    </Text>
+                                </View>
+
+                                <Text style={{ fontSize: 15 , marginLeft: 8 }}>
+                                    {user.email}
+                                </Text>
+                            </ListItem>
+
+                            {/* Location */}
+                            {/* <ListItem>
+                            </ListItem> */}
+
+                            <ListItem>
+                                <View style={{flex:1, flexDirection: 'row'}}>
+                                    <FontAwesomeIcon style={ theme.headerIcon } icon='graduation-cap' size={ 25 }/>
+                                    <Text style={{ fontSize: 15 , marginLeft: 8, flex: 1, alignSelf: 'center' }}>
+                                        Institución
+                                    </Text>
+                                </View>
+
+                                <Text style={{ fontSize: 15}}>
+                                    {user && user.institution && user.institution}
+                                </Text>
+                            </ListItem>
+
+                            <ListItem>
+                                <View style={{flex:1, flexDirection: 'row'}}>
+                                    <FontAwesomeIcon style={ theme.headerIcon } icon='clock' size={ 25 }/>
+                                    <Text style={{ fontSize: 15 , marginLeft: 8, flex: 1, alignSelf: 'center' }}> Horas impartidas </Text>
+                                </View>
+
+                                <Text style={{ fontSize: 15, marginLeft: 8 }}>
+                                    {tutor.hours_done}
+                                </Text>
+                            </ListItem>
+                            
+                        </List>
+
                     </Grid>
                 </Content>
             </Content>
+
+
             <Content style={ theme.content }>
                 <View>
                     <Grid>
@@ -127,29 +165,20 @@ const TutorProfile = ({ navigation , tutor, user, onLoad }) => {
                             <Text style={{ fontSize: 20, textAlign: "center", flex: 1, marginBottom: 15 }}>En tutos desde { dayjs(user.date_joined).format('DD/MM/YYYY') }</Text>
                         </Row>
                     </Grid>
-
-                    <Content>
-
-                        <ListItem>
-                            <FontAwesomeIcon style={ theme.headerIcon } icon='clock' size={ 25 }/>
-                            <Text style={{ fontSize: 15, marginLeft: 8 }}>
-                                {`Horas realizadas: ${tutor.hours_done}` }
-                            </Text>
-                        </ListItem>
-                        <ListItem>
-                            <FontAwesomeIcon style={ theme.headerIcon } icon='graduation-cap' size={ 25 }/>
-                            <Text style={{ fontSize: 15, marginLeft: 8 }}>
-                                {user && user.institution && user.institution}
-                            </Text>
-                        </ListItem>
-                    </Content>
-                    <Card>
+                    
+                    <TouchableOpacity
+                        style={ style.buttonRequest }
+                        // onPress={ navigation.navigate('conversations', { tutor_id: tutor.id })}
+                        >
+                        <Text style={ style.txtButtonRquest}> Solicitar Tutoria </Text>
+                    </TouchableOpacity>
+                    {/* <Card>
                         <CardItem button onPress={() => navigation.navigate('conversations', { tutor_id: tutor.id })}>
                             <Text>
                                 Solicitar Tutoria
                             </Text>
                         </CardItem>
-                    </Card>
+                    </Card> */}
                 </View>
             </Content>
         </Container>
@@ -178,5 +207,21 @@ const style = StyleSheet.create({
     button:{
         color: 'red',
         backgroundColor: '#d1dfed'
-    }
+    },
+    buttonRequest: {
+        width: '100%',
+        marginTop: 20,
+        borderRadius: 5,
+        backgroundColor: '#146dc7',
+        paddingLeft: '22%',
+        paddingRight: '22%',
+        paddingTop: 7,
+        paddingBottom: 7,
+    },
+    txtButtonRquest: {
+        width: '100%',
+        color: 'white',
+        fontSize: 15,
+        textAlign: 'center'
+    },
 })
