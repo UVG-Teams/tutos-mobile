@@ -9,7 +9,7 @@ import {
     StyleSheet
 } from 'react-native'
 
-import { 
+import {
     Container,
     Content,
     Button,
@@ -21,13 +21,14 @@ import {
     Card,
     CardItem,
     Separator,
-    List, 
+    List,
     ListItem,
 } from 'native-base'
 import { connect } from 'react-redux'
 import { Col, Row, Grid } from 'react-native-easy-grid'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import dayjs from 'dayjs'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 import { theme } from './../../../layout/themes'
 
@@ -45,101 +46,139 @@ const TutorProfile = ({ navigation , tutor, user, onLoad }) => {
     >
         <Container style={{ backgroundColor: 'transparent' }}>
             <Header style={ theme.header }>
-                <Left>
+                <Left style={{ width: '20%'}}>
                     <Button transparent
                         onPress={ () => navigation.openDrawer() }
                     >
                         <FontAwesomeIcon style={ theme.headerIcon } icon='bars' size={ 25 }/>
                     </Button>
                 </Left>
-                <Body></Body>
+                <Body>
+                    <Text style={{ fontSize: 25}}>
+                    {user.username}
+                    </Text>
+                </Body>
                 <Right></Right>
             </Header>
+            <Content>
+                <Grid style={{ backgroundColor: 'white', paddingTop: 20, paddingBottom: 20 }}>
+                    
+                    <Col style={{ flex: 0.5, alignSelf: 'center', width: '35%' }}>
+                        {/* <Image style={ style.img } source =  { profileImg }/> */}
+                        <FontAwesomeIcon icon='user-circle' size={ 110 } style={{ ...theme.sidebarIcon, margin: 10 }} />
+
+                        <Row style = {{paddingLeft: 25}}>
+                            <FontAwesomeIcon style={ theme.CardItem} icon='star' size={ 20 }/>
+                            <Text style={{ fontSize: 18 }}>
+                                {" "}
+                                {tutor.score}
+                            </Text>
+                        </Row>
+                    </Col>
+
+                    <Col>
+                        <Row>
+
+                            <Text style={{ flex: 1, alignSelf: 'center', fontSize: 16 }}>
+                                <FontAwesomeIcon style={ theme.headerIcon } icon='user' size={ 25 }/>
+                                {" "}Q{tutor.individual_price}<Text style={{ fontSize: 14 }}>/hora</Text>
+                            </Text>
+
+                            
+                            <Text style={{ flex: 1, alignSelf: 'center', fontSize: 16 }}>
+                                <FontAwesomeIcon style={ theme.headerIcon } icon='users' size={ 30 }/>
+                                {" "}Q{tutor.grupal_price} <Text style={{ fontSize: 14 }}>/hora</Text>
+                            </Text>
+                        </Row>
+
+                        <Row style={{ marginTop: 8 }}>
+                            <Text style={{ fontSize: 15}}>
+                                {tutor.description}
+                            </Text>
+                        </Row>
+                    </Col>
+                </Grid>
+
+                <Content style={ theme.content }>
+                    <Grid>
+                        <List style={{width: '100%'}}>
+                            <ListItem>
+
+                                <View style={{flex:1, flexDirection: 'row'}}>
+                                    <FontAwesomeIcon style={ theme.headerIcon } icon='envelope' size={ 25 }/>
+                                    <Text style={{ fontSize: 15 , marginLeft: 8, flex: 1, alignSelf: 'center' }}>
+                                        Correo
+                                    </Text>
+                                </View>
+
+                                <Text style={{ fontSize: 15 , marginLeft: 8 }}>
+                                    {user.email}
+                                </Text>
+                            </ListItem>
+
+                            {/* Location */}
+                            {/* <ListItem>
+                            </ListItem> */}
+
+                            <ListItem>
+                                <View style={{flex:1, flexDirection: 'row'}}>
+                                    <FontAwesomeIcon style={ theme.headerIcon } icon='graduation-cap' size={ 25 }/>
+                                    <Text style={{ fontSize: 15 , marginLeft: 8, flex: 1, alignSelf: 'center' }}>
+                                        Institución
+                                    </Text>
+                                </View>
+
+                                <Text style={{ fontSize: 15}}>
+                                    {user && user.institution && user.institution}
+                                </Text>
+                            </ListItem>
+
+                            <ListItem>
+                                <View style={{flex:1, flexDirection: 'row'}}>
+                                    <FontAwesomeIcon style={ theme.headerIcon } icon='clock' size={ 25 }/>
+                                    <Text style={{ fontSize: 15 , marginLeft: 8, flex: 1, alignSelf: 'center' }}> Horas impartidas </Text>
+                                </View>
+
+                                <Text style={{ fontSize: 15, marginLeft: 8 }}>
+                                    {tutor.hours_done}
+                                </Text>
+                            </ListItem>
+                            
+                        </List>
+
+                    </Grid>
+                </Content>
+            </Content>
+
+
             <Content style={ theme.content }>
                 <View>
                     <Grid>
-                        <Row style={{ justifyContent: "center" }}>
-                            <Image style={ style.img } source =  { profileImg }/>
-                        </Row>
-                        <Row>
+
+                        {/* <Row>
                             <Text style={{ fontSize: 35, textAlign: "center", flex: 1 }}>{user.first_name}</Text>
                         </Row>
                         <Row>
                             <Text style={{ fontSize: 35, textAlign: "center", flex: 1 }}>{user.last_name}</Text>
-                        </Row>
+                        </Row> */}
                         <Row>
                             <Text style={{ fontSize: 20, textAlign: "center", flex: 1, marginBottom: 15 }}>En tutos desde { dayjs(user.date_joined).format('DD/MM/YYYY') }</Text>
                         </Row>
-                        <Row>
-                            <FontAwesomeIcon style={ theme.headerIcon } icon='at' size={ 20 }/>
-                            <Col>
-                                <Text style={{ fontSize: 20 }}>
-                                    {user.username}
-                                </Text>
-                            </Col>
-                            <FontAwesomeIcon style={ theme.headerIcon } icon='star' size={ 25 }/>
-                            <Text style={{ fontSize: 20 }}>
-                                {tutor.score}
-                            </Text>
-                        </Row>
                     </Grid>
-                    <Content>
-                        <Text style={{ fontSize: 15, marginTop: 15 }}>
-                             {`Descripcion: ${ tutor.description }`}
-                        </Text>
-                    </Content>
-                    <Content>
-                        <ListItem>
-                            <FontAwesomeIcon style={ theme.headerIcon } icon='envelope' size={ 25 }/>
-                            <Text style={{ fontSize: 15 , marginLeft: 8 }}>
-                                {user.email}
-                            </Text>
-                        </ListItem>
-                        <ListItem>
-                            <FontAwesomeIcon style={ theme.headerIcon } icon='clock' size={ 25 }/>
-                            <Text style={{ fontSize: 15, marginLeft: 8 }}>
-                                {`Horas realizadas: ${tutor.hours_done}` }
-                            </Text>
-                        </ListItem>
-                        <ListItem>
-                            <FontAwesomeIcon style={ theme.headerIcon } icon='graduation-cap' size={ 25 }/>
-                            <Text style={{ fontSize: 15, marginLeft: 8 }}>
-                                {user && user.institution && user.institution}
-                            </Text>
-                        </ListItem>
-                        <ListItem>
-                            <Text style={{ fontSize: 15 }}>Precios:</Text>
-                        </ListItem>
-                        <ListItem style={{ marginBottom: 20, marginTop: 10 }}>
-                            <Col>
-                                <Row style={{ justifyContent: "center" }}>
-                                    <FontAwesomeIcon style={ theme.headerIcon } icon='user' size={ 25 }/>
-                                </Row>
-                                <Row>
-                                    <Text style={{ fontSize: 15, textAlign: "center", flex: 1 }}>
-                                        Q{tutor.individual_price}
-                                    </Text>
-                                </Row>
-                            </Col>
-                            <Col>
-                                <Row style={{ justifyContent: "center" }}>
-                                    <FontAwesomeIcon style={ theme.headerIcon } icon='users' size={ 25 }/>
-                                </Row>
-                                <Row>
-                                    <Text style={{ fontSize: 15 , textAlign: "center", flex: 1 }}>
-                                        Q{tutor.grupal_price}
-                                    </Text>
-                                </Row>
-                            </Col>                            
-                        </ListItem>
-                    </Content>
-                    <Card>
+                    
+                    <TouchableOpacity
+                        style={ style.buttonRequest }
+                        // onPress={ navigation.navigate('conversations', { tutor_id: tutor.id })}
+                        >
+                        <Text style={ style.txtButtonRquest}> Solicitar Tutoria </Text>
+                    </TouchableOpacity>
+                    {/* <Card>
                         <CardItem button onPress={() => navigation.navigate('conversations', { tutor_id: tutor.id })}>
                             <Text>
                                 Solicitar Tutoria
                             </Text>
                         </CardItem>
-                    </Card>
+                    </Card> */}
                 </View>
             </Content>
         </Container>
@@ -168,5 +207,21 @@ const style = StyleSheet.create({
     button:{
         color: 'red',
         backgroundColor: '#d1dfed'
-    }
+    },
+    buttonRequest: {
+        width: '100%',
+        marginTop: 20,
+        borderRadius: 5,
+        backgroundColor: '#146dc7',
+        paddingLeft: '22%',
+        paddingRight: '22%',
+        paddingTop: 7,
+        paddingBottom: 7,
+    },
+    txtButtonRquest: {
+        width: '100%',
+        color: 'white',
+        fontSize: 15,
+        textAlign: 'center'
+    },
 })

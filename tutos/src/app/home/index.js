@@ -38,11 +38,6 @@ import { connect } from 'react-redux'
 import * as selectors from '../../tools/reducers';
 import * as actions from '../../tools/actions/tutorias'
 import * as actionsProfile from '../../tools/actions/profile'
-import { tutoria } from '../../tools/schemas/tutorias'
-import profileReducer from '../../tools/reducers/profile'
-
-import Profile from '../profile'
-
 
 
 const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
