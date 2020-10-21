@@ -13,6 +13,7 @@ import languages , * as languagesSelectors from './languages';
 import careers , * as careersSelectors from './careers';
 import institutions, * as institutionsSelectors from './institution';
 import locations, * as locationsSelectors from './locations';
+import notifications, * as notificationsSelectors from './notifications';
 
 const reducer = combineReducers({
     auth,
@@ -27,6 +28,7 @@ const reducer = combineReducers({
     careers,
     institutions,
     locations,
+    notifications,
     form: formReducer,
 })
 
@@ -89,3 +91,8 @@ export const getInstitutionError = (state) => institutionsSelectors.getInstituti
 export const getLocations = (state) => locationsSelectors.getLocations(state.locations);
 export const getLocationIsFetching = (state) => locationsSelectors.getLocationsIsFetching(state.locations);
 export const getLocationError = (state) => locationsSelectors.getLocationsError(state.locations);
+
+export const getNotification = (state, id) => notificationsSelectors.getNotification(state.notifications, id);
+export const getNotifications = state => notificationsSelectors.getNotifications(state.notifications);
+export const isFetchingNotifications = state => notificationsSelectors.isFetchingNotifications(state.notifications);
+export const getNotificationError = state => notificationsSelectors.getNotificationError(state.notifications);

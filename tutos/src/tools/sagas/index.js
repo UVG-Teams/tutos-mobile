@@ -47,6 +47,10 @@ import {
     watchFetchInstitution
 } from './institution'
 
+import {
+    watchGetNotifications
+} from './notifications'
+
 function* mainSaga() {
     yield all([
         fork(watchLoginStarted),
@@ -65,6 +69,7 @@ function* mainSaga() {
         fork(watchFetchCareers),
         fork(watchFetchLocation ),
         fork(watchFetchInstitution),
+        fork(watchGetNotifications),
     ])
 }
 
