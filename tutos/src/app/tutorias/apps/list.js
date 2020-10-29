@@ -1,11 +1,11 @@
-import React, { Component, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
+import dayjs from "dayjs"
 import {
-    ScrollView,
     Text,
-    TextInput,
     View,
     ImageBackground,
+    StyleSheet,
 } from 'react-native'
 
 import {
@@ -19,8 +19,11 @@ import {
     Title,
     Card,
     CardItem,
+    Grid,
     Row,
     Col,
+    List,
+    ListItem,
 } from 'native-base'
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
@@ -30,71 +33,79 @@ import { theme } from '../../../layout/themes'
 import * as selectors from '../../../tools/reducers'
 import * as actions from '../../../tools/actions/tutorias'
 
-const List = ({ 
+const ListApp = ({
     navigation,
     tutorias,
     isLoading,
     onLoad,
 }) => {
     useEffect(onLoad, [])
-    return(
-    <ImageBackground
-        style={ theme.background }
-    >
-        <Container style={{ backgroundColor: 'transparent'}}>
-            <Header style={ theme.header }>
-                <Left>
-                    <Button transparent
-                        onPress={ () => navigation.openDrawer() }
-                    >
-                        <FontAwesomeIcon style={ theme.headerIcon } icon='bars' size={ 25 } />
-                    </Button>
-                </Left>
-                <Body></Body>
-            </Header>
-            <Content style={ theme.content }>
-                <View>
-                    <Text style={{ fontSize: 35 }}>Tutorias</Text>   
-                    {
-                        tutorias.map(tutoria => (
-                            <Card key={ tutoria.id }>
-                                <CardItem button onPress = {() => navigation.navigate("show", { id: tutoria.id })}>
-                                    <Body>
-                                        <Row>
-                                            <Col>
-                                                <Text style={{ fontWeight: "bold" }}>
-                                                    {tutoria.total_price}
-                                                </Text>
-                                            </Col>
-                                            <Col >
-                                                {/* <Text style={{textAlign:'right'}}>
-                                                    <FontAwesomeIcon style={ theme.CardItem} icon='star' size={ 10 } />
-                                                    {selectors.getTutor(state, user.id).score}
-                                                </Text> */}
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col>
-                                                {/* <Text>
-                                                    {selectors.getTutor(state, user.id).description}
-                                                </Text> */}
-                                            </Col>
-                                            <Col>         
-                                                {/* <Text style={{textAlign:'right'}}>
-                                                Q{selectors.getTutor(state, user.id).individual_price}
-                                                </Text>    */}
-                                            </Col>
-                                        </Row>
-                                    </Body>
-                                </CardItem>
-                            </Card>
-                        ))      
-                    }
-                </View>
-            </Content>
-        </Container>
-    </ImageBackground>
-)}
+    return (
+        <ImageBackground
+            style={ theme.background }
+        >
+            <Container style={{ backgroundColor: 'transparent'}}>
+                <Header style={ theme.header }>
+                    <Left>
+                        <Button transparent
+                            onPress={ () => navigation.openDrawer() }
+                        >
+                            <FontAwesomeIcon style={ theme.headerIcon } icon='bars' size={ 25 } />
+                        </Button>
+                    </Left>
+                    <Body></Body>
+                </Header>
+                <Content style={ theme.content }>
+                    <View>
+                        <Text style={{ fontSize: 35 }}>Tutorias</Text>
+                        <List>
+                            {
+                                tutorias.length == 0 && <Text>{'No hay'}</Text>
+                            }
+                            {
+                                tutorias.length > 0 && tutorias.map(tutoria =>
+                                    <ListItem key={ tutoria.id }>
+                                        <Card style={ styles.cardTutoria }>
+                                            <CardItem
+                                                button
+                                                onPress={
+                                                    () => navigation.navigate(
+                                                        'show', {
+                                                            id: tutoria.id
+                                                        }
+                                                    )
+                                                }
+                                            >
+                                                <Grid>
+                                                    <Col>
+                                                        <Row>
+                                                            <Col>
+                                                                <Text style={ styles.tutoriaImportant }>{ dayjs(tutoria.datetime).format('HH:mm') }</Text>
+                                                            </Col>
+                                                            <Col>
+                                                                <Text style={ styles.tutoriaImportant }>{ 'Q.' + tutoria.total_price }</Text>
+                                                            </Col>
+                                                            <Col>
+                                                                <Text style={ styles.tutoriaImportant }>{ tutoria.status.name }</Text>
+                                                            </Col>
+                                                        </Row>
+                                                        <Row><Text style={ styles.tutoriaTitle }>{ 'Tutoria de ' + tutoria.course.name }</Text></Row>
+                                                        <Row><Text style={ styles.tutoriaParticipant }>{ 'Tutor ' + tutoria.tutor.first_name + ' ' + tutoria.tutor.last_name }</Text></Row>
+                                                        <Row><Text style={ styles.tutoriaParticipant }>{ 'Tutorado ' + tutoria.tutorado.first_name + ' ' + tutoria.tutorado.last_name }</Text></Row>
+                                                    </Col>
+                                                </Grid>
+                                            </CardItem>
+                                        </Card>
+                                    </ListItem>
+                                )
+                            }
+                        </List>
+                    </View>
+                </Content>
+            </Container>
+        </ImageBackground>
+    )
+}
 
 export default connect(
     state => ({
@@ -106,4 +117,32 @@ export default connect(
             dispatch(actions.startGetTutorias());
         },
     }),
-)(List);
+)(ListApp);
+
+const styles = StyleSheet.create({
+    title: {
+        fontWeight: 'bold',
+        fontSize: 25,
+        textAlign: 'center',
+        margin: 2,
+        flex: 1,
+    },
+    tutoriaImportant: {
+        fontWeight: 'bold',
+        fontSize: 14,
+        marginBottom: 15,
+    },
+    tutoriaTitle: {
+        fontWeight: 'bold',
+        fontSize: 16,
+    },
+    tutoriaParticipant: {
+        fontSize: 12,
+    },
+    contentView: {
+        marginTop: 20
+    },
+    cardTutoria: {
+        flex: 1,
+    }
+})
