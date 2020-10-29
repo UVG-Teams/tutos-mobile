@@ -32,11 +32,9 @@ import dayjs from 'dayjs'
 import { theme } from './../../../layout/themes'
 
 import * as selectors from '../../../tools/reducers'
-import * as actions from '../../../tools/actions/tutorias'
 
 
-const Show = ({ navigation, tutoria, onLoad} ) => {
-    // useEffect(onLoad , [])
+const Show = ({ navigation, tutoria, onLoad }) => {
     return (
         <ImageBackground
             style={ theme.background }
@@ -54,8 +52,59 @@ const Show = ({ navigation, tutoria, onLoad} ) => {
                     <Right></Right>
                 </Header>
                 <Content style={ theme.content }>
-                    <View>
-                    </View>
+                    <Card style={{ flex:1 }}>
+                        <CardItem header bordered>
+                            <Row><Text style={ styles.title }>{ 'Tutoria de ' + tutoria.course.name }</Text></Row>
+                        </CardItem>
+                        <CardItem>
+                            <Grid>
+                                <Col>
+                                    <Row>
+                                        <Col>
+                                            <Text style={ styles.tutoriaImportant }>{ dayjs(tutoria.datetime).format('DD/MM/YYYY HH:mm') }</Text>
+                                        </Col>
+                                        <Col>
+                                            <Text style={ styles.tutoriaImportant }>{ tutoria.status.name }</Text>
+                                        </Col>
+                                    </Row>
+                                </Col>
+                            </Grid>
+                        </CardItem>
+                        <CardItem>
+                            <Grid>
+                                <Row>
+                                    <Col>
+                                        <Row><Text style={ styles.label }>{'Tutor'}</Text></Row>
+                                        <Row><Text style={ styles.label }>{'Tutorado'}</Text></Row>
+                                    </Col>
+                                    <Col>
+                                        <Row><Text style={ styles.tutoriaParticipant }>{ tutoria.tutor.first_name + ' ' + tutoria.tutor.last_name }</Text></Row>
+                                        <Row><Text style={ styles.tutoriaParticipant }>{ tutoria.tutorado.first_name + ' ' + tutoria.tutorado.last_name }</Text></Row>
+                                    </Col>
+                                </Row>
+                            </Grid>
+                        </CardItem>
+                        <CardItem>
+                            <Grid>
+                                <Row>
+                                    <Col>
+                                        <Row><Text style={ styles.label }>{'Precio'}</Text></Row>
+                                    </Col>
+                                    <Col>
+                                        <Text style={ styles.tutoriaImportant }>{ 'Q.' + tutoria.total_price }</Text>
+                                    </Col>
+                                </Row>
+                            </Grid>
+                        </CardItem>
+                        <CardItem>
+                            <Grid>
+                                <Col>
+                                    <Row><Text style={ styles.label }>{'Descripcion'}</Text></Row>
+                                    <Row><Text style={ styles.text }>{ tutoria.description }</Text></Row>
+                                </Col>
+                            </Grid>
+                        </CardItem>
+                    </Card>
                 </Content>
             </Container>
         </ImageBackground>
@@ -66,19 +115,30 @@ export default connect(
     (state, { route }) => ({
         tutoria: selectors.getTutoria(state, route.params.id),
     }),
-    dispatch => ({
-        onLoad() {
-        },
-    })
+    dispatch => ({})
 )(Show)
 
-const style = StyleSheet.create({
-    img:{
-        width: 150,
-        height: 150,
+const styles = StyleSheet.create({
+    title: {
+        fontWeight: 'bold',
+        fontSize: 20,
     },
-    button:{
-        color: 'red',
-        backgroundColor: '#d1dfed'
-    }
+    label: {
+        fontWeight: 'bold',
+        fontSize: 15,
+    },
+    text: {
+        fontSize: 17,
+    },
+    cardHeader: {
+        fontWeight: 'bold',
+    },
+    tutoriaImportant: {
+        fontWeight: 'bold',
+        fontSize: 16,
+        marginBottom: 15,
+    },
+    tutoriaParticipant: {
+        fontSize: 15,
+    },
 })
