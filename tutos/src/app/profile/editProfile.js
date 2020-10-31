@@ -96,6 +96,7 @@ const EditProfile = ({
       'location': location.id ? location.id : location,
       'institution': institution.id ? institution.id : institution,
       'career': career.id ? career.id : career,
+      'password': password0===password1 ? password0 : '',
     })
     if (profile.is_tutor){
       updateTutorProfile({
