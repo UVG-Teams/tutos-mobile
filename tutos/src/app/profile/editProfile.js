@@ -2,7 +2,8 @@ import React, { useState , useEffect } from 'react'
 import { connect } from 'react-redux'
 import {
 	Text,
-	ScrollView
+	ScrollView,
+	StyleSheet
 } from 'react-native'
 
 import * as selectors from '../../tools/reducers'
@@ -17,11 +18,10 @@ import {
 	Label,
 	Picker,
 	Icon,
-	Separator
+	Separator,
 } from 'native-base'
 
-// import CheckBox from '@react-native-community/checkbox';
-import { CheckBox } from 'react-native-elements' // https://reactnativeelements.com/docs/checkbox/
+import { CheckBox } from 'react-native-elements'
 import { find } from 'lodash'
 
 const EditProfile = ({ 
@@ -112,34 +112,39 @@ const EditProfile = ({
 	return(
 		<ScrollView>
 			<Form>
-				<Text style={{ fontSize: 35 }}> Editar Perfil  </Text>
+				{/* <Text style={{ fontSize: 35 }}> Editar Perfil  </Text> */}
 				<Separator>
 					<Text style={{ fontSize: 25 }}>
 						Información general
 					</Text>
 				</Separator>
-				<Item floatingLabel>
-					<Label>Correo</Label>
-			
+				<Item style={style.item}>
+					<Label style={style.label}>Correo</Label>
 					<Input
+						style={style.input}
 						value={correo}
 						onChangeText={text => setCorreo(text)}
 					/>
 				</Item>
-				<Item floatingLabel>
-					<Label>No. de teléfono</Label>
+				<Item style={style.item}>
+					<Label style={style.label}>No. de teléfono</Label>
 					<Input
+						style={style.input}
 						value={ phone}
 						onChangeText={text => setPhone(text)}
 						keyboardType='numeric'
 					/>
 				</Item>
 				<Item>
-					<Label>Es tutor: </Label>
-					<CheckBox
+					<Label style={style.label}>Es tutor: </Label>
+					{/* <CheckBox
 						disabled={false}
 						value={isTutor}
-						onValueChange={(newValue) => setIsTutor(newValue)}
+						onChangeValue={(newValue) => setIsTutor(newValue)}
+					/> */}
+					<CheckBox
+						checked={isTutor}
+						onPress={() => setIsTutor(!isTutor)}
 					/>
 				</Item>
 				{profile.is_tutor ? (
@@ -149,23 +154,26 @@ const EditProfile = ({
 								Información de Tutor
 							</Text>
 						</Separator>
-						<Item floatingLabel>
-							<Label>Descripción</Label>
+						<Item style={style.item}>
+							<Label style={style.label}>Descripción</Label>
 							<Input
+								style={style.input}
 								value={descripcion}
 								onChangeText={text => setDescripcion(text)}
 							/>
 						</Item>
-						<Item floatingLabel>
-							<Label>Precio Individual</Label>
+						<Item style={style.item}>
+							<Label style={style.label}>Precio Individual</Label>
 							<Input
+								style={style.input}
 								value={precioIndividual}
 								onChangeText={text => setPrecioIndividual(text)}
 							/>
 						</Item>
-						<Item floatingLabel>
-							<Label>Precio Grupal</Label>
+						<Item style={style.item}>
+							<Label style={style.label}>Precio Grupal</Label>
 							<Input
+								style={style.input}
 								value={precioGrupal}
 								onChangeText={text => setPrecioGrupal(text)}
 							/>
@@ -177,31 +185,33 @@ const EditProfile = ({
 						Información Personal
 					</Text>
 				</Separator>
-				<Item floatingLabel>
-					<Label>Nueva contraseña</Label>
+				<Item style={style.item}>
+					<Label style={style.label}>Nueva contraseña</Label>
 					<Input
+						style={style.input}
 						value={password0}
 						placeholder="Dejar el campo en blanco para conservar la contraseña actual"
 						onChangeText={text => setPassword0(text)}
 					/>
 				</Item>
-				<Item floatingLabel>
-					<Label>Confirmar Contraseña</Label>
+				<Item style={style.item}>
+					<Label style={style.label}>Confirmar Contraseña</Label>
 					<Input
+						style={style.input}
 						value={password1}
 						placeholder="Dejar el campo en blanco para conservar la contraseña actual"
 						onChangeText={text => setPassword1(text)}
 					/>
 				</Item>
-				<Item>
-					<Label>Cambiar tu idioma</Label>
+				<Item style={style.itemPicker}>
+					<Label style={style.label}>Cambiar tu idioma</Label>	
 					<Picker
+						style={style.picker}
 						mode="dropdown"
 						iosIcon={<Icon name="arrow-down" />}
 						placeholder="Selecciona tu idioma"
-						placeholderStyle={{ color: "#bfc6ea" }}
-						placeholderIconColor="#007aff"
-						style={{ width: undefined }}
+						placeholderStyle={{ ccolor: "gray", fontSize: 15, width:'100%' }}
+						placeholderIconColor="gray"
 						selectedValue={language}
 						onValueChange={value => setLanguage(value)}
 					>						
@@ -217,15 +227,15 @@ const EditProfile = ({
 						}
 					</Picker>
 				</Item>
-				<Item>
-					<Label>Cambiar tu Institucion</Label>
+				<Item style={style.itemPicker}>
+					<Label style={style.label}>Cambiar tu Institucion</Label>
 					<Picker
+						style={style.picker}
 						mode="dropdown"
 						iosIcon={<Icon name="arrow-down" />}
 						placeholder="Selecciona tu Ubicación"
-						placeholderStyle={{ color: "#bfc6ea" }}
+						placeholderStyle={{ color: "gray", fontSize: 15, width:'100%' }}
 						placeholderIconColor="#007aff"
-						style={{ width: undefined }}
 						selectedValue={institution}
 						onValueChange={value => setInstitution(value)}
 					>
@@ -241,15 +251,15 @@ const EditProfile = ({
 						}					
 					</Picker>
 				</Item>
-				<Item>
-					<Label>Cambiar tu Carrera</Label>
+				<Item style={style.itemPicker}>
+					<Label style={style.label}>Cambiar tu Carrera</Label>
 					<Picker
+						style={style.picker}
 						mode="dropdown"
 						iosIcon={<Icon name="arrow-down" />}
 						placeholder="Selecciona tu Ubicación"
-						placeholderStyle={{ color: "#bfc6ea" }}
+						placeholderStyle={{ color: "gray", fontSize: 15, width:'100%' }}
 						placeholderIconColor="#007aff"
-						style={{ width: undefined }}
 						selectedValue={career}
 						onValueChange={value => setCareer(value)}
 					>
@@ -265,13 +275,14 @@ const EditProfile = ({
 						}
 					</Picker>
 				</Item>
-				<Item>
-					<Label>Cambiar tu Ubicacion</Label>
+				<Item style={style.itemPicker}>
+					<Label style={style.label}>Cambiar tu Ubicacion</Label>
 					<Picker
+						style={style.picker}
 						mode="dropdown"
 						iosIcon={<Icon name="arrow-down" />}
 						placeholder="Selecciona tu Ubicación"
-						placeholderStyle={{ color: "#bfc6ea" }}
+						placeholderStyle={{ color: "gray", fontSize: 15, width:'100%' }}
 						placeholderIconColor="#007aff"
 						selectedValue={location}
 						onValueChange={value => setLocation(value)}
@@ -317,4 +328,42 @@ export default connect(
 		}
 	})
 )(EditProfile)
+
+
+const style = StyleSheet.create({
+    label:{
+		fontSize: 20,
+		color: '#000000',
+		marginBottom: 10,
+		marginTop: 5,
+		alignSelf: 'flex-start',
+		paddingLeft: 5,
+		fontWeight: '500'
+	},
+	item: {
+		flex: 1,
+		flexDirection: 'column',
+		width: '100%'
+	},
+	itemPicker: {
+		flex: 1,
+		flexDirection: 'column',
+		// width: '100%'
+		alignItems: 'flex-start'
+	},
+	input: {
+		fontSize: 15,
+		color: 'gray',
+		height: '100%',
+		borderBottomColor: 'gray',
+		borderBottomWidth: 2,
+		width: '93%',
+		alignSelf: 'flex-start'
+	},
+	picker: {
+		borderBottomColor: 'gray',
+		borderBottomWidth: 2,
+		// width: '77%',
+	}
+})
 											
