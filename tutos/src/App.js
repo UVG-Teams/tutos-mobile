@@ -31,6 +31,7 @@ import {
     faCalendarAlt,
     faPhone,
     faTrash,
+    faUniversity,
 } from '@fortawesome/free-solid-svg-icons'
 import { useCavy, hook, wrap } from 'cavy'
 
@@ -66,6 +67,7 @@ library.add(
     faCalendarAlt,
     faPhone,
     faTrash,
+    faUniversity,
 )
 
 const Drawer = createDrawerNavigator()
