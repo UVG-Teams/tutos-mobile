@@ -132,3 +132,4 @@ export const getEvent = (state, id) =>  state.byid[id];
 export const getEvents = state => state.order.map(id => getEvent(state, id));
 export const isFetchingEvents = (state) => state.isFetching;
 export const getEventError = (state) => state.error;
+export const getEventsOnDate = (state, datetime) => getEvents(state).filter(event => dayjs(event.date).format('YYYY-MM-DD') == datetime)

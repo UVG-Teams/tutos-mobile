@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import {
     Text,
@@ -21,6 +21,7 @@ import { Calendar as CalendarComponent, LocaleConfig } from 'react-native-calend
 
 import { theme } from './../../layout/themes'
 import * as actions from '../../tools/actions/selects'
+import * as eventActions from '../../tools/actions/events'
 import * as selectors from '../../tools/reducers'
 import Today from './today'
 
@@ -42,10 +43,8 @@ const getEventType = enumType => {
     switch (enumType) {
         case 'tutoria':
             return tutoria
-        case 'otra':
-            return other
         default:
-            return tutoria
+            return otra
     }
 }
 
@@ -56,59 +55,70 @@ const Calendar = ({
     daysEvents = {},
     weekStartsOn,
     createEvent,
-}) => (
-    <ImageBackground
-        style={ theme.background }
-    >
-        <Container style={{ backgroundColor: 'transparent'}}>
-            <Header style={ theme.header }>
-                <Left>
-                    <Button transparent
-                        onPress={ () => navigation.openDrawer() }
-                    >
-                        <FontAwesomeIcon style={ theme.headerIcon } icon='bars' size={ 25 } />
-                    </Button>
-                </Left>
-                <Body></Body>
-                <Right></Right>
-            </Header>
-            <Content style={ theme.content }>
-                <View>
-                    {
-                        events.map(event => {
-                            const event_date = dayjs(event.datetime).format('YYYY-MM-DD')
-                            if (daysEvents[event_date] && daysEvents[event_date]['dots']) {
-                                daysEvents[event_date]['dots'].push(getEventType(event.event_type))
-                            } else if (daysEvents[event_date]) {
-                                daysEvents[event_date]['dots'] = [getEventType(event.event_type)]
-                            } else {
-                                daysEvents[event_date] = {dots: [getEventType(event.event_type)]}
-                            }
-                        })
-                    }
-                    <CalendarComponent
-                        markingType={ 'multi-dot' }
-                        onDayPress={ day => selectDay(day.dateString) }
-                        onDayLongPress={ day => createEvent(day.dateString) }
-                        markedDates={ daysEvents }
-                        // onMonthChange={(month) => {console.log('month changed', month)}}
-                        firstDay={ weekStartsOn }
-                        style={ calendarStyles }
-                        theme={ calendarTheme }
-                    />
-                    <Today navigation={ navigation } />
-                </View>
-            </Content>
-        </Container>
-    </ImageBackground>
-)
+    onLoad,
+}) => {
+    useEffect(onLoad,[])
+    return(
+        <ImageBackground
+            style={ theme.background }
+        >
+            <Container style={{ backgroundColor: 'transparent'}}>
+                <Header style={ theme.header }>
+                    <Left>
+                        <Button transparent
+                            onPress={ () => navigation.openDrawer() }
+                        >
+                            <FontAwesomeIcon style={ theme.headerIcon } icon='bars' size={ 25 } />
+                        </Button>
+                    </Left>
+                    <Body></Body>
+                    <Right>
+                        <Button transparent onPress={ () => createEvent() }>
+                            <FontAwesomeIcon style={ theme.headerIcon } icon='plus-circle' size={ 25 } />
+                        </Button>
+                    </Right>
+                </Header>
+                <Content style={ theme.content }>
+                    <View>
+                        {
+                            events.map(event => {
+                                const event_date = dayjs(event.datetime).format('YYYY-MM-DD')
+                                if (daysEvents[event_date] && daysEvents[event_date]['dots']) {
+                                    daysEvents[event_date]['dots'].push(getEventType(event.typeEvent))
+                                } else if (daysEvents[event_date]) {
+                                    daysEvents[event_date]['dots'] = [getEventType(event.typeEvent)]
+                                } else {
+                                    daysEvents[event_date] = {dots: [getEventType(event.typeEvent)]}
+                                }
+                            })
+                        }
+                        <CalendarComponent
+                            markingType={ 'multi-dot' }
+                            onDayPress={ day => selectDay(day.dateString) }
+                            onDayLongPress={ day => createEvent(day.dateString) }
+                            markedDates={ daysEvents }
+                            // onMonthChange={(month) => {console.log('month changed', month)}}
+                            firstDay={ weekStartsOn }
+                            style={ calendarStyles }
+                            theme={ calendarTheme }
+                        />
+                        <Today navigation={ navigation } />
+                    </View>
+                </Content>
+            </Container>
+        </ImageBackground>
+    )
+}
 
 export default connect(
     state => ({
-        events: selectors.getTutorias(state),
+        events: selectors.getEvents(state),
         weekStartsOn: 0, // Sunday
     }),
     dispatch => ({
+        onLoad(){
+            dispatch(eventActions.startGetEvents())
+        },
         createEvent(day) {
             alert("Crear evento", day)
         },

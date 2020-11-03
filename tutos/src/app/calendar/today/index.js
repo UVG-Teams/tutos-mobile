@@ -45,18 +45,9 @@ const Today = ({
                                         <Col>
                                             <Row>
                                                 <Col>
-                                                    <Text style={ styles.eventImportant }>{ dayjs(event.datetime).format('HH:mm') }</Text>
-                                                </Col>
-                                                <Col>
-                                                    <Text style={ styles.eventImportant }>{ 'Q.' + event.total_price }</Text>
-                                                </Col>
-                                                <Col>
-                                                    <Text style={ styles.eventImportant }>{ event.status.name }</Text>
+                                                    <Text style={ styles.eventImportant }>{ dayjs(event.date).format('HH:mm') }</Text>
                                                 </Col>
                                             </Row>
-                                            <Row><Text style={ styles.eventTitle }>{ 'Tutoria de ' + event.course.name }</Text></Row>
-                                            <Row><Text style={ styles.eventParticipant }>{ 'Tutor ' + event.tutor.first_name + ' ' + event.tutor.last_name }</Text></Row>
-                                            <Row><Text style={ styles.eventParticipant }>{ 'Tutorado ' + event.tutorado.first_name + ' ' + event.tutorado.last_name }</Text></Row>
                                         </Col>
                                     </Grid>
                                 </CardItem>
@@ -79,7 +70,7 @@ export default connect(
         ...ownProps,
         ...stateProps,
         ...dispatchProps,
-        events: selectors.getTutoriasOnDate(stateProps.state, stateProps.selectedDay),
+        events: selectors.getEventsOnDate(stateProps.state, stateProps.selectedDay),
     }),
 )(Today)
 
