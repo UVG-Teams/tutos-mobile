@@ -26,7 +26,7 @@ import {
 } from 'native-base'
 
 import Modal from 'react-native-modal';
-
+import moment from 'moment'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
@@ -41,17 +41,12 @@ import { notification } from '../../tools/schemas/notifications';
 
 
 const Notifications = ({ navigation ,notifications, userid, onLoad, deleteNotification}) => {
-    const [isModalVisible, setModalVisible] = useState(false);
-  
-    const toggleModal = (id) => {
-        setModalID(id)
-        setModalVisible(!isModalVisible);
-    };
+    const [isModalVisi, setModalVisible] = useState(false);
     useEffect(onLoad, [])
     return(
         <ImageBackground style={ theme.background }>
             <Container style={{ backgroundColor: 'transparent'}}>
-                <Content style={ theme.content }>
+                <Content>
                     <View>
                         <Modal 
                         isVisible={true}
@@ -64,34 +59,32 @@ const Notifications = ({ navigation ,notifications, userid, onLoad, deleteNotifi
                                                 <View style={ styles.cardInfo }>
                                                     <Row>
                                                         <Col>
-                                                            <Text style = {{fontSize: 15, marginTop: 2}}>{notification.title} </Text>
+                                                            <Text style = {{fontSize: 15}}>{notification.title} </Text>
                                                         </Col>
                                                         <Right>
                                                             <Col>
                                                                 <Button transparent onPress={ () => deleteNotification(notification.id)}>
-                                                                    <FontAwesomeIcon style={{color: "gray"}} icon='trash' size={ 15 } />
+                                                                    <FontAwesomeIcon style={{color: "gray",marginBottom:"220%"}} icon='trash' size={ 15 } />
                                                                 </Button>
                                                             </Col>  
                                                         </Right>
                                                     </Row>
                                                 </View>
                                             </CardItem>
-                                            <CardItem header bordered>
-                                                <Row>
-                                                    <View style={ styles.cardInfo }>
-                                                        <Text style = {{fontSize: 15, color: "gray"}}>{notification.description}</Text>
-                                                    </View>
-                                                </Row>
-                                                <Row>
-                                                    <View style={ styles.cardInfo }>
-                                                        <Text style = {{fontSize: 15, color: "gray"}}>{notification.date}</Text>
-                                                    </View>
-                                                </Row>
+                                            <CardItem>
+                                                <View style={ styles.cardInfo }>
+                                                    <Text style = {{fontSize: 15, color: "gray"}}>{notification.description}</Text>
+                                                    <Text style = {{fontSize: 15, color: "gray", textAlign:"right"}}>{moment(notification.date).format('L LT')}</Text>
+                                                </View>
                                             </CardItem>
                                         </Card>
                                     ))
                                 }
                             </View>
+                            {/* Aqui hay que quitar el boton, cuando se arregl el "onBackdropPress" del modal */}
+                            <Button style={{width:"100%", textAlign:"center"}} onPress={ () => navigation.navigate('home') }>
+                                <Text>Regresar</Text>
+                            </Button> 
                         </Modal>
                     </View>
                 </Content>

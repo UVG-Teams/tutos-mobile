@@ -14,6 +14,7 @@ import careers , * as careersSelectors from './careers';
 import institutions, * as institutionsSelectors from './institution';
 import locations, * as locationsSelectors from './locations';
 import notifications, * as notificationsSelectors from './notifications';
+import events, * as eventsSelectors from './events';
 
 const reducer = combineReducers({
     auth,
@@ -29,6 +30,7 @@ const reducer = combineReducers({
     institutions,
     locations,
     notifications,
+    events,
     form: formReducer,
 })
 
@@ -96,3 +98,9 @@ export const getNotification = (state, id) => notificationsSelectors.getNotifica
 export const getNotifications = state => notificationsSelectors.getNotifications(state.notifications);
 export const isFetchingNotifications = state => notificationsSelectors.isFetchingNotifications(state.notifications);
 export const getNotificationError = state => notificationsSelectors.getNotificationError(state.notifications);
+
+export const getEvent = (state, id) => eventsSelectors.getEvent(state.events, id);
+export const getEvents = state => eventsSelectors.getEvents(state.events);
+export const isFetchingEvents = state => eventsSelectors.isFetchingEvents(state.events);
+export const getEventError = state => eventsSelectors.getEventError(state.events);
+export const getEventsOnDate = (state, date) => eventsSelectors.getEventsOnDate(state.events, date)
