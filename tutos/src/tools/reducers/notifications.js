@@ -15,23 +15,23 @@ const byid = (state = {} , action) => {
             })
             return newState
         }
-        // case types.ADD_NOTIFICATION_STARTED :{
-        //     const newState = {...state}
-        //     newState[action.payload.id] = {
-        //         ...action.payload,
-        //         isConfirmed : false
-        //     }
-        //     return newState
-        // }
-        // case types.ADD_NOTIFICATION_COMPLETED:{
-        //     const {tempid, notification } = action.payload
-        //     const newState = omit(state, tempid)
-        //     newState[notification.id] = {
-        //         ...notification,
-        //         isConfirmed : true,
-        //     }
-        //     return newState
-        // }
+        case types.ADD_NOTIFICATION_STARTED :{
+            const newState = {...state}
+            newState[action.payload.id] = {
+                ...action.payload,
+                isConfirmed : false
+            }
+            return newState
+        }
+        case types.ADD_NOTIFICATION_COMPLETED:{
+            const {tempid, notification } = action.payload
+            const newState = omit(state, tempid)
+            newState[notification.id] = {
+                ...notification,
+                isConfirmed : true,
+            }
+            return newState
+        }
         case types.DELETE_NOTIFICATION_STARTED:{
             return omit(state,action.payload.id)
         }
@@ -48,16 +48,16 @@ const order = (state = [] , action) => {
             ...action.payload.order
         ]
     }
-    // case types.ADD_NOTIFICATION_STARTED: {
-    //     return [
-    //         ...state, 
-    //         ...action.payload.notification.id
-    //     ]
-    // }
-    // case types.ADD_NOTIFICATION_COMPLETED: {
-    //     const { tempid, notification } = action.payload
-    //     return state.map(id => id === tempid ? notification.id : id)
-    // }
+    case types.ADD_NOTIFICATION_STARTED: {
+        return [
+            ...state, 
+            ...action.payload.notification.id
+        ]
+    }
+    case types.ADD_NOTIFICATION_COMPLETED: {
+        const { tempid, notification } = action.payload
+        return state.map(id => id === tempid ? notification.id : id)
+    }
     case types.DELETE_NOTIFICATION_STARTED: {
         const { id } = action.payload
         return state.filter(value => value !== id)
@@ -95,15 +95,15 @@ const error = (state = null, action) => {
         case types.GET_NOTIFICATIONS_FAILED : {
             return action.payload.error
         }
-        // case types.ADD_NOTIFICATION_STARTED: {
-        //     return null
-        // }
-        // case types.ADD_NOTIFICATION_COMPLETED: {
-        //     return null
-        // }
-        // case types.ADD_NOTIFICATION_FAILED : {
-        //     return action.payload.error
-        // }
+        case types.ADD_NOTIFICATION_STARTED: {
+            return null
+        }
+        case types.ADD_NOTIFICATION_COMPLETED: {
+            return null
+        }
+        case types.ADD_NOTIFICATION_FAILED : {
+            return action.payload.error
+        }
         case types.DELETE_NOTIFICATION_STARTED: {
             return null
         }

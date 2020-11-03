@@ -56,45 +56,45 @@ export function* watchGetNotifications(){
     )
 }
 
-// function* addNotification(action) {
-//     try {
-//         const isAuth = yield select(selectors.isAuthenticated)
-//         if (isAuth) {
-//             const token = yield select(selectors.getToken)
-//             const response = yield call(
-//                 fetch,
-//                 `${API_BASE_URL}/notifications/`,
-//                 {
-//                     method: 'POST',
-//                     body : JSON.stringify(action.payload),
-//                     headers: {
-//                         'Content-Type': 'application/json',
-//                         'Authorization': `JWT ${token}`,
-//                     },
-//                 }
-//             )
-//             if (http.isSuccessful(response.status)) {
-//                 const jsonResult = yield response.json();
-//                 yield put(actions.completeAddNotification(
-//                     action.payload.id, 
-//                     jsonResult
-//                 )) 
-//             } else {
-//                 const { non_field_errors } = yield response.json;
-//                 yield put(actions.failAddNotification(non_field_errors[0]))
-//             }
-//         }
-//     } catch (error) {
-//         yield put(actions.failGetNotifications('Connection error!'))
-//     }
-// }
+function* addNotification(action) {
+    try {
+        const isAuth = yield select(selectors.isAuthenticated)
+        if (isAuth) {
+            const token = yield select(selectors.getToken)
+            const response = yield call(
+                fetch,
+                `${API_BASE_URL}/notifications/`,
+                {
+                    method: 'POST',
+                    body : JSON.stringify(action.payload),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `JWT ${token}`,
+                    },
+                }
+            )
+            if (http.isSuccessful(response.status)) {
+                const jsonResult = yield response.json();
+                yield put(actions.completeAddNotification(
+                    action.payload.id, 
+                    jsonResult
+                )) 
+            } else {
+                const { non_field_errors } = yield response.json;
+                yield put(actions.failAddNotification(non_field_errors[0]))
+            }
+        }
+    } catch (error) {
+        yield put(actions.failGetNotifications('Connection error!'))
+    }
+}
 
-// export function* watchAddNotification() {
-//     yield takeEvery(
-//         types.ADD_NOTIFICATION_STARTED,
-//         addNotification
-//     )
-// }
+export function* watchAddNotification() {
+    yield takeEvery(
+        types.ADD_NOTIFICATION_STARTED,
+        addNotification
+    )
+}
 
 function* deleteNotification(action) {
     try {
@@ -103,7 +103,7 @@ function* deleteNotification(action) {
             const token = yield select(selectors.getToken)
             const response = yield call(
                 fetch,
-                `${API_BASE_URL}/notifications/${action.payload.id}`,
+                `${API_BASE_URL}/notifications/${action.payload.id}/`,
                 {
                     method: 'DELETE',
                     headers: {

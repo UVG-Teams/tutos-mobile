@@ -48,7 +48,9 @@ import {
 } from './institution'
 
 import {
-    watchGetNotifications
+    watchGetNotifications,
+    watchAddNotification,
+    watchDeleteNotification
 } from './notifications'
 
 function* mainSaga() {
@@ -70,6 +72,8 @@ function* mainSaga() {
         fork(watchFetchLocation ),
         fork(watchFetchInstitution),
         fork(watchGetNotifications),
+        fork(watchAddNotification),
+        fork(watchDeleteNotification),
     ])
 }
 
