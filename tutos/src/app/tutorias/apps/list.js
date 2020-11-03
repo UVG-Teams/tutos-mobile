@@ -53,11 +53,16 @@ const ListApp = ({
                             <FontAwesomeIcon style={ theme.headerIcon } icon='bars' size={ 25 } />
                         </Button>
                     </Left>
-                    <Body></Body>
+                    <Body>
+                        <Text style={{ fontSize: 25}}>
+                            Tutorias
+                        </Text>
+                    </Body>
+                    <Right></Right>
                 </Header>
                 <Content style={ theme.content }>
                     <View>
-                        <Text style={{ fontSize: 35 }}>Tutorias</Text>
+                        {/* <Text style={{ fontSize: 35 }}>Tutorias</Text> */}
                         <List>
                             {
                                 tutorias.length == 0 && <Text>{'No hay'}</Text>
