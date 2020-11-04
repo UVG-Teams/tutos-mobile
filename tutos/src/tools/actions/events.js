@@ -16,7 +16,7 @@ export const failGetEvents = error => ({
     payload : {error}
 })
   
-export const startAddEvent = (event) => ({
+export const startAddEvent = event => ({
       type : types.ADD_EVENT_STARTED,
       payload: event
 })
@@ -35,7 +35,7 @@ export const failAddEvent = (tempid , error) => ({
     }
 })
   
-export const startDeleteEvent = (id ) => ({
+export const startDeleteEvent = id => ({
     type : types.DELETE_EVENT_STARTED ,
     payload: {
         id

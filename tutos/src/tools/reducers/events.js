@@ -1,6 +1,7 @@
 import * as types from '../types/events'
 import { combineReducers } from 'redux';
 import omit from 'lodash/omit'
+import dayjs from 'dayjs'
 
 const byid = (state = {} , action) => {
     switch(action.type){
@@ -51,7 +52,7 @@ const order = (state = [] , action) => {
     case types.ADD_EVENT_STARTED: {
         return [
             ...state, 
-            ...action.payload.event.id
+            action.payload.id
         ]
     }
     case types.ADD_EVENT_COMPLETED: {

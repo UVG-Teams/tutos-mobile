@@ -91,9 +91,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 16,
     },
-    eventParticipant: {
-        fontSize: 12,
-    },
     contentView: {
         marginTop: 20
     },

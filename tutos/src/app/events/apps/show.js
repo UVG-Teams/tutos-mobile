@@ -36,7 +36,6 @@ import * as actions from '../../../tools/actions/events'
 
 
 const Show = ({ navigation, event}) => {
-    //useEffect(onLoad, [])
     return (
         <ImageBackground
             style={ theme.background }
@@ -55,59 +54,6 @@ const Show = ({ navigation, event}) => {
                 </Header>
                 <Content style={ theme.content }>
                     <Card style={{ flex:1 }}>
-                        {/* <CardItem header bordered>
-                            <Row><Text style={ styles.title }>{ 'Tutoria de ' + tutoria.course.name }</Text></Row>
-                        </CardItem>
-                        <CardItem>
-                            <Grid>
-                                <Col>
-                                    <Row>
-                                        <Col>
-                                            <Text style={ styles.eventImportant }>{ dayjs(tutoria.datetime).format('DD/MM/YYYY HH:mm') }</Text>
-                                        </Col>
-                                        <Col>
-                                            <Text style={ styles.eventImportant }>{ tutoria.status.name }</Text>
-                                        </Col>
-                                    </Row>
-                                </Col>
-                            </Grid>
-                        </CardItem>
-                        <CardItem>
-                            <Grid>
-                                <Row>
-                                    <Col>
-                                        <Row><Text style={ styles.label }>{'Tutor'}</Text></Row>
-                                        <Row><Text style={ styles.label }>{'Tutorado'}</Text></Row>
-                                    </Col>
-                                    <Col>
-                                        <Row><Text style={ styles.eventParticipant }>{ tutoria.tutor.first_name + ' ' + tutoria.tutor.last_name }</Text></Row>
-                                        <Row><Text style={ styles.eventParticipant }>{ tutoria.tutorado.first_name + ' ' + tutoria.tutorado.last_name }</Text></Row>
-                                    </Col>
-                                </Row>
-                            </Grid>
-                        </CardItem>
-                        <CardItem>
-                            <Grid>
-                                <Row>
-                                    <Col>
-                                        <Row><Text style={ styles.label }>{'Precio'}</Text></Row>
-                                    </Col>
-                                    <Col>
-                                        <Text style={ styles.eventImportant }>{ 'Q.' + tutoria.total_price }</Text>
-                                    </Col>
-                                </Row>
-                            </Grid>
-                        </CardItem>
-                        <CardItem>
-                            <Grid>
-                                <Col>
-                                    <Row><Text style={ styles.label }>{'Descripcion'}</Text></Row>
-                                    <Row><Text style={ styles.text }>{ tutoria.description }</Text></Row>
-                                </Col>
-                            </Grid>
-                        </CardItem>
-                    </Card>
-                    <Card> */}
                         <CardItem>
                             <Grid>
                                 <Col>
@@ -125,7 +71,7 @@ const Show = ({ navigation, event}) => {
                             </Grid>
                             <Grid>
                                 <Col>
-                                    <Row><Text style={ styles.text }>{ event.date }</Text></Row>
+                                    <Row><Text style={ styles.text }>{ dayjs(event.date).format('DD/MM/YYYY HH:mm')}</Text></Row>
                                 </Col>
                             </Grid>
                         </CardItem>
