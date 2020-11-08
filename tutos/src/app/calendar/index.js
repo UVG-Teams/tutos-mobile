@@ -37,14 +37,22 @@ LocaleConfig.defaultLocale = 'es';
 
 // Event types
 const tutoria = { color: 'red' }
-const other = { color: 'blue' }
+const social = { color: 'blue' }
+const personal = {color: 'green'}
+const other = {color: 'yellow'}
 
 const getEventType = enumType => {
     switch (enumType) {
         case 'tutoria':
             return tutoria
+        case 'social':
+            return social
+        case 'personal':
+            return personal
+        case 'other':
+            return other
         default:
-            return otra
+            return other
     }
 }
 
@@ -73,7 +81,7 @@ const Calendar = ({
                     </Left>
                     <Body></Body>
                     <Right>
-                        <Button transparent onPress={ () => createEvent() }>
+                        <Button transparent onPress={ () => navigation.navigate('events', {screen: 'new'})}>
                             <FontAwesomeIcon style={ theme.headerIcon } icon='plus-circle' size={ 25 } />
                         </Button>
                     </Right>
@@ -95,7 +103,7 @@ const Calendar = ({
                         <CalendarComponent
                             markingType={ 'multi-dot' }
                             onDayPress={ day => selectDay(day.dateString) }
-                            onDayLongPress={ day => createEvent(day.dateString) }
+                            onDayLongPress={ day =>  navigation.navigate('events', {screen: 'new'})}
                             markedDates={ daysEvents }
                             // onMonthChange={(month) => {console.log('month changed', month)}}
                             firstDay={ weekStartsOn }
@@ -118,9 +126,6 @@ export default connect(
     dispatch => ({
         onLoad(){
             dispatch(eventActions.startGetEvents())
-        },
-        createEvent(day) {
-            alert("Crear evento", day)
         },
         selectDay(day) {
             dispatch(actions.selectDay(day))
