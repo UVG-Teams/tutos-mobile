@@ -48,15 +48,16 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
         setModalID(id)
         setModalVisible(!isModalVisible);
     };
-
     const deviceWidth = Dimensions.get("window").width;
     const deviceHeight = Dimensions.get("window").height;
     useEffect(onLoad, [])
-    if (isTutor){
+    
+    if (isTutor) {
         tutorias = tutorias.filter(tutoria => tutoria.tutor.id === profile.id)
-    }else{
+    } else {
         tutorias = tutorias.filter(tutoria => tutoria.tutorado.id === profile.id)
     }
+
     return(
         <ImageBackground
             style={ theme.background }
@@ -96,7 +97,12 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                         </CardItem>
                                         {
                                             tutorias.map(tutoria => tutoria.status.name === "scheduled" && (
-                                                <CardItem bordered button onPress={() => toggleModal(tutoria.id)}>
+                                                <CardItem
+                                                    bordered
+                                                    button
+                                                    key={ tutoria.id }
+                                                    onPress={() => toggleModal(tutoria.id)}
+                                                >
                                                     <Body>
                                                         <Row>
                                                             <Col>
@@ -118,7 +124,12 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                         </CardItem>
                                         {
                                             tutorias.map(tutoria => tutoria.status.name === "in_process" && (
-                                                <CardItem bordered button onPress={() => toggleModal(tutoria.id)}>
+                                                <CardItem
+                                                    bordered
+                                                    button
+                                                    key={ tutoria.id }
+                                                    onPress={() => toggleModal(tutoria.id)}
+                                                >
                                                     <Body>
                                                         <Row>
                                                             <Col>
@@ -140,7 +151,12 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                         </CardItem>
                                         {
                                             tutorias.map(tutoria => tutoria.status.name === "end" && (
-                                                <CardItem bordered button onPress={() => toggleModal(tutoria.id)}>
+                                                <CardItem
+                                                    bordered
+                                                    button
+                                                    key={ tutoria.id }
+                                                    onPress={() => toggleModal(tutoria.id)}
+                                                >
                                                     <Body>
                                                         <Row>
                                                             <Col>
@@ -162,7 +178,12 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                         </CardItem>
                                         {
                                             tutorias.map(tutoria => tutoria.status.name === "canceled" && (
-                                                <CardItem bordered button onPress={() => toggleModal(tutoria.id)}>
+                                                <CardItem
+                                                    bordered
+                                                    button
+                                                    key={ tutoria.id }
+                                                    onPress={() => toggleModal(tutoria.id)}
+                                                >
                                                     <Body>
                                                         <Row>
                                                             <Col>
@@ -186,7 +207,12 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                         </CardItem>
                                         {
                                             tutorias.map(tutoria => tutoria.status.name ===  "end" && (
-                                                <CardItem bordered button onPress={() => toggleModal(tutoria.id)}>
+                                                <CardItem
+                                                    bordered
+                                                    button
+                                                    key={ tutoria.id }
+                                                    onPress={() => toggleModal(tutoria.id)}
+                                                >
                                                     <Body>
                                                         <Row>
                                                             <Col>
@@ -207,21 +233,24 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                             <Text style={{ fontSize: 18, fontWeight: "bold" }}>Programadas</Text>
                                         </CardItem>
                                         {
-                                            tutorias.map(tutoria => tutoria.status.name ===  "scheduled" && (
-                                                <>
-                                                    <CardItem bordered button onPress={() => toggleModal(tutoria.id)}>
-                                                        <Body>
-                                                            <Row>
-                                                                <Col>
-                                                                    <Text>{tutoria.course.name}, {tutoria.tutor.first_name}</Text>
-                                                                </Col>
-                                                                <Col>
-                                                                    <Text style={{textAlign: 'right'}}>{moment(tutoria.datetime).format('L LT')}</Text>
-                                                                </Col>
-                                                            </Row>
-                                                        </Body>
-                                                    </CardItem>
-                                                </>
+                                            tutorias.map(tutoria => tutoria.status.name === "scheduled" && (
+                                                <CardItem
+                                                    bordered
+                                                    button
+                                                    key={ tutoria.id }
+                                                    onPress={() => toggleModal(tutoria.id)}
+                                                >
+                                                    <Body>
+                                                        <Row>
+                                                            <Col>
+                                                                <Text>{tutoria.course.name}, {tutoria.tutor.first_name}</Text>
+                                                            </Col>
+                                                            <Col>
+                                                                <Text style={{textAlign: 'right'}}>{moment(tutoria.datetime).format('L LT')}</Text>
+                                                            </Col>
+                                                        </Row>
+                                                    </Body>
+                                                </CardItem>
                                             ))
                                         }
                                     </Card>
@@ -238,9 +267,9 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                 <Card>
                                     <CardItem header bordered>
                                         {tutorias.map(tutoria => {
-                                            if (tutoria.id === modalID){
+                                            if (tutoria.id === modalID) {
                                                 return (
-                                                    <View style={ styles.cardInfo }>
+                                                    <View key={ tutoria.id } style={ styles.cardInfo }>
                                                         <Text style = {{fontSize: 20, fontWeight: "bold", marginBottom: 10, textAlign: "center"}}>Información Tutoría</Text>
                                                         {
                                                             isTutor ? (

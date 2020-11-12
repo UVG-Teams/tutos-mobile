@@ -24,14 +24,14 @@ import {
 import { CheckBox } from 'react-native-elements'
 import { find } from 'lodash'
 
-const EditProfile = ({ 
-	profile , 
-	tutorProfile={} , 
-	updateProfile , 
-	updateTutorProfile , 
-	end , 
-	languages, 
-	careers ,
+const EditProfile = ({
+	profile,
+	tutorProfile={},
+	updateProfile,
+	updateTutorProfile,
+	end,
+	languages,
+	careers,
 	locations,
 	institutions
 }) => {
@@ -42,29 +42,29 @@ const EditProfile = ({
 	const [correo, setCorreo] = useState(profile.email)
 	const [precioIndividual, setPrecioIndividual] = useState(tutorProfile.individual_price)
 	const [precioGrupal, setPrecioGrupal] = useState(tutorProfile.grupal_price)
-	const [descripcion , setDescripcion] = useState(tutorProfile.description)
-	
+	const [descripcion, setDescripcion] = useState(tutorProfile.description)
+
 	// userdetail
 	const [phone, setPhone] = useState(profile.phone.toString())
-	const [isTutor , setIsTutor] = useState(profile.is_tutor) 
-	const [password0 , setPassword0 ] = useState('')
-	const [password1 , setPassword1 ] = useState('')
-	const [language , setLanguage] = useState({
+	const [isTutor, setIsTutor] = useState(profile.is_tutor) 
+	const [password0, setPassword0] = useState('')
+	const [password1, setPassword1] = useState('')
+	const [language, setLanguage] = useState({
 		id: profile.language,
-		name: find(languages , element => element.id === profile.language),
+		name: find(languages, element => element.id === profile.language),
 	})
 	const [career, setCareer] = useState({
 		id: profile.career.id,
-		name : profile.career.name
+		name: profile.career.name
 	})
 	const [location, setLocation] = useState({
-		id : profile.location.id,
-		name : profile.location.name,
+		id: profile.location.id,
+		name: profile.location.name,
 	})
 	
 	const [institution, setInstitution] = useState({
 		id: profile.institution.id,
-		name : profile.institution.name
+		name: profile.institution.name
 	})
 	
 	// const onLoad = () => {
@@ -84,7 +84,7 @@ const EditProfile = ({
 	//     id: profile.institution.id,
 	//     name: profile.institution.name
 	//   })
-	//   console.log('Componentes actualizados')
+	//   alert('Componentes actualizados')
 	// }
 	
 	// useEffect(() => onLoad() , [])
@@ -103,13 +103,13 @@ const EditProfile = ({
 		if (profile.is_tutor){
 			updateTutorProfile({
 				'description': descripcion,
-				'individual_price' : precioIndividual,
-				'grupal_price' : precioGrupal
+				'individual_price': precioIndividual,
+				'grupal_price': precioGrupal
 			})
 		}
 		end(false)
 	}
-	
+
 	return(
 		<ScrollView>
 			<Form>
@@ -205,7 +205,7 @@ const EditProfile = ({
 					/>
 				</Item>
 				<Item style={style.itemPicker}>
-					<Label style={style.label}>Cambiar tu idioma</Label>	
+					<Label style={style.label}>Cambiar tu idioma</Label>
 					<Picker
 						style={style.picker}
 						mode="dropdown"
@@ -215,13 +215,14 @@ const EditProfile = ({
 						placeholderIconColor="gray"
 						selectedValue={language}
 						onValueChange={value => setLanguage(value)}
-					>						
+					>
 						{
 							languages.map(
-								(element) => (
-									<Picker.Item 
-										label={element.name} 
-										value={element.id} 
+								element => (
+									<Picker.Item
+										key={element.id}
+										label={element.name}
+										value={element.id}
 									/>
 								)
 							)
@@ -241,15 +242,16 @@ const EditProfile = ({
 						onValueChange={value => setInstitution(value)}
 					>
 						{
-							institutions.map(			
-								(element) => (
-									<Picker.Item 
-										label={element.name} 
-										value={element.id} 
+							institutions.map(
+								element => (
+									<Picker.Item
+										key={element.id}
+										label={element.name}
+										value={element.id}
 									/>
 								)
 							)
-						}					
+						}
 					</Picker>
 				</Item>
 				<Item style={style.itemPicker}>
@@ -265,11 +267,12 @@ const EditProfile = ({
 						onValueChange={value => setCareer(value)}
 					>
 						{
-							careers.map(								
-								(element) => (
-									<Picker.Item 
-										label={element.name} 
-										value={element.id} 
+							careers.map(
+								element => (
+									<Picker.Item
+										key={element.id}
+										label={element.name}
+										value={element.id}
 									/>
 								)
 							)
@@ -290,10 +293,11 @@ const EditProfile = ({
 					>
 						{
 							locations.map(
-								(element) => (
-									<Picker.Item 
-										label={element.name} 
-										value={element.id} 
+								element => (
+									<Picker.Item
+										key={element.id}
+										label={element.name}
+										value={element.id}
 									/>
 								)
 							)
@@ -310,7 +314,7 @@ const EditProfile = ({
 		</ScrollView>
 	)
 }
-										
+
 export default connect(
 	state=>({
 		profile: selectors.getProfile(state),
@@ -367,4 +371,3 @@ const style = StyleSheet.create({
 		// width: '77%',
 	}
 })
-											
