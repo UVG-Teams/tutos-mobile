@@ -20,7 +20,7 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-!tutos/ios/tutos/Images.xcassets/
+
 
 # Android/IntelliJ
 #
@@ -29,7 +29,7 @@ build/
 .gradle
 local.properties
 *.iml
-!android/app/src/main/
+
 # node.js
 #
 node_modules/
@@ -62,6 +62,9 @@ buck-out/
 # Native files
 ios/
 android/
+
+!ios/tutos/Images.xcassets/
+!android/app/src/main/
 
 # Local
 local/
