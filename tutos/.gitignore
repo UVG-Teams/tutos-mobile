@@ -20,7 +20,7 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-!ios/tutos/Images.xcassets/
+!tutos/ios/tutos/Images.xcassets/
 
 # Android/IntelliJ
 #
