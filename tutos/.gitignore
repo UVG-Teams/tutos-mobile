@@ -60,10 +60,16 @@ buck-out/
 /ios/Pods/
 
 # Native files
-ios/
-android/
-
+ios/*
+!ios/tutos/
+ios/tutos/*
 !ios/tutos/Images.xcassets/
+
+android/*
+!android/app/
+android/app/*
+!android/app/src/
+android/app/src/*
 !android/app/src/main/
 
 # Local
