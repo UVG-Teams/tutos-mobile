@@ -1,28 +1,20 @@
-import React, {component, useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {
-    ScrollView,
     Text,
-    TextInput,
     View,
     ImageBackground,
     StyleSheet,
-    Dimensions,
 } from 'react-native'
 
 import {
     Container,
     Content,
     Button,
-    Header,
-    Left,
-    Body,
     Right,
-    Title,
     Card,
     CardItem,
     Row,
     Col,
-    Center,
 } from 'native-base'
 
 import Modal from 'react-native-modal';
@@ -49,12 +41,13 @@ const Notifications = ({ navigation ,notifications, userid, onLoad, deleteNotifi
                 <Content>
                     <View>
                         <Modal 
-                        isVisible={true}
-                        onBackdropPress={() => setModalVisible(false) && navigation.navigate('home') }>
+                            isVisible={true}
+                            onBackdropPress={() => setModalVisible(false) && navigation.navigate('home')}
+                        >
                             <View>
                                 {
-                                    notifications.map(notification => notification.user == userid &&(
-                                        <Card>
+                                    notifications.map(notification => notification.user == userid && (
+                                        <Card key={ notification.id }>
                                             <CardItem header bordered style = {{display: "flex", flex: 1, alignItems: "center"}}>
                                                 <View style={ styles.cardInfo }>
                                                     <Row>

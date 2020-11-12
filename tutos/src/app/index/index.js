@@ -47,7 +47,7 @@ class Index extends Component {
                     delay={8000}
                     style={this.state.size}
                     autoplay
-                    // onAnimateNextPage={(p) => console.log(p)}
+                    // onAnimateNextPage={(p) => alert(p)}
                 >
                     <View style={this.state.size}>
                         <ImageBackground source={imgCarousel1} style={styles.image}>
