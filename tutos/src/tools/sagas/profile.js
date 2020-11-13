@@ -104,6 +104,13 @@ function* updateProfile(action){
     try{
         const isAuth = yield select(selectors.isAuthenticated)
         if (isAuth) {
+            const formData = new FormData()
+            formData.append('image', action.payload.image)
+
+            Object.keys(action.payload).forEach(field => {
+                formData.append(field, action.payload[field])
+            })
+
             const token = yield select(selectors.getToken)
             const response = yield call(
                 fetch,
@@ -111,8 +118,10 @@ function* updateProfile(action){
                 {
                     method: 'POST',
                     body: JSON.stringify(action.payload),
+                    // body: formData,
                     headers: {
                         'Content-Type': 'application/json',
+                        // 'Content-Type': 'multipart/form-data',
                         'Authorization': `JWT ${token}`,
                     }
                 }

@@ -1,8 +1,10 @@
-import React, { useState , useEffect } from 'react'
+import React, { useState } from 'react'
+import ImagePicker from 'react-native-image-picker'
 import { connect } from 'react-redux'
 import {
 	Text,
 	ScrollView,
+	Image,
 	StyleSheet
 } from 'react-native'
 
@@ -33,12 +35,13 @@ const EditProfile = ({
 	languages,
 	careers,
 	locations,
-	institutions
+	institutions,
 }) => {
 	locations = locations.filter(loc => loc.location_type === 'municipality').map(value => ({
 		id : value.id,
 		name : value.name
 	}))
+	const [image, setImage] = useState(null);
 	const [correo, setCorreo] = useState(profile.email)
 	const [precioIndividual, setPrecioIndividual] = useState(tutorProfile.individual_price)
 	const [precioGrupal, setPrecioGrupal] = useState(tutorProfile.grupal_price)
@@ -99,6 +102,7 @@ const EditProfile = ({
 			'institution': institution.id ? institution.id : institution,
 			'career': career.id ? career.id : career,
 			'password': password0===password1 ? password0 : '',
+			'image': image
 		})
 		if (profile.is_tutor){
 			updateTutorProfile({
@@ -112,6 +116,28 @@ const EditProfile = ({
 
 	return(
 		<ScrollView>
+			{
+				image && (
+					<Image
+						style={{ height: 150, width: 150 }}
+						source={{
+							uri: image.uri
+						}}
+					/>
+				)
+			}
+			<Button block info
+				onPress={() => ImagePicker.launchImageLibrary(
+					{
+						mediaType: 'photo',
+					},
+					response => {
+						setImage(response)
+					},
+				)}
+			>
+				<Text>Elige una foto</Text>
+			</Button>
 			<Form>
 				{/* <Text style={{ fontSize: 35 }}> Editar Perfil  </Text> */}
 				<Separator>
@@ -321,7 +347,7 @@ export default connect(
 		tutorProfile: selectors.getTutorProfile(state),
 		languages: selectors.getLanguages(state),
 		careers: selectors.getCareers(state),
-		locations : selectors.getLocations(state),
+		locations: selectors.getLocations(state),
 		institutions: selectors.getInstitutions(state)
 	}),
 	dispatch=>({
@@ -330,7 +356,7 @@ export default connect(
 		},
 		updateTutorProfile(data){
 			dispatch(actionsTutor.startEditTutorProfile(data))
-		}
+		},
 	})
 )(EditProfile)
 
