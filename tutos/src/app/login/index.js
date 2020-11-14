@@ -89,23 +89,28 @@ const Login = ({
                         isLoading ? (
                             <ActivityIndicator size="large" color="#0000ff" />
                         ) : (
-                            <>
-                                <TouchableOpacity
-                                    style={ styles.buttonLogin }
-                                    onPress={ handleSubmit }
-                                    ref={generateTestHook('LoginScreen.Button')}
-                                >
-                                    <Text style={styles.txtButtonLogin}>Ingresar</Text>
-                                </TouchableOpacity>
-
-                                <TouchableOpacity
-                                    style={ styles.buttonPassword }
-                                    onPress={ rememberPassword }
-                                    ref={generateTestHook('LoginScreen.ButtonForgot')}
-                                >
-                                    <Text style={styles.txtButtonPassword}>¿Olvidaste tu contraseña?</Text>
-                                </TouchableOpacity>
-                            </>
+                            <View>
+                                <View style={styles.btnLogInContainer}>
+                                    <TouchableOpacity
+                                        // hitSlop={{top:20}}
+                                        style={ styles.buttonLogin }
+                                        onPress={ handleSubmit }
+                                        ref={generateTestHook('LoginScreen.Button')}
+                                    >
+                                        <Text style={styles.txtButtonLogin}>Ingresar</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={styles.btnFPasswordContainer}>
+                                    <TouchableOpacity
+                                        hitSlop={{top:0}}
+                                        style={ styles.buttonPassword }
+                                        onPress={ rememberPassword }
+                                        ref={generateTestHook('LoginScreen.ButtonForgot')}
+                                    >
+                                        <Text style={styles.txtButtonPassword}>¿Olvidaste tu contraseña?</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
                         )
                     }
                 </View>
@@ -158,8 +163,12 @@ const styles = StyleSheet.create({
         fontSize: 40,
         marginBottom: 30,
     },
+    buttonsContainer : {
+        paddingTop: 15,
+        height: '30%'
+    },
     buttonLogin: {
-        marginTop: 15,
+        // marginTop: 15,
         borderRadius: 5,
         backgroundColor: 'black',
         color: 'white',
@@ -175,7 +184,7 @@ const styles = StyleSheet.create({
     },
     buttonPassword: {
         width: '100%',
-        marginTop: 100,
+        // marginTop: 100,
         borderRadius: 5,
         backgroundColor: '#146dc7',
         color: 'white',
@@ -188,6 +197,12 @@ const styles = StyleSheet.create({
         width: '100%',
         color: 'white',
         fontSize: 15,
+    },
+    btnLogInContainer: {
+        marginTop: 15
+    },
+    btnFPasswordContainer: {
+        marginTop: 100
     },
     ...Platform.select({
         ios: {
