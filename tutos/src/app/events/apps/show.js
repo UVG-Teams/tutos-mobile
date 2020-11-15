@@ -35,7 +35,7 @@ import * as selectors from '../../../tools/reducers'
 import * as actions from '../../../tools/actions/events'
 
 
-const Show = ({ navigation, event}) => {
+const Show = ({ navigation, event, deleteEvent}) => {
     return (
         <ImageBackground
             style={ theme.background }
@@ -79,6 +79,9 @@ const Show = ({ navigation, event}) => {
                             </Grid>
                         </CardItem>
                     </Card>
+                    <Button transparent onPress={ () => deleteEvent(event.id)}>
+                        <FontAwesomeIcon style={ theme.dangerIcon } icon='trash-alt' size={ 25 }/>
+                    </Button>
                 </Content>
             </Container>
         </ImageBackground>

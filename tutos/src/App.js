@@ -31,6 +31,7 @@ import {
     faCalendarAlt,
     faPhone,
     faTrash,
+    faTrashAlt,
     faUniversity,
     faPlusCircle,
 } from '@fortawesome/free-solid-svg-icons'
@@ -69,6 +70,7 @@ library.add(
     faCalendarAlt,
     faPhone,
     faTrash,
+    faTrashAlt,
     faUniversity,
     faPlusCircle,
 )

@@ -25,4 +25,7 @@ export const theme = StyleSheet.create({
     errorText: {
         color: 'red',
     },
+    dangerIcon:{
+        color: 'red',
+    }
 })
