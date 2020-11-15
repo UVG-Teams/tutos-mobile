@@ -48,8 +48,15 @@ import {
 } from './institution'
 
 import {
-    watchGetNotifications
+    watchGetNotifications,
+    watchAddNotification,
+    watchDeleteNotification
 } from './notifications'
+import {
+    watchGetEvents,
+    watchAddEvent,
+    watchDeleteEvent
+} from './events'
 
 function* mainSaga() {
     yield all([
@@ -70,6 +77,11 @@ function* mainSaga() {
         fork(watchFetchLocation ),
         fork(watchFetchInstitution),
         fork(watchGetNotifications),
+        fork(watchAddNotification),
+        fork(watchDeleteNotification),
+        fork(watchGetEvents),
+        fork(watchAddEvent),
+        fork(watchDeleteEvent),
     ])
 }
 

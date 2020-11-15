@@ -32,12 +32,14 @@ import {
     faPhone,
     faTrash,
     faUniversity,
+    faPlusCircle,
 } from '@fortawesome/free-solid-svg-icons'
 import { useCavy, hook, wrap } from 'cavy'
 
 import { routes } from './routes'
 import * as selectors from './tools/reducers'
 import SideBar from './layout/sidebar'
+import { Circle } from 'react-native-svg'
 
 
 library.add(
@@ -68,6 +70,7 @@ library.add(
     faPhone,
     faTrash,
     faUniversity,
+    faPlusCircle,
 )
 
 const Drawer = createDrawerNavigator()

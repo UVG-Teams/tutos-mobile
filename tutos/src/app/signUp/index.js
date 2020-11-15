@@ -203,7 +203,6 @@ export default connect(
             const month = birth.getMonth()+1;
             const day = birth.getDate();
             const birthdate = year+'-'+month+'-'+day;
-            console.log(birthdate)
             dispatch(
                 actions.startSignUp(username, password, firstName, lastName, email, birthdate, gender, isTutor, phone, 100),
             );

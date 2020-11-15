@@ -20,24 +20,24 @@ export const startGetNotifications  = (/*tutorid = 1*/) => ({
     payload : {error}
   })
   
-//   export const startAddNotification = (notification) => ({
-//       type : types.ADD_NOTIFICATION_STARTED,
-//       payload: notification
-//   })
-//   export const completeAddNotification = (tempid ,  notification) => ({
-//       type : types.ADD_NOTIFICATION_COMPLETED,
-//       payload: {
-//           tempid,
-//           notification
-//       }
-//   })
-//   export const failAddNotification = (tempid , error) => ({
-//       type : types.ADD_NOTIFICATION_FAILED,
-//       payload: {
-//           tempid, 
-//           error
-//       }
-//   })
+  export const startAddNotification = (notification) => ({
+      type : types.ADD_NOTIFICATION_STARTED,
+      payload: notification
+  })
+  export const completeAddNotification = (tempid ,  notification) => ({
+      type : types.ADD_NOTIFICATION_COMPLETED,
+      payload: {
+          tempid,
+          notification
+      }
+  })
+  export const failAddNotification = (tempid , error) => ({
+      type : types.ADD_NOTIFICATION_FAILED,
+      payload: {
+          tempid, 
+          error
+      }
+  })
   
   export const startDeleteNotification = (id ) => ({
       type : types.DELETE_NOTIFICATION_STARTED ,

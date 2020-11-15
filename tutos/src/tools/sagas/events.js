@@ -6,24 +6,24 @@ import {
 } from 'redux-saga/effects';
 
 
-import * as types from './../types/notifications'
+import * as types from './../types/events'
 import * as selectors from '../reducers/index'
-import * as actions from './../actions/notifications'
+import * as actions from './../actions/events'
 import { normalize } from 'normalizr';
 import * as http from '../utils/http';
-import * as schemas from './../schemas/notifications'
+import * as schemas from './../schemas/events'
 import {
     API_BASE_URL,
 } from '../../settings';
 
-function* getNotifications(action){
+function* getEvents(action){
     try{
         const isAuth = yield select(selectors.isAuthenticated)
         if (isAuth){
             const token = yield select(selectors.getToken)
             const response = yield call(
                 fetch,
-                `${API_BASE_URL}/notifications/`,
+                `${API_BASE_URL}/events/`,
                 {
                     method: 'GET',
                     headers : {
@@ -35,35 +35,35 @@ function* getNotifications(action){
             if(http.isSuccessful(response.status)){
                 const jsonResult = yield response.json();
                 const {
-                    entities: {notifications}, 
+                    entities: {events}, 
                     result,
-                } = normalize(jsonResult, schemas.notifications)
-                yield put (actions.completeGetNotifications(notifications, result))
+                } = normalize(jsonResult, schemas.events)
+                yield put (actions.completeGetEvents(events, result))
             }else{
                 const {non_field_errors } = yield response.json;
-                yield put(actions.failGetNotifications(non_field_errors[0]))
+                yield put(actions.failGetEvents(non_field_errors[0]))
             }
         }
     }catch(error){
-        yield put(actions.failGetNotifications('Connection error!'))
+        yield put(actions.failGetEvents('Connection error!'))
     }
 }
 
-export function* watchGetNotifications(){
+export function* watchGetEvents(){
     yield takeEvery(
-        types.GET_NOTIFICATIONS_STARTED,
-        getNotifications
+        types.GET_EVENTS_STARTED,
+        getEvents
     )
 }
 
-function* addNotification(action) {
+function* addEvent(action) {
     try {
         const isAuth = yield select(selectors.isAuthenticated)
         if (isAuth) {
             const token = yield select(selectors.getToken)
             const response = yield call(
                 fetch,
-                `${API_BASE_URL}/notifications/`,
+                `${API_BASE_URL}/events/`,
                 {
                     method: 'POST',
                     body : JSON.stringify(action.payload),
@@ -75,35 +75,35 @@ function* addNotification(action) {
             )
             if (http.isSuccessful(response.status)) {
                 const jsonResult = yield response.json();
-                yield put(actions.completeAddNotification(
+                yield put(actions.completeAddEvent(
                     action.payload.id, 
                     jsonResult
                 )) 
             } else {
                 const { non_field_errors } = yield response.json;
-                yield put(actions.failAddNotification(non_field_errors[0]))
+                yield put(actions.failAddEvent(non_field_errors[0]))
             }
         }
     } catch (error) {
-        yield put(actions.failGetNotifications('Connection error!'))
+        yield put(actions.failGetEvents('Connection error!'))
     }
 }
 
-export function* watchAddNotification() {
+export function* watchAddEvent() {
     yield takeEvery(
-        types.ADD_NOTIFICATION_STARTED,
-        addNotification
+        types.ADD_EVENT_STARTED,
+        addEvent
     )
 }
 
-function* deleteNotification(action) {
+function* deleteEvent(action) {
     try {
         const isAuth = yield select(selectors.isAuthenticated)
         if (isAuth) {
             const token = yield select(selectors.getToken)
             const response = yield call(
                 fetch,
-                `${API_BASE_URL}/notifications/${action.payload.id}/`,
+                `${API_BASE_URL}/events/${action.payload.id}/`,
                 {
                     method: 'DELETE',
                     headers: {
@@ -113,20 +113,20 @@ function* deleteNotification(action) {
                 }
             )
             if (http.isSuccessful(response.status)) {
-                yield put(actions.completeDeleteNotification())
+                yield put(actions.completeDeleteEvent())
             } else {
                 const { non_field_errors } = yield response.json;
-                yield put(actions.failDeleteNotification(non_field_errors[0]))
+                yield put(actions.failDeleteEvent(non_field_errors[0]))
             }
         }
     } catch (error) {
-        yield put(actions.failGetNotifications('Connection error!'))
+        yield put(actions.failGetEvents('Connection error!'))
     }
 }
 
-export function* watchDeleteNotification() {
+export function* watchDeleteEvent() {
     yield takeEvery(
-        types.DELETE_NOTIFICATION_STARTED,
-        deleteNotification
+        types.DELETE_EVENT_STARTED,
+        deleteEvent
     )
 }

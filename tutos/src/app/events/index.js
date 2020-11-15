@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import Show from './apps/show'
+import New from './apps/new'
 
 const Stack = createStackNavigator()
 
@@ -11,6 +12,11 @@ export const routes = [
         displayName: 'Show',
         name: 'show',
         component: Show,
+    },
+    {
+        displayName: 'New',
+        name: 'new',
+        component: New,
     },
 ]
 

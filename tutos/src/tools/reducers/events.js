@@ -1,10 +1,11 @@
-import * as types from '../types/notifications'
+import * as types from '../types/events'
 import { combineReducers } from 'redux';
 import omit from 'lodash/omit'
+import dayjs from 'dayjs'
 
 const byid = (state = {} , action) => {
     switch(action.type){
-        case types.GET_NOTIFICATIONS_COMPLETED :{
+        case types.GET_EVENTS_COMPLETED :{
             const newState = {};
             const { entities, order } = action.payload;
             order.forEach(id => {
@@ -15,7 +16,7 @@ const byid = (state = {} , action) => {
             })
             return newState
         }
-        case types.ADD_NOTIFICATION_STARTED :{
+        case types.ADD_EVENT_STARTED :{
             const newState = {...state}
             newState[action.payload.id] = {
                 ...action.payload,
@@ -23,16 +24,16 @@ const byid = (state = {} , action) => {
             }
             return newState
         }
-        case types.ADD_NOTIFICATION_COMPLETED:{
-            const {tempid, notification } = action.payload
+        case types.ADD_EVENT_COMPLETED:{
+            const {tempid, event } = action.payload
             const newState = omit(state, tempid)
-            newState[notification.id] = {
-                ...notification,
+            newState[event.id] = {
+                ...event,
                 isConfirmed : true,
             }
             return newState
         }
-        case types.DELETE_NOTIFICATION_STARTED:{
+        case types.DELETE_EVENT_STARTED:{
             return omit(state,action.payload.id)
         }
         default :{
@@ -43,22 +44,22 @@ const byid = (state = {} , action) => {
 
 const order = (state = [] , action) => {
   switch (action.type){
-    case types.GET_NOTIFICATIONS_COMPLETED: {
+    case types.GET_EVENTS_COMPLETED: {
         return [
             ...action.payload.order
         ]
     }
-    case types.ADD_NOTIFICATION_STARTED: {
+    case types.ADD_EVENT_STARTED: {
         return [
             ...state, 
-            ...action.payload.notification.id
+            action.payload.id
         ]
     }
-    case types.ADD_NOTIFICATION_COMPLETED: {
-        const { tempid, notification } = action.payload
-        return state.map(id => id === tempid ? notification.id : id)
+    case types.ADD_EVENT_COMPLETED: {
+        const { tempid, event } = action.payload
+        return state.map(id => id === tempid ? event.id : id)
     }
-    case types.DELETE_NOTIFICATION_STARTED: {
+    case types.DELETE_EVENT_STARTED: {
         const { id } = action.payload
         return state.filter(value => value !== id)
     }
@@ -71,13 +72,13 @@ const order = (state = [] , action) => {
 
 const isFetching = (state = false, action) => {
     switch(action.type){
-        case types.GET_NOTIFICATIONS_STARTED: {
+        case types.GET_EVENTS_STARTED: {
             return true
         }
-        case types.GET_NOTIFICATIONS_COMPLETED:{
+        case types.GET_EVENTS_COMPLETED:{
             return false
         }   
-        case types.GET_NOTIFICATIONS_FAILED:{
+        case types.GET_EVENTS_FAILED:{
             return false
         }
         default : {return state}
@@ -86,31 +87,31 @@ const isFetching = (state = false, action) => {
 
 const error = (state = null, action) => {
     switch(action.type){
-        case types.GET_NOTIFICATIONS_STARTED : {
+        case types.GET_EVENTS_STARTED : {
             return null
         }
-        case types.GET_NOTIFICATIONS_COMPLETED : {
+        case types.GET_EVENTS_COMPLETED : {
             return null
         }
-        case types.GET_NOTIFICATIONS_FAILED : {
+        case types.GET_EVENTS_FAILED : {
             return action.payload.error
         }
-        case types.ADD_NOTIFICATION_STARTED: {
+        case types.ADD_EVENT_STARTED: {
             return null
         }
-        case types.ADD_NOTIFICATION_COMPLETED: {
+        case types.ADD_EVENT_COMPLETED: {
             return null
         }
-        case types.ADD_NOTIFICATION_FAILED : {
+        case types.ADD_EVENT_FAILED : {
             return action.payload.error
         }
-        case types.DELETE_NOTIFICATION_STARTED: {
+        case types.DELETE_EVENT_STARTED: {
             return null
         }
-        case types.DELETE_NOTIFICATION_COMPLETED: {
+        case types.DELETE_EVENT_COMPLETED: {
             return null
         }
-        case types.DELETE_NOTIFICATION_FAILED : {
+        case types.DELETE_EVENT_FAILED : {
             return action.payload.error
         }
         default: {
@@ -119,16 +120,17 @@ const error = (state = null, action) => {
     }
 }
 
-const dashboardNotification = combineReducers({
+const dashboardEvent = combineReducers({
   byid,
   order,
   isFetching,
   error,
 })
 
-export default dashboardNotification;
+export default dashboardEvent;
 
-export const getNotification = (state, id) =>  state.byid[id];
-export const getNotifications = state => state.order.map(id => getNotification(state, id));
-export const isFetchingNotifications = (state) => state.isFetching;
-export const getNotificationError = (state) => state.error;
+export const getEvent = (state, id) =>  state.byid[id];
+export const getEvents = state => state.order.map(id => getEvent(state, id));
+export const isFetchingEvents = (state) => state.isFetching;
+export const getEventError = (state) => state.error;
+export const getEventsOnDate = (state, datetime) => getEvents(state).filter(event => dayjs(event.date).format('YYYY-MM-DD') == datetime)

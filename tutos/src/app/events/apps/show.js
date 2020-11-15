@@ -32,9 +32,10 @@ import dayjs from 'dayjs'
 import { theme } from './../../../layout/themes'
 
 import * as selectors from '../../../tools/reducers'
+import * as actions from '../../../tools/actions/events'
 
 
-const Show = ({ navigation, event }) => {
+const Show = ({ navigation, event}) => {
     return (
         <ImageBackground
             style={ theme.background }
@@ -53,47 +54,12 @@ const Show = ({ navigation, event }) => {
                 </Header>
                 <Content style={ theme.content }>
                     <Card style={{ flex:1 }}>
-                        <CardItem header bordered>
-                            <Row><Text style={ styles.title }>{ 'Tutoria de ' + event.course.name }</Text></Row>
-                        </CardItem>
                         <CardItem>
                             <Grid>
                                 <Col>
-                                    <Row>
-                                        <Col>
-                                            <Text style={ styles.eventImportant }>{ dayjs(event.datetime).format('DD/MM/YYYY HH:mm') }</Text>
-                                        </Col>
-                                        <Col>
-                                            <Text style={ styles.eventImportant }>{ event.status.name }</Text>
-                                        </Col>
-                                    </Row>
+                                    <Row><Text style={ styles.label }>{'Titulo'}</Text></Row>
+                                    <Row><Text style={ styles.text }>{ event.title }</Text></Row>
                                 </Col>
-                            </Grid>
-                        </CardItem>
-                        <CardItem>
-                            <Grid>
-                                <Row>
-                                    <Col>
-                                        <Row><Text style={ styles.label }>{'Tutor'}</Text></Row>
-                                        <Row><Text style={ styles.label }>{'Tutorado'}</Text></Row>
-                                    </Col>
-                                    <Col>
-                                        <Row><Text style={ styles.eventParticipant }>{ event.tutor.first_name + ' ' + event.tutor.last_name }</Text></Row>
-                                        <Row><Text style={ styles.eventParticipant }>{ event.tutorado.first_name + ' ' + event.tutorado.last_name }</Text></Row>
-                                    </Col>
-                                </Row>
-                            </Grid>
-                        </CardItem>
-                        <CardItem>
-                            <Grid>
-                                <Row>
-                                    <Col>
-                                        <Row><Text style={ styles.label }>{'Precio'}</Text></Row>
-                                    </Col>
-                                    <Col>
-                                        <Text style={ styles.eventImportant }>{ 'Q.' + event.total_price }</Text>
-                                    </Col>
-                                </Row>
                             </Grid>
                         </CardItem>
                         <CardItem>
@@ -101,6 +67,11 @@ const Show = ({ navigation, event }) => {
                                 <Col>
                                     <Row><Text style={ styles.label }>{'Descripcion'}</Text></Row>
                                     <Row><Text style={ styles.text }>{ event.description }</Text></Row>
+                                </Col>
+                            </Grid>
+                            <Grid>
+                                <Col>
+                                    <Row><Text style={ styles.text }>{ dayjs(event.date).format('DD/MM/YYYY HH:mm')}</Text></Row>
                                 </Col>
                             </Grid>
                         </CardItem>
@@ -113,9 +84,13 @@ const Show = ({ navigation, event }) => {
 
 export default connect(
     (state, { route }) => ({
-        event: selectors.getTutoria(state, route.params.id),
+        event: selectors.getEvent(state,route.params.id),
     }),
-    dispatch => ({})
+    dispatch => ({
+        deleteEvent(id){
+            dispatch(actions.startDeleteEvent(id))
+        },
+    })
 )(Show)
 
 const styles = StyleSheet.create({
