@@ -129,7 +129,7 @@ const TutorProfile = ({ navigation , tutor, user, onLoad }) => {
                                 </View>
 
                                 <Text style={{ fontSize: 15}}>
-                                    {user && user.institution && user.institution}
+                                    {user && user.institution && user.institution.name}
                                 </Text>
                             </ListItem>
 
