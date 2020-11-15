@@ -90,7 +90,7 @@ const Calendar = ({
                     <View>
                         {
                             events.map(event => {
-                                const event_date = dayjs(event.datetime).format('YYYY-MM-DD')
+                                const event_date = dayjs(event.date).format('YYYY-MM-DD')
                                 if (daysEvents[event_date] && daysEvents[event_date]['dots']) {
                                     daysEvents[event_date]['dots'].push(getEventType(event.typeEvent))
                                 } else if (daysEvents[event_date]) {

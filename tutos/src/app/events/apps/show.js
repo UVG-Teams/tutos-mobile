@@ -60,6 +60,9 @@ const Show = ({ navigation, event}) => {
                                     <Row><Text style={ styles.label }>{'Titulo'}</Text></Row>
                                     <Row><Text style={ styles.text }>{ event.title }</Text></Row>
                                 </Col>
+                                <Col>
+                                    <Text>{'Tipo de evento: ' + event.typeEvent}</Text>
+                                </Col>
                             </Grid>
                         </CardItem>
                         <CardItem>
