@@ -45,9 +45,15 @@ const Today = ({
                                         <Col>
                                             <Row>
                                                 <Col>
-                                                    <Text style={ styles.eventImportant }>{ dayjs(event.date).format('HH:mm') }</Text>
+                                                    {/* <Text style={ styles.eventImportant }>{ dayjs(event.date).format('HH:mm') }</Text> */}
+                                                    <Text style={ styles.eventImportant }>{ dayjs(event.date).format('DD/MM/YYYY') }</Text>
+                                                </Col>
+                                                <Col>
+                                                    <Text style={ styles.eventImportant }>{ 'Evento ' + event.typeEvent}</Text>
                                                 </Col>
                                             </Row>
+                                            <Row><Text style={ styles.eventTitle }>{event.title}</Text></Row>
+                                            <Row><Text style={ styles.eventParticipant }>{event.description}</Text></Row>
                                         </Col>
                                     </Grid>
                                 </CardItem>
@@ -62,7 +68,7 @@ const Today = ({
 
 export default connect(
     (state, { today }) => ({
-        state: state,
+        state: state, 
         selectedDay: (today ? dayjs().format('YYYY-MM-DD') : selectors.getSelectedDay(state)) || dayjs().format('YYYY-MM-DD'),
     }),
     dispatch => ({}),

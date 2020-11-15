@@ -141,7 +141,6 @@ export default connect(
             const month = eventDate.getMonth()+1;
             const day = eventDate.getDate();
             const date = year+'-'+month+'-'+day;
-            console.log(date)
             dispatch(
                 actions.startAddEvent({title, description, date, typeEvent}),
             );
