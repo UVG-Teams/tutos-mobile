@@ -46,28 +46,26 @@ const ListTutories = ({
     // const isInProcess = tutoria.status.name
     useEffect(onLoad, [])
     return(
-        <ImageBackground
-            style={ theme.background }
-        >
-            <Container style={{ backgroundColor: 'transparent'}}>
-                <Header hasTabs style={ theme.header }>
-                    <Left>
-                        <Button transparent
-                            onPress={ () => navigation.openDrawer() }
-                        >
-                            <FontAwesomeIcon style={ theme.headerIcon } icon='bars' size={ 25 } />
-                        </Button>
-                    </Left>
-                    <Body>
-                        <Text style={{ fontSize: 25}}>
-                            Tutorias
-                        </Text>
-                    </Body>
-                    <Right></Right>
-                </Header>
+        <Container style={{ backgroundColor: 'transparent'}}>
+            <Header hasTabs style={ theme.header }>
+                <Left>
+                    <Button transparent
+                        onPress={ () => navigation.openDrawer() }
+                    >
+                        <FontAwesomeIcon style={ theme.headerIcon } icon='bars' size={ 25 } />
+                    </Button>
+                </Left>
+                <Body>
+                    <Text style={{ fontSize: 25}}>
+                        Tutorias
+                    </Text>
+                </Body>
+                <Right></Right>
+            </Header>
 
-                <Tabs>
-                    <Tab heading="En curso"> 
+            <Tabs>
+                <Tab heading="En curso"> 
+                    <ImageBackground style={ theme.background }>
                         <Content style={ theme.content }>
                             <View>
                                 <List>
@@ -116,9 +114,11 @@ const ListTutories = ({
                                 </List>
                             </View>
                         </Content>
-                    </Tab>
-                    
-                    <Tab heading="Programadas">
+                    </ImageBackground>
+                </Tab>
+                
+                <Tab heading="Programadas">
+                    <ImageBackground style={ theme.background }>
                         <Content style={ theme.content }>
                             <View>
                                 <List>
@@ -167,8 +167,10 @@ const ListTutories = ({
                                 </List>
                             </View>
                         </Content>
-                    </Tab>
-                    <Tab heading="Terminadas">
+                    </ImageBackground>
+                </Tab>
+                <Tab heading="Terminadas">
+                    <ImageBackground style={ theme.background }>
                         <Content style={ theme.content }>
                             <View>
                                 <List>
@@ -217,8 +219,10 @@ const ListTutories = ({
                                 </List>
                             </View>
                         </Content>
-                    </Tab>
-                    <Tab heading="Canceladas">
+                    </ImageBackground>
+                </Tab>
+                <Tab heading="Canceladas">
+                    <ImageBackground style={ theme.background }>
                         <Content style={ theme.content }>
                             <View>
                                 <List>
@@ -267,10 +271,10 @@ const ListTutories = ({
                                 </List>
                             </View>
                         </Content>
-                    </Tab>
-                </Tabs>
-            </Container>
-        </ImageBackground>
+                    </ImageBackground>
+                </Tab>
+            </Tabs>
+        </Container>
     )
 }
 
