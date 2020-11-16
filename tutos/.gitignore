@@ -64,6 +64,8 @@ ios/*
 !ios/tutos/
 ios/tutos/*
 !ios/tutos/Images.xcassets/
+!ios/tutos/Info.plist
+!ios/Podfile
 
 android/*
 !android/app/
