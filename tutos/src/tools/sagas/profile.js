@@ -36,7 +36,7 @@ function* getProfile(action){
                 const jsonResult = yield response.json();
                 const institutionResponse = yield call(
                     fetch,
-                    `${API_BASE_URL}/institutions/${jsonResult.institution}/`,
+                    `${API_BASE_URL}/institutions/${jsonResult.institution.id}/`,
                     {
                         method: 'GET',
                         headers: {
@@ -51,7 +51,7 @@ function* getProfile(action){
                 }
                 const locationResponse = yield call(
                     fetch,
-                    `${API_BASE_URL}/locations/${jsonResult.location}/`,
+                    `${API_BASE_URL}/locations/${jsonResult.location.id}/`,
                     {
                         method: 'GET',
                         headers: {
@@ -67,7 +67,7 @@ function* getProfile(action){
 
                 const careerResponse = yield call(
                     fetch,
-                    `${API_BASE_URL}/careers/${jsonResult.career}`,
+                    `${API_BASE_URL}/careers/${jsonResult.career.id}`,
                     {
                         method: 'GET',
                         headers: {
@@ -105,7 +105,7 @@ function* updateProfile(action){
         const isAuth = yield select(selectors.isAuthenticated)
         if (isAuth) {
             const formData = new FormData()
-            formData.append('image', action.payload.image)
+            // formData.append('image', action.payload.image)
 
             Object.keys(action.payload).forEach(field => {
                 formData.append(field, action.payload[field])

@@ -166,7 +166,7 @@ const Profile = ({
                                         <View style={{flex:1, flexDirection: 'row'}}>
                                             <FontAwesomeIcon icon='location-arrow' size={25} />
                                             <Text style={{ fontSize: 15 , marginLeft: 8, flex: 1, alignSelf: 'center' }}>
-                                                Ubiacación
+                                                Ubicación
                                             </Text>
                                         </View>
                                         <Text style={{ fontSize: 15 }}>
@@ -293,10 +293,10 @@ const Profile = ({
 
 export default connect(
     state => ({
-        profile : selectors.getProfile(state) ,
-        tutorProfile : selectors.getTutorProfile(state),
-        isFetchingProfile : selectors.isFetchingProfile(state),
-        isFetchingTutorProfile : selectors.isFetchingTutorProfile(state)
+        profile: selectors.getProfile(state) ,
+        tutorProfile: selectors.getTutorProfile(state),
+        isFetchingProfile: selectors.isFetchingProfile(state),
+        isFetchingTutorProfile: selectors.isFetchingTutorProfile(state)
     }),
     dispatch => ({
         getTutorProfile(){
