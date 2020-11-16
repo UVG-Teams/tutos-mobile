@@ -64,6 +64,7 @@ const renderPickerEventType = ({input:{onChange, value, placeholder, ...restInpu
     <Picker
         style={{marginBottom:10, width:'100%', backgroundColor:'white'}}
         note
+        placeholder='Tutoria'
         mode='dropdown'
         selectedValue={value}
         onValueChange={onChange}
