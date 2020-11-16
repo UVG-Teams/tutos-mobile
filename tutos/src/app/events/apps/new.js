@@ -50,26 +50,19 @@ const renderDatePicker = ({input:{onChange, value, placeholder,...restInput}}) =
         modalTransparent={false}
         animationType={'fade'}
         androidMode={'default'}
-        placeHolderText='Fecha de Evento'
-        textStyle={{color:'black'}}
+        placeHolderText='Seleccionar fecha'
+        placeHolderTextStyle={{color:'lightgray', borderRadius: 5, backgroundColor: 'white'}}
+        textStyle={{color:'black', borderRadius: 5, backgroundColor: 'white'}}
         disabled={false}
         onDateChange={onChange}
         value={value}
         // formatChosenDate={value => {return moment(value).format('YYYY-MM-DD');}}
     />
 )
-// const renderTimePicker = ({input:{onChange, value, placeholder,...restInput}}) => (
-//     <DateTimePicker
-//     testID="dateTimePicker"
-//     value={value}
-//     mode="time"
-//     is24Hour={true}
-//     display="default"
-//     />
-// )
+
 const renderPickerEventType = ({input:{onChange, value, placeholder, ...restInput}}) => (
     <Picker
-        style={{borderWidth:1, borderStyle:"solid", width:107, marginBottom:10}}
+        style={{marginBottom:10, width:'100%', backgroundColor:'white'}}
         note
         mode='dropdown'
         selectedValue={value}
@@ -96,33 +89,41 @@ const New = ({ navigation, handleSubmit}) => {
                             <FontAwesomeIcon style={ theme.headerIcon } icon='bars' size={ 25 } />
                         </Button>
                     </Left>
-                    <Body></Body>
+                    <Body>
+                        <Text style={{ fontSize: 25}}>
+                            Crear evento
+                        </Text>
+                    </Body>
                     <Right></Right>
                 </Header>
                 <Content style={ theme.content }>
-                    <Text>Crear Evento</Text>
+                    <Text style={styles.fieldText}>Título:</Text>
                     <Field
                         name='title'
                         placeholder='Titulo'
                         component={RenderInput}
                     />
+                    <Text style={styles.fieldText}>Descripción:</Text>
                     <Field
                         name='description'
                         placeholder='Descripcion'
                         component={RenderInput}
                     />
+                    <Text style={styles.fieldText}>Fecha de evento:</Text>
                     <Field
                         name='eventDate'
                         component={renderDatePicker}
                     />
+                    <Text style={styles.fieldText}>Tipo de evento:</Text>
                     <Field
                         name='typeEvent'
                         component={renderPickerEventType}
                     />      
                     <TouchableOpacity
                         onPress={handleSubmit}
+                        style={styles.btnCreateEvent}
                     >
-                        <Text>Crear Evento</Text>
+                        <Text style={styles.txtCreateEvent}>Crear Evento</Text>
                     </TouchableOpacity>         
                 </Content>
             </Container>
@@ -147,3 +148,27 @@ export default connect(
         }
     })(New)
 );
+
+
+const styles = StyleSheet.create({
+    fieldText: {
+        marginBottom: 5,
+        marginTop: 5,
+        fontSize: 17
+    },
+    btnCreateEvent: {
+        width: '100%',
+        marginTop: 20,
+        borderRadius: 5,
+        backgroundColor: '#146dc7',
+        paddingLeft: '37%',
+        paddingRight: '39%',
+        paddingTop: 7,
+        paddingBottom: 7,
+    },
+    txtCreateEvent: {
+        color: 'white',
+        fontSize: 19,
+        width: '160%',
+    }
+})
