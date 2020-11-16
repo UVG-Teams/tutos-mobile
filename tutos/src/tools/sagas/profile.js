@@ -15,6 +15,7 @@ import {
 } from '../../settings';
 import { Body } from 'native-base';
 import { omit } from 'lodash';
+import { Platform } from 'react-native';
 
 function* getProfile(action){
     try{
@@ -106,7 +107,18 @@ function* updateProfile(action){
         const isAuth = yield select(selectors.isAuthenticated)
         if (isAuth) {
             const formData = new FormData()
-            formData.append('image', action.payload.image)
+
+            formData.append('avatar', {
+                name: action.payload.image.fileName,
+                type: action.payload.image.type,
+                uri: Platform.OS === "android" ? action.payload.image.uri : action.payload.image.uri.replace("file://", ""),
+            })
+
+            formData.append('image', {
+                name: action.payload.image.fileName,
+                type: action.payload.image.type,
+                uri: Platform.OS === "android" ? action.payload.image.uri : action.payload.image.uri.replace("file://", ""),
+            })
 
             const data = omit(action.payload, 'image')
             const token = yield select(selectors.getToken)
@@ -130,6 +142,7 @@ function* updateProfile(action){
                     method: 'POST',
                     body: formData,
                     headers: {
+                        'Content-Type': 'multipart/form-data',
                         'Authorization': `JWT ${token}`,
                     }
                 }
