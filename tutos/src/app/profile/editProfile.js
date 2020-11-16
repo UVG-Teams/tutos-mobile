@@ -53,8 +53,8 @@ const EditProfile = ({
 	const [password0, setPassword0] = useState('')
 	const [password1, setPassword1] = useState('')
 	const [language, setLanguage] = useState({
-		id: profile.language,
-		name: find(languages, element => element.id === profile.language),
+		id: profile.language.id,
+		name: profile.language.name,
 	})
 	const [career, setCareer] = useState({
 		id: profile.career.id,
@@ -97,10 +97,10 @@ const EditProfile = ({
 			'email': correo,
 			'phone': phone,
 			'is_tutor' : isTutor,
-			'language': language.id ? language.id : language,
-			'location': location.id ? location.id : location,
-			'institution': institution.id ? institution.id : institution,
-			'career': career.id ? career.id : career,
+			'language': language && language.id,
+			'location': location && location.id,
+			'institution': institution && institution.id,
+			'career': career && career.id,
 			'password': password0===password1 ? password0 : '',
 			'image': image
 		})

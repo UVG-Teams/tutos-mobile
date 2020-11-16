@@ -14,6 +14,7 @@ import {
     API_BASE_URL,
 } from '../../settings';
 import { Body } from 'native-base';
+import { omit } from 'lodash';
 
 function* getProfile(action){
     try{
@@ -105,27 +106,35 @@ function* updateProfile(action){
         const isAuth = yield select(selectors.isAuthenticated)
         if (isAuth) {
             const formData = new FormData()
-            // formData.append('image', action.payload.image)
+            formData.append('image', action.payload.image)
 
-            Object.keys(action.payload).forEach(field => {
-                formData.append(field, action.payload[field])
-            })
-
+            const data = omit(action.payload, 'image')
             const token = yield select(selectors.getToken)
             const response = yield call(
                 fetch,
                 `${API_BASE_URL}/userdetails/edit/`,
                 {
                     method: 'POST',
-                    body: JSON.stringify(action.payload),
-                    // body: formData,
+                    body: JSON.stringify(data),
                     headers: {
                         'Content-Type': 'application/json',
-                        // 'Content-Type': 'multipart/form-data',
                         'Authorization': `JWT ${token}`,
                     }
                 }
             )
+            console.log("HOLA 3")
+            const responsePhoto = yield call(
+                fetch,
+                `${API_BASE_URL}/user-avatar/`,
+                {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Authorization': `JWT ${token}`,
+                    }
+                }
+            )
+            console.log("HOLA 4")
             if (http.isSuccessful(response.status)) {
                 const jsonResult = yield response.json();
                 yield put(actions.completeEditProfile(jsonResult))
