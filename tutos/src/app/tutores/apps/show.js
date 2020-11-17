@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react'
+import 'react-native-get-random-values'
+import React, { useEffect, useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import {
     ScrollView,
     Text,
@@ -6,7 +8,8 @@ import {
     View,
     ImageBackground,
     Image,
-    StyleSheet
+    StyleSheet,
+    Dimensions,
 } from 'react-native'
 
 import {
@@ -31,15 +34,26 @@ import dayjs from 'dayjs'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 import { theme } from './../../../layout/themes'
+import Modal from 'react-native-modal';
 
 import * as selectors from '../../../tools/reducers'
 import profileImg from '../../../assets/profile1.png'
 import * as actions from '../../../tools/actions/users'
+import * as tutoriaActions from '../../../tools/actions/tutorias'
 import * as tutoresactions from '../../../tools/actions/tutores'
 
 
-const TutorProfile = ({ navigation , tutor, user, onLoad }) => {
+const TutorProfile = ({ navigation , tutor, user, onLoad,authUserId, createTutoria }) => {
     useEffect(onLoad , [])
+    const [course, changeCourse] = useState('')
+    const [date, changeDate] = useState('')
+    const [isModalVisible, setModalVisible] = useState(false);
+    const toggleModal = () => {
+        setModalVisible(!isModalVisible);
+        console.log('cerrar')
+    };
+    const deviceWidth = Dimensions.get("window").width;
+    const deviceHeight = Dimensions.get("window").height;
     return(
     <ImageBackground
         style={ theme.background }
@@ -55,7 +69,7 @@ const TutorProfile = ({ navigation , tutor, user, onLoad }) => {
                 </Left>
                 <Body>
                     <Text style={{ fontSize: 25}}>
-                    {user.username}
+                        {user.username}
                     </Text>
                 </Body>
                 <Right></Right>
@@ -168,10 +182,41 @@ const TutorProfile = ({ navigation , tutor, user, onLoad }) => {
                     
                     <TouchableOpacity
                         style={ style.buttonRequest }
+                        onPress={()=>toggleModal()}
                         // onPress={ navigation.navigate('conversations', { tutor_id: tutor.id })}
                         >
                         <Text style={ style.txtButtonRquest}> Solicitar Tutoria </Text>
                     </TouchableOpacity>
+                    <Modal 
+                        deviceWidth={deviceWidth}
+                        deviceHeight={deviceHeight} 
+                        isVisible={isModalVisible} 
+                        onBackdropPress={() => setModalVisible(false)}>
+                        <View>
+                            <Card>
+                                <CardItem header bordered>
+                                    <View>
+                                        <TextInput
+                                            placeholder='Curso'
+                                            onChangeText={text => changeCourse(text)}
+                                            value={course}
+                                        />
+                                        <TextInput
+                                            placeholder='Fecha'
+                                            onChangeText={text => changeDate(text)}
+                                            value={date}
+                                        />
+                                    </View>
+                                </CardItem>
+                            </Card>
+                            <Button style={ style.buttonLogin }  onPress={toggleModal}>
+                                <Text style={style.txtButtonLogin}>Cerrar</Text>
+                            </Button>
+                            <Button style={ style.buttonLogin }  onPress={()=>{createTutoria(uuidv4(), tutor.id,authUserId,date,course);toggleModal()}}>
+                                <Text style={style.txtButtonLogin}>Crear Tutoria</Text>
+                            </Button>
+                        </View>
+                    </Modal>
                     {/* <Card>
                         <CardItem button onPress={() => navigation.navigate('conversations', { tutor_id: tutor.id })}>
                             <Text>
@@ -190,11 +235,15 @@ export default connect(
     (state, { route }) => ({
         user: selectors.getUser(state, route.params.id),
         tutor: selectors.getTutor(state, route.params.id),
+        authUserId: selectors.getAuthUserID(state),
     }),
     dispatch => ({
         onLoad() {
             dispatch(actions.startFetchingUsers());
             dispatch(tutoresactions.startFetchingTutores());
+        },
+        createTutoria(id, tutorId, tutoradoId, date, course){
+            dispatch(tutoriaActions.startAddTutoria({id:id, tutorId:tutorId, tutoradoId:tutoradoId, date:date, course:course}));
         },
     })
 )(TutorProfile)
@@ -223,5 +272,19 @@ const style = StyleSheet.create({
         color: 'white',
         fontSize: 15,
         textAlign: 'center'
+    },
+    buttonLogin: {
+        marginTop: 15,
+        borderRadius: 5,
+        backgroundColor: '#146dc7',
+        color: 'white',
+        paddingLeft: '39%',
+        paddingRight: '39%',
+        paddingTop: 7,
+        paddingBottom: 7,
+    },
+    txtButtonLogin: {
+        color: 'white',
+        fontSize: 19,
     },
 })

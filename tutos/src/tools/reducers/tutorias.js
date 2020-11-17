@@ -64,7 +64,7 @@ const order = (state = [] , action) => {
     case types.ADD_TUTORIA_STARTED: {
         return [
             ...state, 
-            ...action.payload.tutoria.id
+            action.payload.id
         ]
     }
     case types.ADD_TUTORIA_COMPLETED: {
