@@ -43,7 +43,6 @@ const ListTutories = ({
     isLoading,
     onLoad,
 }) => {
-    // const isInProcess = tutoria.status.name
     useEffect(onLoad, [])
     return(
         <Container style={{ backgroundColor: 'transparent'}}>
@@ -74,7 +73,7 @@ const ListTutories = ({
                                     }
                                     {
                                         tutorias.length > 0 && tutorias.map(tutoria =>
-                                            tutoria.status.name === "in_process" ? (
+                                            tutoria && tutoria.status.name === "in_process" ? (
                                                 <ListItem key={ tutoria.id }>
                                                     <Card style={ styles.cardTutoria }>
                                                         <CardItem
@@ -127,7 +126,7 @@ const ListTutories = ({
                                     }
                                     {
                                         tutorias.length > 0 && tutorias.map(tutoria =>
-                                            tutoria.status.name === "scheduled" ? (
+                                            tutoria && tutoria.status.name === "scheduled" ? (
                                                 <ListItem key={ tutoria.id }>
                                                     <Card style={ styles.cardTutoria }>
                                                         <CardItem
@@ -179,7 +178,7 @@ const ListTutories = ({
                                     }
                                     {
                                         tutorias.length > 0 && tutorias.map(tutoria =>
-                                            tutoria.status.name === "end" ? (
+                                            tutoria && tutoria.status.name === "end" ? (
                                                 <ListItem key={ tutoria.id }>
                                                     <Card style={ styles.cardTutoria }>
                                                         <CardItem
@@ -231,7 +230,7 @@ const ListTutories = ({
                                     }
                                     {
                                         tutorias.length > 0 && tutorias.map(tutoria =>
-                                            tutoria.status.name === "canceled" ? (
+                                            tutoria && tutoria.status.name === "canceled" ? (
                                                 <ListItem key={ tutoria.id }>
                                                     <Card style={ styles.cardTutoria }>
                                                         <CardItem
