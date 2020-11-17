@@ -10,6 +10,7 @@ import {
     TouchableHighlight,
     ActivityIndicator,
     Platform,
+    Image,
 } from 'react-native'
 
 import {
@@ -66,7 +67,8 @@ const Login = ({
             </Header>
             <ImageBackground style={ styles.background }>
                 <View style={ styles.content }>
-                    <Text style={ styles.title }>Tuto's</Text>
+                    <Image source={{uri: '../../../media/logo-login'}} style={{width:20, height:15}} />
+                    {/* <Text style={ styles.title }>Tuto's</Text> */}
                     <Field
                         name='email'
                         placeholder='Usuario'
