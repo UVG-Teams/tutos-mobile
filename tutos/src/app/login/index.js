@@ -67,7 +67,8 @@ const Login = ({
             </Header>
             <ImageBackground style={ styles.background }>
                 <View style={ styles.content }>
-                    <Image source={{uri: '../../../media/logo-login'}} style={{width:20, height:15}} />
+                    {/* <Image source={{uri: '../../asser'}} style={{width:20, height:15}} /> */}
+                    <Image source={require('../../assets/logo-login.png')} style={{width:20, height:25}} />
                     {/* <Text style={ styles.title }>Tuto's</Text> */}
                     <Field
                         name='email'
