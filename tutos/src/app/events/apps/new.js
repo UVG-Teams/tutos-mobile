@@ -1,12 +1,7 @@
 import React, { useEffect } from 'react'
 import {
-    ScrollView,
     Text,
-    TextInput,
-    View,
     ImageBackground,
-    Image,
-    StyleSheet,
     TouchableOpacity
 } from 'react-native'
 
@@ -18,12 +13,6 @@ import {
     Left,
     Body,
     Right,
-    Title,
-    Card,
-    CardItem,
-    Separator,
-    List, 
-    ListItem,
     DatePicker,
     Picker,
 } from 'native-base'
@@ -55,18 +44,8 @@ const renderDatePicker = ({input:{onChange, value, placeholder,...restInput}}) =
         disabled={false}
         onDateChange={onChange}
         value={value}
-        // formatChosenDate={value => {return moment(value).format('YYYY-MM-DD');}}
     />
 )
-// const renderTimePicker = ({input:{onChange, value, placeholder,...restInput}}) => (
-//     <DateTimePicker
-//     testID="dateTimePicker"
-//     value={value}
-//     mode="time"
-//     is24Hour={true}
-//     display="default"
-//     />
-// )
 const renderPickerEventType = ({input:{onChange, value, placeholder, ...restInput}}) => (
     <Picker
         style={{borderWidth:1, borderStyle:"solid", width:107, marginBottom:10}}
@@ -137,13 +116,15 @@ export default connect(
     reduxForm({
         form: 'new',
         onSubmit({ title, description, eventDate, typeEvent}, dispatch) {
-            const year = eventDate.getFullYear();
-            const month = eventDate.getMonth()+1;
-            const day = eventDate.getDate();
-            const date = year+'-'+month+'-'+day;
-            dispatch(
-                actions.startAddEvent({title, description, date, typeEvent}),
+            if (eventDate){
+                const year = eventDate.getFullYear();
+                const month = eventDate.getMonth()+1;
+                const day = eventDate.getDate();
+                const date = year+'-'+month+'-'+day;
+                title && description && typeEvent && date && dispatch(
+                    actions.startAddEvent({title, description, date, typeEvent}),
             );
+            }
         }
     })(New)
 );
