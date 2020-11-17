@@ -68,7 +68,7 @@ function* addTutoria(action) {
             const token = yield select(selectors.getToken)
             const response = yield call(
                 fetch,
-                `${API_BASE_URL}/tutorias/`,
+                `${API_BASE_URL}/tutorias/create_tutoria/`,
                 {
                     method: 'POST',
                     body : JSON.stringify(action.payload),
@@ -90,7 +90,7 @@ function* addTutoria(action) {
             }
         }
     } catch (error) {
-        yield put(actions.failGetTutorias('Connection error!'))
+        yield put(actions.failAddTutoria('Connection error!'))
     }
 }
 

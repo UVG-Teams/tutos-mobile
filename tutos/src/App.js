@@ -34,6 +34,7 @@ import {
     faTrashAlt,
     faUniversity,
     faPlusCircle,
+    faSyncAlt,
 } from '@fortawesome/free-solid-svg-icons'
 import { useCavy, hook, wrap } from 'cavy'
 
@@ -73,6 +74,7 @@ library.add(
     faTrashAlt,
     faUniversity,
     faPlusCircle,
+    faSyncAlt,
 )
 
 const Drawer = createDrawerNavigator()

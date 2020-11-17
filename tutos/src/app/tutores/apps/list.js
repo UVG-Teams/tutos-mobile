@@ -59,7 +59,7 @@ const Tutores = ({
                 <View>
                     <Text style={{ fontSize: 35 }}>Tutores</Text>   
                     {
-                        users.map(user => user.is_tutor && (
+                        users.map(user => user && user.is_tutor && (
                             <Card key={ user.id }>
                                 <CardItem button onPress = {() => navigation.navigate("show", {id: user.id})}>
                                     <Body>

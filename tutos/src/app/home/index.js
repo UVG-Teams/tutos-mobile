@@ -53,9 +53,9 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
     useEffect(onLoad, [])
     
     if (isTutor) {
-        tutorias = tutorias.filter(tutoria => tutoria.tutor.id === profile.id)
+        tutorias = tutorias.filter(tutoria => (tutoria && tutoria.tutorado && tutoria.tutor.id) === profile.id)
     } else {
-        tutorias = tutorias.filter(tutoria => tutoria.tutorado.id === profile.id)
+        tutorias = tutorias.filter(tutoria => (tutoria && tutoria.tutorado && tutoria.tutorado.id) === profile.id)
     }
 
     return(
@@ -79,10 +79,15 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                             <FontAwesomeIcon style={ theme.headerIcon } icon='bell' size={ 25 } />
                         </Button>
 
-                        <Button transparent
+                        {/* <Button transparent
                             onPress={ () => navigation.navigate('inbox') }
                         >
                             <FontAwesomeIcon style={ theme.headerIcon } icon='inbox' size={ 25 } />
+                        </Button> */}
+                        <Button transparent
+                            onPress={ () => onLoad() }
+                        >
+                            <FontAwesomeIcon style={ theme.headerIcon } icon='sync-alt' size={ 25 } />
                         </Button>
                     </Right>
                 </Header>
@@ -96,7 +101,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                             <Text style={{ fontSize: 18, fontWeight: "bold" }}>Programadas</Text>
                                         </CardItem>
                                         {
-                                            tutorias.map(tutoria => tutoria.status.name === "scheduled" && (
+                                            tutorias.map(tutoria => tutoria && tutoria.status.name === "scheduled" && (
                                                 <CardItem
                                                     bordered
                                                     button
@@ -123,7 +128,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                             <Text style={{ fontSize: 18, fontWeight: "bold" }}>En curso</Text>
                                         </CardItem>
                                         {
-                                            tutorias.map(tutoria => tutoria.status.name === "in_process" && (
+                                            tutorias.map(tutoria => tutoria && tutoria.status.name === "in_process" && (
                                                 <CardItem
                                                     bordered
                                                     button
@@ -150,7 +155,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                             <Text style={{ fontSize: 18, fontWeight: "bold" }}>Terminadas</Text>
                                         </CardItem>
                                         {
-                                            tutorias.map(tutoria => tutoria.status.name === "end" && (
+                                            tutorias.map(tutoria => tutoria && tutoria.status.name === "end" && (
                                                 <CardItem
                                                     bordered
                                                     button
@@ -177,7 +182,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                             <Text style={{ fontSize: 18, fontWeight: "bold" }}>Canceladas</Text>
                                         </CardItem>
                                         {
-                                            tutorias.map(tutoria => tutoria.status.name === "canceled" && (
+                                            tutorias.map(tutoria => tutoria && tutoria.status.name === "canceled" && (
                                                 <CardItem
                                                     bordered
                                                     button
@@ -206,7 +211,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                             <Text style={{ fontSize: 18, fontWeight: "bold" }}>Pasadas</Text>
                                         </CardItem>
                                         {
-                                            tutorias.map(tutoria => tutoria.status.name ===  "end" && (
+                                            tutorias.map(tutoria => tutoria && tutoria.status.name ===  "end" && (
                                                 <CardItem
                                                     bordered
                                                     button
@@ -233,7 +238,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                             <Text style={{ fontSize: 18, fontWeight: "bold" }}>Programadas</Text>
                                         </CardItem>
                                         {
-                                            tutorias.map(tutoria => tutoria.status.name === "scheduled" && (
+                                            tutorias.map(tutoria => tutoria && tutoria.status.name === "scheduled" && (
                                                 <CardItem
                                                     bordered
                                                     button
@@ -267,7 +272,7 @@ const Home = ({ navigation, tutorias, onLoad, isTutor, profile}) => {
                                 <Card>
                                     <CardItem header bordered>
                                         {tutorias.map(tutoria => {
-                                            if (tutoria.id === modalID) {
+                                            if (tutoria && tutoria.id === modalID) {
                                                 return (
                                                     <View key={ tutoria.id } style={ styles.cardInfo }>
                                                         <Text style = {{fontSize: 20, fontWeight: "bold", marginBottom: 10, textAlign: "center"}}>Información Tutoría</Text>
