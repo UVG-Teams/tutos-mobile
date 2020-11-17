@@ -114,12 +114,6 @@ function* updateProfile(action){
                 uri: Platform.OS === "android" ? action.payload.image.uri : action.payload.image.uri.replace("file://", ""),
             })
 
-            formData.append('image', {
-                name: action.payload.image.fileName,
-                type: action.payload.image.type,
-                uri: Platform.OS === "android" ? action.payload.image.uri : action.payload.image.uri.replace("file://", ""),
-            })
-
             const data = omit(action.payload, 'image')
             const token = yield select(selectors.getToken)
             const response = yield call(
@@ -134,20 +128,6 @@ function* updateProfile(action){
                     }
                 }
             )
-            console.log("HOLA 3")
-            const responsePhoto = yield call(
-                fetch,
-                `${API_BASE_URL}/user-avatar/`,
-                {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                        'Authorization': `JWT ${token}`,
-                    }
-                }
-            )
-            console.log("HOLA 4")
             if (http.isSuccessful(response.status)) {
                 const jsonResult = yield response.json();
                 yield put(actions.completeEditProfile(jsonResult))
