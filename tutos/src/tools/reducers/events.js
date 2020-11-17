@@ -36,6 +36,13 @@ const byid = (state = {} , action) => {
         case types.DELETE_EVENT_STARTED:{
             return omit(state,action.payload.id)
         }
+        case types.EDIT_EVENTS_COMPLETED: {
+            const newState = {...state}
+            newState[action.payload.id] = {
+                ...action.payload
+            }
+            return newState
+        }
         default :{
             return state
         }

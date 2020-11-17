@@ -77,11 +77,14 @@ const Show = ({ navigation, event, deleteEvent}) => {
                                     <Row><Text style={ styles.text }>{ dayjs(event.date).format('DD/MM/YYYY HH:mm')}</Text></Row>
                                 </Col>
                             </Grid>
+                            <Button transparent onPress={() => navigation.navigate('edit', { id: event.id })}>
+                                <FontAwesomeIcon style={theme.warningIcon} icon='edit' size={25} />
+                            </Button>
+                            <Button transparent onPress={ () => deleteEvent(event.id)}>
+                                <FontAwesomeIcon style={ theme.dangerIcon } icon='trash-alt' size={ 25 }/>
+                            </Button>
                         </CardItem>
                     </Card>
-                    <Button transparent onPress={ () => deleteEvent(event.id)}>
-                        <FontAwesomeIcon style={ theme.dangerIcon } icon='trash-alt' size={ 25 }/>
-                    </Button>
                 </Content>
             </Container>
         </ImageBackground>

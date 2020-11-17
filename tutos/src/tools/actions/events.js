@@ -51,3 +51,18 @@ export const failDeleteEvent = (id, error) => ({
         error
     }
 })
+
+export const startEditEvent = event => ({
+    type: types.EDIT_EVENTS_STARTED,
+    payload: event
+})
+export const failEditEvent = (error) => ({
+    type: types.EDIT_EVENTS_COMPLETED,
+    payload: {
+        error
+    }
+})
+export const completeEditEvent = (event) => ({
+    type: types.EDIT_EVENTS_COMPLETED,
+    payload: event
+})
