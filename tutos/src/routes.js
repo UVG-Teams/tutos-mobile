@@ -93,7 +93,7 @@ export const routes = [
         component: Conversations,
         icon: 'comments',
         authProtection: true,
-        showOnSidebar: true,
+        showOnSidebar: false,
         defaultRoute: 'list',
     },
     {
@@ -102,7 +102,7 @@ export const routes = [
         component: Schedule,
         icon: 'calendar-alt',
         authProtection: true,
-        showOnSidebar: true,
+        showOnSidebar: false,
         defaultRoute: 'show',
     },
     {
