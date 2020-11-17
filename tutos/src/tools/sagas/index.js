@@ -55,7 +55,8 @@ import {
 import {
     watchGetEvents,
     watchAddEvent,
-    watchDeleteEvent
+    watchDeleteEvent,
+    watchEditEvent
 } from './events'
 
 function* mainSaga() {
@@ -82,6 +83,7 @@ function* mainSaga() {
         fork(watchGetEvents),
         fork(watchAddEvent),
         fork(watchDeleteEvent),
+        fork(watchEditEvent),
     ])
 }
 

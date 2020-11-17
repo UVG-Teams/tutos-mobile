@@ -70,28 +70,6 @@ const EditProfile = ({
 		name: profile.institution.name
 	})
 	
-	// const onLoad = () => {
-	//   setLanguage({
-	//     id: profile.language,
-	//     name: find(languages, element => element.id === profile.language),
-	//   })
-	//   setCareer({
-	//     id: profile.career.id,
-	//     name: profile.career.name
-	//   })
-	//   setLocation({
-	//     id: profile.location.id,
-	//     name: profile.location.name,
-	//   })
-	//   setInstitution({
-	//     id: profile.institution.id,
-	//     name: profile.institution.name
-	//   })
-	//   alert('Componentes actualizados')
-	// }
-	
-	// useEffect(() => onLoad() , [])
-	
 	const onSubmit = () => {
 		updateProfile({
 			'email': correo,
@@ -139,7 +117,7 @@ const EditProfile = ({
 				<Text>Elige una foto</Text>
 			</Button>
 			<Form>
-				{/* <Text style={{ fontSize: 35 }}> Editar Perfil  </Text> */}
+
 				<Separator>
 					<Text style={{ fontSize: 25 }}>
 						Información general

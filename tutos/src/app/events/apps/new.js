@@ -1,13 +1,9 @@
 import React, { useEffect } from 'react'
 import {
-    ScrollView,
     Text,
-    TextInput,
-    View,
     ImageBackground,
-    Image,
-    StyleSheet,
-    TouchableOpacity
+    TouchableOpacity,
+    StyleSheet
 } from 'react-native'
 
 import { 
@@ -18,12 +14,6 @@ import {
     Left,
     Body,
     Right,
-    Title,
-    Card,
-    CardItem,
-    Separator,
-    List, 
-    ListItem,
     DatePicker,
     Picker,
 } from 'native-base'
@@ -56,7 +46,6 @@ const renderDatePicker = ({input:{onChange, value, placeholder,...restInput}}) =
         disabled={false}
         onDateChange={onChange}
         value={value}
-        // formatChosenDate={value => {return moment(value).format('YYYY-MM-DD');}}
     />
 )
 
@@ -139,13 +128,15 @@ export default connect(
     reduxForm({
         form: 'new',
         onSubmit({ title, description, eventDate, typeEvent}, dispatch) {
-            const year = eventDate.getFullYear();
-            const month = eventDate.getMonth()+1;
-            const day = eventDate.getDate();
-            const date = year+'-'+month+'-'+day;
-            dispatch(
-                actions.startAddEvent({title, description, date, typeEvent}),
+            if (eventDate){
+                const year = eventDate.getFullYear();
+                const month = eventDate.getMonth()+1;
+                const day = eventDate.getDate();
+                const date = year+'-'+month+'-'+day;
+                title && description && typeEvent && date && dispatch(
+                    actions.startAddEvent({title, description, date, typeEvent}),
             );
+            }
         }
     })(New)
 );

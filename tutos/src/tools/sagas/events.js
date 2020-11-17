@@ -96,6 +96,46 @@ export function* watchAddEvent() {
     )
 }
 
+function* editEvent(action){
+    try {
+        const isAuth = yield select(selectors.isAuthenticated)
+        if (isAuth) {
+            const token = yield select(selectors.getToken)
+            const id = action.payload.id
+            const response = yield call(
+                fetch,
+                `${API_BASE_URL}/events/${id}/`,
+                {
+                    method: 'PATCH',
+                    body: JSON.stringify(action.payload),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `JWT ${token}`,
+                    },
+                }
+            )
+            if (http.isSuccessful(response.status)) {
+                const jsonResult = yield response.json();
+                yield put(actions.completeEditEvent(
+                    jsonResult
+                ))
+            } else {
+                const { non_field_errors } = yield response.json;
+                yield put(actions.failEditEvent(non_field_errors[0]))
+            }
+        }
+    } catch (error) {
+        yield put(actions.failEditEvent('Connection error!'))
+    }
+}
+
+export function* watchEditEvent(){
+    yield takeEvery(
+        types.EDIT_EVENTS_STARTED,
+        editEvent
+    )
+}
+
 function* deleteEvent(action) {
     try {
         const isAuth = yield select(selectors.isAuthenticated)

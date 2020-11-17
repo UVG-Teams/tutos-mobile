@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import Show from './apps/show'
 import New from './apps/new'
+import Edit from './apps/edit'
 
 const Stack = createStackNavigator()
 
@@ -18,6 +19,11 @@ export const routes = [
         name: 'new',
         component: New,
     },
+    {
+        displayName: 'Edit',
+        name: 'edit',
+        component: Edit
+    }
 ]
 
 
