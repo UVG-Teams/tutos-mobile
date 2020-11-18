@@ -24,6 +24,11 @@
 
 ## Desarrollo
 
+* [Configuracion para correr en simulador o en dispositivo](https://reactnative.dev/docs/environment-setup)
+* Crear archivo de configuracion local en /tutos/src/localsettings.js
+    ```js
+    export const LOCAL_URL = 'http://192.168.1.16:3000/api'   // Usa tu ip
+    ```
 * Run Server en Android dos diferentes consolas
     ```shell
     $ yarn start
