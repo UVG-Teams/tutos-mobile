@@ -23,7 +23,7 @@
     "cavy-cli": "^2.1.0",
     "dayjs": "^1.8.35",
     "jwt-decode": "^2.2.0",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "moment": "^2.27.0",
     "native-base": "^2.13.13",
     "normalizr": "^3.6.0",
